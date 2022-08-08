@@ -1,4 +1,23 @@
 class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        '''
+        iterative inorder traversal ver
+        '''
+        stack = list()
+        while True:
+            # always traverse leftmost node first.
+            while root:
+                stack.append(root)
+                root = root.left
+            # visit the node
+            root = stack.pop()
+            k -= 1
+            if not k:
+                return root.val
+            root = root.right
+
+
+class roughSolution:
     def __init__(self):
         self.counter = 0
         
