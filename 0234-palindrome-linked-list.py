@@ -1,0 +1,48 @@
+'''
+learnt from official approach: reverse 2nd half in-place
+and then verify from both start & end of listnode.
+'''
+class Solution:
+    def find_half_end(self, head: ListNode):
+        fast = slow = head
+        while(fast.next is not None and fast.next.next is not None):
+            fast = fast.next.next
+            slow = slow.next
+        # slow node should be a center node or a node prior to middle.
+        return slow
+    
+    def reverse_listnode(self, head: ListNode):
+        prev = None
+        current = head
+        
+        while(current):
+            parent = current.next
+            
+            # reverse current node
+            current.next = prev
+            
+            # update for next loop
+            prev = current
+            current = parent
+        
+        # return the end of original ListNode which is also head of reversed 2nd half ListNode
+        return prev
+    
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        if head is None:
+            return True
+        
+        first_half_end = self.find_half_end(head)
+        second_half_start = self.reverse_listnode(first_half_end.next)
+        
+        # time to verify palindrome pattern
+        left = head
+        right = second_half_start
+        
+        while(right and left):
+            if left.val != right.val:
+                return False
+            left = left.next
+            right = right.next
+        
+        return True
