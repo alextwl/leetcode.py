@@ -1,0 +1,14 @@
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        '''
+        calculate Sigma(length of nums) and substract each element in the nums
+        final remaining part is the missing number
+
+        time=O(n), space=O(1)
+        '''
+        n = len(nums)
+        remaining = int(n * (n+1) / 2)  # do not return float ans
+        for num in nums:
+            remaining -= num
+        
+        return remaining
