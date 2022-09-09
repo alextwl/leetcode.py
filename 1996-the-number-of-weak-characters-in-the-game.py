@@ -20,3 +20,27 @@ class Solution:
                 max_defense = defense
         
         return weak_chars
+
+'''
+counting sort
+time=O(n+k), space=O(n+k)
+'''
+
+class Solution:
+    def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
+        count = [0] * 100002  # count[attack] = max defense
+        max_attack = 0
+        weak_chars = 0
+        
+        for attack, defense in properties:
+            count[attack] = max(defense, count[attack])
+            max_attack = max(attack, max_attack)
+        
+        for attack in range(max_attack-1, 0, -1):
+            count[attack] = max(count[attack], count[attack+1])
+        
+        for attack, defense in properties:
+            if count[attack+1] > defense:
+                weak_chars += 1
+        
+        return weak_chars
