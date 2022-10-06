@@ -2,6 +2,9 @@
 2022/10/06 daily challenge
 
 binary search approach
+
+(if-else in while) runtime=757ms
+(if-elif-else in while) runtime=1921ms
 '''
 
 from collections import defaultdict
@@ -31,6 +34,12 @@ class TimeMap:
         
         '''
         binary search timestamp
+
+        the goal is to find not only the exact timestamp
+        but also the nearest <=timestamp.
+
+        we use the simplistic conditions to keep the runtime low
+        and self._storage[key][right-1][1] is always the answer.
         '''
         series = self._storage[key]
         left = 0
@@ -40,10 +49,11 @@ class TimeMap:
             if series[mid][0] <= timestamp:
                 left = mid + 1
             else:
+                '''
+                right is not a candidate but right-1 will be the answer in the end.
+                '''
                 right = mid
         
-        if right == 0:
-            return ""
-        else:
-            return series[right-1][1]
+        # no need to check right==0 here as it's handled in the beginning.
+        return series[right-1][1]
 
