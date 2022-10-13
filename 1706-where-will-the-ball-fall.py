@@ -70,7 +70,7 @@ class Solution:
             else:
                 '''
                 ball falls out of the box.
-                the last col is always the output column which ball falls.
+                the last col is always the last column where ball falls.
                 '''
                 ans[start_col] = col
         
