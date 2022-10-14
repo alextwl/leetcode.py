@@ -26,3 +26,24 @@ class Solution:
         
         return dp[n]
 
+
+'''
+Catalan number approach
+
+See wikipedia for Catalan number's various applications:
+https://en.wikipedia.org/wiki/Catalan_number#Applications_in_combinatorics
+
+        (2n)!
+Cn = -----------
+     (n+1)! * n!
+
+more detailed explanation:
+https://leetcode.com/problems/unique-binary-search-trees/discuss/703049/Python-Math-oneliner-O(n)-using-Catalan-number-explained
+'''
+
+from math import factorial
+
+class Solution2:
+    def numTrees(self, n: int) -> int:
+        return factorial(2*n) // (factorial(n+1) * factorial(n))
+
