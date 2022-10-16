@@ -6,6 +6,9 @@ dynamic programming + DFS recursive approach
 learnt from
 https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/discuss/490316/JavaC%2B%2BPython3-DP-O(nd)-Solution
 
+more detailed explanation:
+https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/discuss/944828/Short-DP-solution-with-highly-detailed-step-by-step-explanation
+
 the idea is iterating all possible subarrays for both days & jobs.
 '''
 
