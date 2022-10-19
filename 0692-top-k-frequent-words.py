@@ -22,5 +22,8 @@ class Solution:
         the word (w) itself should be the secondary key because
         the problem asks for sorting them with the *same* frequency
         by their lexicographical order.
+
+        don't use heapq.nlargest here because it results in
+        reversed lexicographical order for the same freq words.
         '''
         return heapq.nsmallest(k, wdict, key=lambda w: (-wdict[w], w))
