@@ -29,7 +29,7 @@ class Solution:
 class Solution2:
     def deleteAndEarn(self, nums: List[int]) -> int:
         '''
-        intuitive easy-to-read ver, time=O(n), space=O(n)
+        intuitive easy-to-read ver, time=O(n), space=O(C) (depend on range of input values)
         '''
         # points{the value of element} = total earned points of the same element.
         points = [0] * (10**4 + 1)
