@@ -41,3 +41,28 @@ class Solution:
         
         # the dp value of the first position is the minimum accumulated jump times.
         return dp[0]
+
+
+'''
+more clever 2-pointer approach
+
+learnt from
+https://leetcode.com/problems/jump-game-ii/discuss/170518/8-Lines-in-Python!-Easiest-Solution!
+'''
+
+class Solution2:
+    def jump(self, nums: List[int]) -> int:
+        '''
+        always evaulate the furthest distance we can reach from nums[left:right+1],
+        pick (jump from) the maximum right pointer,
+        and we can get the minimum time of jumps.
+        '''
+        left = right = 0
+        jumps = 0  # the number of jumps (not distance.)
+        
+        while right < len(nums) - 1:
+            jumps += 1
+            max_jump_distance = max([i + nums[i] for i in range(left, right+1)])
+            left, right = right+1, max_jump_distance
+        
+        return jumps
