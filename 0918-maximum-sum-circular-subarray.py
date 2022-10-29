@@ -59,3 +59,43 @@ class Solution:
             max_sum = max(max_sum, current_sum + max_rsums[i+2])
         
         return max_sum
+
+
+'''
+3-time kadane's approach (Kadane's sign variant)
+
+learnt from official solution 3 (see the derived sigma equation)
+
+the explanation from official sol is not intuitive,
+but the main idea is using kadane's to
+find the *minimum* sum from nums[1:] & nums[:-1],
+add it to sum(nums[]) (equal to sum(nums[]) subtracted the excluded part.)
+
+it seems the actual runtime does not beat next array method...
+'''
+
+class Solution:
+    def maxSubarraySumCircular(self, nums: List[int]) -> int:
+        def kadane(g):
+            '''
+            :param g: an iterable instance of numbers
+            :type g: list_iterator or generator
+            '''
+            max_sum = cur_sum = next(g)  # do *not* initialize it to None or it raises exception when calling max(None).
+            for num in g:
+                cur_sum = num + max(cur_sum, 0)  # restart subarray if cur_sum was negative.
+                max_sum = max(max_sum, cur_sum)
+            
+            return max_sum
+        
+        if len(nums) == 1:
+            # just return the first element, no need to run Kadane's.
+            return nums[0]
+        
+        sumA = sum(nums)
+        
+        s1 = kadane(iter(nums))  # for the case of the subarray == nums[].
+        s2 = sumA + kadane(-nums[i] for i in range(1, len(nums)))  # == kadane(nums[j:] + nums[i:]), 2nd-part without first element.
+        s3 = sumA + kadane(-nums[i] for i in range(0, len(nums)-1))  # == kadane(nums[j:] + nums[i:]), 2nd-part without last element.
+        
+        return max(s1, s2, s3)
