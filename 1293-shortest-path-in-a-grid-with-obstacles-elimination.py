@@ -18,6 +18,13 @@ class Solution:
             # start == end
             return 0
         
+        '''
+        shortcut: if k is greater than width+height (excluding beginning cell),
+        a shortest path must exist that it walks along the edges.
+        '''
+        if k > (m-1 + n-1):
+            return m-1 + n-1
+        
         # BFS queue of coordinates to be visited
         q = collections.deque([(0, 0, k, 0)])  # (i, j, remaining k obstacles, steps)
         
