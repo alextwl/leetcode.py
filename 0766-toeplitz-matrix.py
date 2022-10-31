@@ -24,3 +24,19 @@ class Solution:
 
         # the matrix is Toeplitz.
         return True
+
+
+'''
+clever pythonic approach
+
+learnt from official solution 2.
+
+for all cells, just compare with top-left neighbor,
+do *AND* with all its comparsion results plus always-true top-left edge cells.
+'''
+
+class Solution2:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        return all(x == 0 or y == 0 or matrix[x-1][y-1] == val
+                   for x, row in enumerate(matrix)
+                   for y, val in enumerate(row))
