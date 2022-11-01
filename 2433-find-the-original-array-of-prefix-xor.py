@@ -19,10 +19,12 @@ arr[3] = pref[4] ^ pref[3]
 
 class Solution:
     def findArray(self, pref: List[int]) -> List[int]:
-        arr = [pref[0]]
+        last = pref[0]
+        arr = [last]
         
         for i in range(1, len(pref)):
-            arr.append(pref[i] ^ pref[i-1])
+            arr.append(pref[i] ^ last)
+            last = pref[i]
         
         return arr
 
