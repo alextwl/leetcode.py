@@ -1,5 +1,5 @@
 '''
-XOR cancel approach (time limit exceeded)
+XOR cancel approach
 
 according to example 1:
 
@@ -12,14 +12,29 @@ pref[4] ^ arr[0] ^ arr[1] ^ arr[2]
 = (arr[0] ^ arr[1] ^ arr[2] ^ arr[3]) ^ (arr[0] ^ arr[1] ^ arr[2])
 = arr[3]
 
-use reduce() to reiterate such annoying calculation:
+use last prefix XOR to recover:
+
+arr[3] = pref[4] ^ pref[3]
+'''
+
+class Solution:
+    def findArray(self, pref: List[int]) -> List[int]:
+        arr = [pref[0]]
+        
+        for i in range(1, len(pref)):
+            arr.append(pref[i] ^ pref[i-1])
+        
+        return arr
+
+'''
+or use reduce() to reiterate such annoying calculation: (time limit exceeded)
 
 arr[3] = (((pref[4] ^ arr[0]) ^ arr[1]) ^ arr[2])
 '''
 
 import functools
 
-class Solution:
+class Solution2:
     def findArray(self, pref: List[int]) -> List[int]:
         arr = [pref[0]]
         
