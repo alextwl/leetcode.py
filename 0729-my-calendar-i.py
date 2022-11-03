@@ -19,3 +19,36 @@ class MyCalendar:
         self.bookings.append((start, end))
         return True
 
+
+'''
+SortedList approach, learnt from official solution 2.
+
+sort the bookings and find the conflict by binary search provided by SortedList.
+'''
+
+from sortedcontainers import SortedList
+
+
+class MyCalendar:
+
+    def __init__(self):
+        self.bookings = SortedList()  # list of scheduled bookings.
+
+    def book(self, start: int, end: int) -> bool:
+        '''
+        find a proper index of the incoming request to be inserted where
+        next to a scheduled booking [bStart, bEnd) by bStart > start.
+        '''
+        idx = self.bookings.bisect_right((start, end))
+        '''
+        (1) if idx > 0, lookup the previous booking of idx (that is, bookings[idx-1])
+            and check if its end time is later than start.
+        (2) check if the start time of the bookings[idx] was earlier than the incoming end time.
+        '''
+        if (idx > 0 and self.bookings[idx-1][1] > start) or \
+            (idx < len(self.bookings) and self.bookings[idx][0] < end):
+            return False
+        # conflict not found, good to accept booking.
+        self.bookings.add((start, end))
+        return True
+
