@@ -11,10 +11,7 @@ class Solution:
         start1, end1 = map(time2int, event1)
         start2, end2 = map(time2int, event2)
         
-        if (start2 <= start1 <= end2) or \
-           (start2 <= end1 <= end2) or \
-           (start1 <= start2 <= end1) or \
-           (start1 <= end2 <= end1):
+        if (start1 <= end2) and (start2 <= end1):
             return True
         
         return False
