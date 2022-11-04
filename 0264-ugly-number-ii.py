@@ -3,6 +3,8 @@ generate n-th ugly number approach
 
 learnt from a nice explanation:
 https://leetcode.com/problems/ugly-number-ii/discuss/69373/Short-and-O(n)-Python-and-C%2B%2B
+
+walrus op used for speedup, python 3.8+ required.
 '''
 
 
@@ -27,13 +29,13 @@ class Solution:
             '''
             try to multiply by one of prime factors to go over the last ugly number.
             '''
-            while ugly[i2] * 2 <= ugly[-1]:
+            while (c2 := ugly[i2] * 2) <= ugly[-1]:
                 i2 += 1
-            while ugly[i3] * 3 <= ugly[-1]:
+            while (c3 := ugly[i3] * 3) <= ugly[-1]:
                 i3 += 1
-            while ugly[i5] * 5 <= ugly[-1]:
+            while (c5 := ugly[i5] * 5) <= ugly[-1]:
                 i5 += 1
             # get the minimum of next ugly candidates.
-            ugly.append(min(ugly[i2]*2, ugly[i3]*3, ugly[i5]*5))
-        
+            ugly.append(min(c2, c3, c5))
+
         return ugly[-1]
