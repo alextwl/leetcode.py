@@ -1,0 +1,1 @@
+../all/0120-triangle.py
