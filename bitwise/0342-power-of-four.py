@@ -1,0 +1,1 @@
+../all/0342-power-of-four.py

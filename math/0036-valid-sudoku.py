@@ -1,0 +1,1 @@
+../all/0036-valid-sudoku.py

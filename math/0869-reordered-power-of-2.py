@@ -1,0 +1,1 @@
+../all/0869-reordered-power-of-2.py

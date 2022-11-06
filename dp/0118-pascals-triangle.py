@@ -1,0 +1,1 @@
+../all/0118-pascals-triangle.py

@@ -1,0 +1,1 @@
+../all/2095-delete-the-middle-node-of-a-linked-list.py

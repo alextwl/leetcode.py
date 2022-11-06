@@ -1,0 +1,1 @@
+../all/0976-largest-perimeter-triangle.py

@@ -1,0 +1,1 @@
+../all/0048-rotate-image.py

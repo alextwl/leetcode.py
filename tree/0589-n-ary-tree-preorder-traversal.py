@@ -1,0 +1,1 @@
+../all/0589-n-ary-tree-preorder-traversal.py

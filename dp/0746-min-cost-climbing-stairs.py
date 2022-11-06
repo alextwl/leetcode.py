@@ -1,0 +1,1 @@
+../all/0746-min-cost-climbing-stairs.py

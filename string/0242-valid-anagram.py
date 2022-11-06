@@ -1,0 +1,1 @@
+../all/0242-valid-anagram.py

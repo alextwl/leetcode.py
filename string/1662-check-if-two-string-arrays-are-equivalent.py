@@ -1,0 +1,1 @@
+../all/1662-check-if-two-string-arrays-are-equivalent.py

@@ -1,0 +1,1 @@
+../all/0740-delete-and-earn.py

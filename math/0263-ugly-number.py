@@ -1,0 +1,1 @@
+../all/0263-ugly-number.py

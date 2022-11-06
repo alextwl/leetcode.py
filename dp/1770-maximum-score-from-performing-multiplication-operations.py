@@ -1,0 +1,1 @@
+../all/1770-maximum-score-from-performing-multiplication-operations.py

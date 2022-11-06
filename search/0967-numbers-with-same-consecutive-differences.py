@@ -1,0 +1,1 @@
+../all/0967-numbers-with-same-consecutive-differences.py

@@ -1,0 +1,1 @@
+../all/0990-satisfiability-of-equality-equations.py

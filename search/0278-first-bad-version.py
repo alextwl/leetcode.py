@@ -1,0 +1,1 @@
+../all/0278-first-bad-version.py

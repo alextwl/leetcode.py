@@ -1,0 +1,1 @@
+../all/0009-palindrome-number.py

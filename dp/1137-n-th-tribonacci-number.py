@@ -1,0 +1,1 @@
+../all/1137-n-th-tribonacci-number.py

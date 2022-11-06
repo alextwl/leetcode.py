@@ -1,0 +1,1 @@
+../all/0766-toeplitz-matrix.py

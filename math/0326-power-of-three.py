@@ -1,0 +1,1 @@
+../all/0326-power-of-three.py

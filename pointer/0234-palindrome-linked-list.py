@@ -1,0 +1,1 @@
+../all/0234-palindrome-linked-list.py

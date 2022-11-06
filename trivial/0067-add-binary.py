@@ -1,0 +1,1 @@
+../all/0067-add-binary.py

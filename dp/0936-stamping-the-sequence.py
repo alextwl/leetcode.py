@@ -1,0 +1,1 @@
+../all/0936-stamping-the-sequence.py

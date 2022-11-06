@@ -1,0 +1,1 @@
+../all/0336-palindrome-pairs.py

@@ -1,0 +1,1 @@
+../all/0985-sum-of-even-numbers-after-queries.py

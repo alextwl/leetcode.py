@@ -1,0 +1,1 @@
+../all/1832-check-if-the-sentence-is-pangram.py
