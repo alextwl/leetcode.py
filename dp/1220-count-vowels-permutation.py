@@ -1,0 +1,1 @@
+../all/1220-count-vowels-permutation.py
