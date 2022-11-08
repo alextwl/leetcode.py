@@ -19,3 +19,21 @@ class Solution:
                 i += 1
         
         return s
+
+
+'''
+stack approach, learnt from official solution
+
+it's easier and we don't need to maintain pointer.
+'''
+
+class Solution:
+    def makeGood(self, s: str) -> str:
+        stack = []
+        for c in s:
+            if stack and abs(ord(c) - ord(stack[-1])) == 32:
+                stack.pop()
+            else:
+                stack.append(c)
+        return ''.join(stack)
+
