@@ -1,0 +1,1 @@
+../all/0028-implement-strstr.py
