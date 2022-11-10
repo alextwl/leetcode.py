@@ -1,0 +1,1 @@
+../all/1047-remove-all-adjacent-duplicates-in-string.py
