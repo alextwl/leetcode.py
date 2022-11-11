@@ -38,3 +38,62 @@ class Solution:
 
         return max(up[-1], down[-1])
 
+
+'''
+better dynamic programming approach (linear ver)
+
+learnt from official solution.
+
+time=O(n), space=O(2n)
+'''
+
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        up = [0] * n
+        down = up.copy()
+        up[0] = down[0] = 1
+        
+        for i in range(1, n):
+            if nums[i] > nums[i-1]:
+                # nums[i] is added to the rising sequence (expands previous falling sequence.)
+                up[i] = down[i-1] + 1
+                down[i] = down[i-1]
+            elif nums[i] < nums[i-1]:
+                # nums[i] is added to the falling sequence (expands previous rising sequence.)
+                down[i] = up[i-1] + 1
+                up[i] = up[i-1]
+            else:
+                # nums[i] is deleted (bypassed) from the sequences
+                up[i], down[i] = up[i-1], down[i-1]
+
+        return max(up[-1], down[-1])
+
+
+'''
+extreme dynamic programming approach (space-optimized ver)
+
+learnt from official solution.
+
+time=O(n), space=O(1)
+'''
+
+class Solution:
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        up = down = 1
+        
+        for i in range(1, n):
+            if nums[i] > nums[i-1]:
+                # nums[i] is added to the rising sequence (expands previous falling sequence.)
+                up = down + 1
+            elif nums[i] < nums[i-1]:
+                # nums[i] is added to the falling sequence (expands previous rising sequence.)
+                down = up + 1
+            '''
+            else:
+                # nums[i] is deleted (bypassed) from the sequences
+                pass
+            '''
+        return max(up, down)
+
