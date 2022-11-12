@@ -1,0 +1,1 @@
+../all/0392-is-subsequence.py
