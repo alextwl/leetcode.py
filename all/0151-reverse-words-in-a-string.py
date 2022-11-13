@@ -43,10 +43,8 @@ class Solution:
                 s[i] = ' '
                 i += 1
                 # forward j to non-space char.
-                while(s[j] == ' '):
+                while(j < end and s[j] == ' '):
                     j += 1
-                    if j == end:
-                        break
             s[i] = s[j]
             i += 1
             j += 1
