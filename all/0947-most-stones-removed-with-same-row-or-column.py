@@ -56,3 +56,32 @@ class Solution:
 
         return len(stones) - islands
 
+
+'''
+union find approach
+
+learnt from
+https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/discuss/197668/Count-the-Number-of-Islands-O(N)
+'''
+
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        uf = {}
+        def find(x):
+            if x != uf.setdefault(x,x):
+                uf[x] = find(uf[x])
+            return uf[x]
+
+        '''
+        the idea is all stones sharing the same row or the same column (bitwise inverted)
+        share the same root in the forst graph.
+        '''
+        for i, j in stones:
+            uf[find(i)] = find(~j)
+
+        # and then we count roots as islands. (disjoint sets)
+        islands = {find(x) for x in uf}
+
+        # each island keeps one non-removable stone so we subtract it from total stones.
+        return len(stones) - len(islands)
+
