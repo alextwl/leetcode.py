@@ -1,4 +1,16 @@
-# 2022/08/05 daily challenge
+'''
+2022/08/05 daily challenge
+
+dynamic programming approach
+
+search the combinations by reducing the problem with subtracting each num from target.
+
+e.g. nums = [1,2,3], target = 4
+search(4) = search(4-1) + search(4-2) + search(4-3)
+search(3) = search(3-1) + search(3-2) + search(3-3)
+search(2) = search(2-1) + search(2-2)
+search(1) = search(1-1)
+'''
 
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
