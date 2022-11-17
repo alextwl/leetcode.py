@@ -1,0 +1,1 @@
+../all/0223-rectangle-area.py
