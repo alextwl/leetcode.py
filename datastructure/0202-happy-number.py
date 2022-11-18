@@ -1,0 +1,1 @@
+../all/0202-happy-number.py
