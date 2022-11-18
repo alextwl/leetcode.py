@@ -1,4 +1,6 @@
 '''
+2022/11/18 daily challenge
+
 intuitive approach
 
 keep dividing input n by appointed factors until n is reduced to 1.
@@ -12,7 +14,10 @@ class Solution:
         
         # just try to divide n by 2/3/5.
         for divisor in [2,3,5]:
-            while n % divisor == 0:
-                n //= divisor
+            while 1:
+                quo, rem = divmod(n, divisor)
+                if rem != 0:
+                    break
+                n = quo
         
         return n==1
