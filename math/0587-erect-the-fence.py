@@ -1,0 +1,1 @@
+../all/0587-erect-the-fence.py
