@@ -87,7 +87,7 @@ class Solution:
         '''
         check if n could fit in x**2 + y**2 (two-square)
 
-        note: two-square check may be done after four-square check with n evenly divided by 4 (n >>= 2)
+        note: two-square check may be done after four-square check with n evenly divided by 4**(r>=0)
         as the original solution by davidtan1890 & zhukov.
 
         See "Computing sum of squares when the factorization is not known"
@@ -95,9 +95,14 @@ class Solution:
         https://www.alpertron.com.ar/4SQUARES.HTM
 
         s = a**2 + b**2 + c**2 + d**2
-        n = (4**r) * s = (2**r * a)**2 + (2**r * b)**2 + (2**r * c)**2 + (2**r * d)**2
+        n = (4**r) * s
+          = (4**r) * (a**2 + b**2 + c**2 + d**2)
+          = (2**r * a)**2 + (2**r * b)**2 + (2**r * c)**2 + (2**r * d)**2
        
         where some variables can be equal to zero.
+
+        also noted in my reply:
+        https://leetcode.com/problems/perfect-squares/discuss/71488/Summary-of-4-different-solutions-(BFS-DP-static-DP-and-mathematics)/1692870
         '''
         for i in range(1, math.isqrt(n) + 1):
             if isSquare(n - i**2):
@@ -111,7 +116,10 @@ class Solution:
         while((n & 3) == 0):
             n >>= 2
         if (n & 7) == 7:
-            # the least number is Lagrange's four-square.
+            '''
+            the input n can't be represented as a three-square sum,
+            so the least number is Lagrange's four-square.
+            '''
             return 4
         
         '''
