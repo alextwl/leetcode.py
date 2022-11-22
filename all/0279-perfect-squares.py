@@ -42,3 +42,83 @@ class Solution:
 
         return dp[-1]
 
+
+'''
+2022/11/22 daily challenge
+
+math approach
+
+learnt from
+https://leetcode.com/problems/perfect-squares/discuss/71488/Summary-of-4-different-solutions-(BFS-DP-static-DP-and-mathematics)
+'''
+
+import math
+
+
+class Solution:
+    def numSquares(self, n: int) -> int:
+        '''
+        according to Lagrange's four-square theorem:
+        https://en.wikipedia.org/wiki/Lagrange%27s_four-square_theorem
+        
+        `every` natural number p can be represented as the sum of 4 integer (a0~a3) squares.
+        p = a0**2 + a1**2 + a2**2 + a3**3
+        
+        also referring to Legendre's three-square theorem:
+        https://en.wikipedia.org/wiki/Legendre%27s_three-square_theorem
+        
+        a natural number n may be represented as:
+        n = x**2 + y**2 + z**2
+        
+        if and only if n is not of the form
+        n = 4**a * (8*b + 7) with non-negative integer a & b.
+        
+        so, if n couldn't be represented as a perfect square, a two-square, or a three-square,
+        we can comfortably say n can be represented as a four-square
+        and the least number of perfect square numbers is 4.
+        '''
+        # python >= 3.8: fast nearest integer square root by Newton's iteration.
+        isSquare = lambda n: n == math.isqrt(n)**2
+        
+        if isSquare(n):
+            # n is already a perfect square.
+            return 1
+
+        '''
+        check if n could fit in x**2 + y**2 (two-square)
+
+        note: two-square check may be done after four-square check with n evenly divided by 4 (n >>= 2)
+        as the original solution by davidtan1890 & zhukov.
+
+        See "Computing sum of squares when the factorization is not known"
+        explanation by Dario Alejandro Alpern
+        https://www.alpertron.com.ar/4SQUARES.HTM
+
+        s = a**2 + b**2 + c**2 + d**2
+        n = (4**r) * s = (2**r * a)**2 + (2**r * b)**2 + (2**r * c)**2 + (2**r * d)**2
+       
+        where some variables can be equal to zero.
+        '''
+        for i in range(1, math.isqrt(n) + 1):
+            if isSquare(n - i**2):
+                # n can be represented as a two-square
+                return 2
+
+        '''
+        check if it's an exception from Legendre's three-square by
+        n = 4**a * (8*b + 7)
+        '''
+        while((n & 3) == 0):
+            n >>= 2
+        if (n & 7) == 7:
+            # the least number is Lagrange's four-square.
+            return 4
+        
+        '''
+        now we can comfortably say n can be represented as a three-square.
+
+        n is neither a perfect square and a two-square sum,
+        but is a Legendre's three-square sum.
+        '''
+        return 3
+

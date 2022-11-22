@@ -1,0 +1,1 @@
+../all/0279-perfect-squares.py
