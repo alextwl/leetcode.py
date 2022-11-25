@@ -44,3 +44,38 @@ class Solution:
         
         return ssmin % MOD
 
+
+'''
+dynamic programming + mono stack approach
+
+learnt from official solution
+'''
+
+class Solution:
+    def sumSubarrayMins(self, arr: List[int]) -> int:
+        dp = [0] * len(arr)  # dp[i] = sum(minimums of subarrays ending at i)
+        stack = []
+        
+        for i in range(0, len(arr)):
+            while stack and arr[stack[-1]] >= arr[i]:
+                stack.pop()
+            if stack:
+                '''
+                the current arr[i] is the nextSmaller,
+                where prevSmaller is >= nextSmaller,
+                that means we need to inherit the smaller sum(mins of subarrays ending at prevSmaller)
+                and then plus sum(mins of subarrays in (prevSmaller+1, i] range)
+                '''
+                prevSmaller = stack[-1]
+                dp[i] = dp[prevSmaller] + (i - prevSmaller) * arr[i]
+            else:
+                '''
+                arr[i] is the minimum of arr[0:i+1],
+                so just count subarrays from arr[0:i+1] ~ arr[i:i+1] and contribute them.
+                '''
+                dp[i] = (i+1) * arr[i]
+            
+            stack.append(i)
+        
+        return sum(dp) % MOD
+
