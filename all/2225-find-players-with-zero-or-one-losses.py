@@ -30,3 +30,25 @@ class Solution:
         
         return [allwin, oneloss]
 
+
+'''
+hashmap + builtin sorting approach
+
+Runtime: 1902 ms, faster than 94.37%
+apparantly python's dict access is much faster than list...
+'''
+
+import collections
+
+class Solution:
+    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+        # count losers first
+        losses = collections.Counter(loser for _, loser in matches)
+        # and count all winners (== won any matches and no loss)
+        allwin = [winner for winner in sorted(set(winner for winner, _ in matches) - set(losses))]
+        # count losers with exact one loss
+        oneloss = [loser for loser, loss in losses.items() if loss == 1]
+        oneloss.sort()
+        
+        return [allwin, oneloss]
+
