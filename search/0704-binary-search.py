@@ -1,0 +1,1 @@
+../all/0704-binary-search.py
