@@ -1,14 +1,16 @@
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
         # do binary search
-        start = 0
-        end = len(nums)
+        left, right = 0, len(nums)-1
         
-        while(start < end):
-            middle = (start + end) // 2
-            if target > nums[middle]:
-                start = middle + 1
+        while(left < right):
+            mid = left + (right-left)//2
+            if target == nums[mid]:
+                return mid
+            elif target > nums[mid]:
+                left = mid + 1
             else:
-                end = middle
+                right = mid
         
-        return start
+        # determine the position to insert in order
+        return left + 1 if nums[left] < target else left
