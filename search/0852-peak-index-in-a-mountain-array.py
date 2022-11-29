@@ -1,0 +1,1 @@
+../all/0852-peak-index-in-a-mountain-array.py
