@@ -1,0 +1,1 @@
+../all/1281-subtract-the-product-and-sum-of-digits-of-an-integer.py
