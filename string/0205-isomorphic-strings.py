@@ -1,0 +1,1 @@
+../all/0205-isomorphic-strings.py
