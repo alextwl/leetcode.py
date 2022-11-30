@@ -1,0 +1,1 @@
+../all/0367-valid-perfect-square.py
