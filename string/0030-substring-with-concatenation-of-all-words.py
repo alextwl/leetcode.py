@@ -1,0 +1,1 @@
+../all/0030-substring-with-concatenation-of-all-words.py
