@@ -1,0 +1,1 @@
+../all/2256-minimum-average-difference.py
