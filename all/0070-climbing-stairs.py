@@ -29,3 +29,27 @@ class Solution:
             dp[i] = dp[i-1] + dp[i-2]
         
         return dp[n]
+
+
+'''
+2022/12/12 daily challenge
+
+dynamic programming approach
+
+space=O(1) ver
+'''
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n
+
+        # define initial ans
+        i_2, i_1 = 1, 2
+
+        for _ in range(3,n+1):
+            i = i_1+i_2
+            i_2, i_1 = i_1, i
+
+        return i
+
