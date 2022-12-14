@@ -10,9 +10,7 @@ class Solution:
         tmp = prev1 = prev2 = 0
         
         for num in nums:
-            tmp = prev1
-            prev1 = max(prev2+num, prev1)  # rob current house, or not to rob
-            prev2 = tmp
+            prev2, prev1 = prev1, max(prev2+num, prev1)  # rob num or not to rob
         
         return prev1
 
