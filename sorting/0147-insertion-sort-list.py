@@ -1,0 +1,1 @@
+../all/0147-insertion-sort-list.py
