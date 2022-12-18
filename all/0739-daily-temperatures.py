@@ -21,3 +21,26 @@ class Solution:
         
         return ans[::-1]
 
+
+'''
+stack approach
+'''
+
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        stack = []  # value=(reversed index, temperature)
+        ans = []
+
+        for rev, temp in enumerate(reversed(temperatures)):
+            while(stack and stack[-1][1] <= temp):
+                # remove further days which are not warmer than today from stack.
+                stack.pop()
+            
+            # get the distance between nearest warmer day and today.
+            ans.append(rev - stack[-1][0] if stack else 0)
+
+            # always push today to the stack to avoid duplicate access to temperatures[].
+            stack.append((rev, temp))
+        
+        return ans[::-1]
+
