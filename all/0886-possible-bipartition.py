@@ -25,7 +25,7 @@ class Solution:
         vgroup = [None for _ in range(0, n+1)]
 
         # run BFS from each unset vertex
-        for root in range(0, n+1):
+        for root in range(1, n+1):
             if vgroup[root] is None:
                 queue = collections.deque([root])
                 vgroup[root] = False  # initialize with group 1
