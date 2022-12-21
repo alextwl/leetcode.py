@@ -1,7 +1,7 @@
 '''
 2022/12/20 daily challenge
 
-breadth first search approach
+depth first search approach
 '''
 
 class Solution:
