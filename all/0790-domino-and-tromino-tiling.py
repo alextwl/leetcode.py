@@ -12,28 +12,28 @@ MODULO = (10**9) + 7
 
 class Solution:
     def numTilings(self, n: int) -> int:
-        dp_D = {0: 0, 1: 1, 2: 2}  # board filled without empty cell
-        dp_T = {0: 0, 1: 0, 2: 1}  # board filled with 1 empty cell in the end of column
+        dp_D = {0: 0, 1: 1, 2: 2}  # board filled fully, no empty cell
+        dp_T = {0: 0, 1: 0, 2: 1}  # board filled partially, left 1 empty cell in the end of column
 
         for i in range(3, n+1):
             '''
             grown board fully filled by the following ways
 
-            (1)
+            (1) dp_D[i-1] + a domino
             ------------+---+
                         | o |
              dp_D[i-1]  +---+
                         | o |
             ------------+---+
 
-            (2)
+            (2) dp_D[i-2] + two dominos (horizontal)
             ------------+---+---+
                         | o | o |
              dp_D[i-2]  +---+---+
                         | x | x |
             ------------+---+---+
 
-            (3)
+            (3) dp_T[i-1] + a tromino (two ways)
             ------------+---+---+      ------------+---+---+
                         | o | o |                      | o |
              dp_T[i-1]  +---+---+  or   dp_T[i-1]  +---+---+
@@ -43,7 +43,7 @@ class Solution:
             dp_D[i] = (dp_D[i-1] + dp_D[i-2] + dp_T[i-1]*2) % MODULO
 
             '''
-            grown board partially filled with 1 empty cell by the following ways
+            grown board partially filled, left 1 empty cell by the following ways
 
             (1) dp_D[i-2] + a tromino
             ------------+---+---+
