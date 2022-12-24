@@ -67,3 +67,24 @@ class Solution:
         # the 2*n board must be fully filled, so we get the answer from the last dp_D.
         return dp_D[n]
 
+
+'''
+space=O(1) ver
+'''
+
+class Solution:
+    def numTilings(self, n: int) -> int:
+        if n<=2: return n
+
+        d2, d1, d0 = 0, 1, 2
+        t2, t1, t0 = 0, 0, 1
+
+        for _ in range(3, n+1):
+            d2, d1 = d1, d0
+            t2, t1 = t1, t0
+
+            d0 = (d1 + d2 + t1*2) % MODULO
+            t0 = (t1 + d2) % MODULO
+
+        return d0
+
