@@ -31,3 +31,27 @@ class Solution:
         
         return [a for _, a in sorted(ans, key=lambda x:x[0])]
 
+
+'''
+prefix sum + bisect approach
+
+learnt from official solution
+'''
+
+import bisect
+
+
+class Solution:
+    def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+        nums.sort()
+        psum = [nums[0]]
+        for i in range(1, len(nums)):
+            psum.append(psum[-1] + nums[i])
+
+        ans = []  # [answers in queries' order]
+
+        for lmax in queries:
+            ans.append(bisect.bisect_right(psum, lmax))
+
+        return ans
+
