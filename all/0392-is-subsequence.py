@@ -29,3 +29,33 @@ class Solution:
         # s not found.
         return False
 
+
+'''
+damn fast ver, runtime=24ms
+
+catch exception as a signal of valid subsequence.
+'''
+
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        if not s:
+            # an empty s-string is always a subsequence of any t-string.
+            return True
+        if not t:
+            # an empty t-string has no non-empty s-subsequence.
+            return False
+
+        siter = iter(s)
+        schar = next(siter)
+
+        for c in t:
+            if c == schar:
+                try:
+                    schar = next(siter)
+                except StopIteration:
+                    # all chars of s found.
+                    return True
+
+        # s not found.
+        return False
+
