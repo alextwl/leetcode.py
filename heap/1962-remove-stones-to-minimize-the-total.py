@@ -1,0 +1,1 @@
+../all/1962-remove-stones-to-minimize-the-total.py
