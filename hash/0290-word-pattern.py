@@ -1,0 +1,1 @@
+../all/0290-word-pattern.py
