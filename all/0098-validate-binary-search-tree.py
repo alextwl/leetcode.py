@@ -25,3 +25,38 @@ class Solution:
         
         return True
 
+
+'''
+faster iterative approach
+'''
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        node = root
+        stack = []  # FILO nodes to be traversed
+        inorder = []  # inorder sequence of the tree
+
+        # iterative inorder (LVR) traversal
+        while(True):
+            if node is not None:
+                # queue V if V exists, the next is L.
+                stack.append(node)
+                node = node.left
+            elif stack:
+                # V is empty so the parent has no left child.
+                # we can now visit parent.
+                node = stack.pop()
+                if inorder and inorder[-1] >= node.val:
+                    # it's not a BST because the current node
+                    # is not greater than the last visited node.
+                    return False
+                inorder.append(node.val)
+
+                # the next is R.
+                node = node.right
+            else:
+                # all nodes are traversed.
+                break
+
+        return True
+
