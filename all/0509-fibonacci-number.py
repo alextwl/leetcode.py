@@ -13,3 +13,24 @@ class Solution:
             f[i] = f[i-1] + f[i-2]
         
         return f[n]
+
+
+'''
+space=O(1) ver
+'''
+
+class Solution:
+    def fib(self, n: int) -> int:
+        if n < 2:
+            # corner case
+            return n
+
+        # dp space
+        i2, i1, i0 = 0, 1, 1
+
+        for _ in range(3, n+1):
+            i2, i1 = i1, i0
+            i0 = i1+i2
+
+        return i0
+
