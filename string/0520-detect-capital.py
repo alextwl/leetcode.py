@@ -1,0 +1,1 @@
+../all/0520-detect-capital.py
