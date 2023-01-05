@@ -51,3 +51,30 @@ class Solution:
 
         return True
 
+
+'''
+stack approach
+
+follow the official hint
+'''
+
+class Solution:
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        def rebuild(text):
+            '''
+            strip backspace from the text.
+            '''
+            stack = []
+            for c in text:
+                if c == '#':
+                    if stack:
+                        # pop char only when stack is not empty.
+                        # a backspace with no chars does nothing.
+                        stack.pop()
+                else:
+                    stack.append(c)
+            return ''.join(stack)
+
+        # compare backspace-stripped strings of two inputs.
+        return rebuild(s) == rebuild(t)
+
