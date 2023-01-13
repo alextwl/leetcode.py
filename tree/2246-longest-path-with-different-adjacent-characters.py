@@ -1,0 +1,1 @@
+../all/2246-longest-path-with-different-adjacent-characters.py
