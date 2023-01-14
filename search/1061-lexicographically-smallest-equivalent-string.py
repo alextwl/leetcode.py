@@ -1,0 +1,1 @@
+../all/1061-lexicographically-smallest-equivalent-string.py
