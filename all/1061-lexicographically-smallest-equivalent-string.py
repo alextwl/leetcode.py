@@ -44,3 +44,32 @@ class Solution:
 
         return ''.join([smallest[c] for c in baseStr])
 
+
+'''
+union-find approach
+'''
+
+class Solution:
+    def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
+        # union-find functions to calculate the smallest equivalent characters
+        uf = dict()
+        def find(x):
+            if x != uf.setdefault(x,x):
+                uf[x] = find(uf[x])
+            return uf[x]
+        
+        def merge(x, y):
+            px, py = find(x), find(y)
+            if px == py:
+                return
+            if px > py:
+                uf[px] = py
+            else:
+                # px < py
+                uf[py] = px
+
+        for c1, c2 in zip(s1, s2):
+            merge(c1, c2)
+        
+        return ''.join([find(c) for c in baseStr])
+
