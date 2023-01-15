@@ -14,7 +14,7 @@ class Solution:
         '''
         speed up:
         x**(2n) = (x**n) * (x**n)
-        x**(2n+1) = (x**n) * (x**n) * n
+        x**(2n+1) = (x**n) * (x**n) * x
         and we only need to calculate x**n once.
         '''
         ans = self.myPow(x, n >> 1)
