@@ -1,0 +1,1 @@
+../all/2421-number-of-good-paths.py
