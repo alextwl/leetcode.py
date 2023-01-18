@@ -4,6 +4,26 @@ bottom-up dynamic programming approach
 learnt from official solution 3
 
 count coins from $0 and find the minimum number of coins while adding money.
+
+for example: coins = [1,2,5], amount = 11
+
+       coin iter order ->
++---------+----+----+----+-----+
+| dp\deno | $1 | $2 | $5 | min |
++---------+----+----+----+-----+
+|  [$0]   | --   --   -- |  0  |
+|  [$1]   |  1   --   -- |  1  |
+|  [$2]   |  2    1   -- |  1  |
+|  [$3]   |  3    2   -- |  2  |
+|  [$4]   |  4    2   -- |  2  |
+|  [$5]   |  5    3    1 |  1  |
+|  [$6]   |  6    3    2 |  2  |
+|  [$7]   |  7    4    2 |  2  |
+|  [$8]   |  8    4    3 |  3  |
+|  [$9]   |  9    5    3 |  3  |
+|  [$10]  | 10    5    2 |  2  |
+|  [$11]  | 11    6    3 |  3  | <- the answer
++---------+--------------+-----+
 '''
 
 class Solution:
