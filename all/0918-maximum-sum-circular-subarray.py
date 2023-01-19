@@ -108,25 +108,48 @@ learnt from official solution 4,
 it is more intuitive than official solution 3 (Kadane's sign variant).
 
 i wonder if anyone found official's python solutions were all broken with max(None)...
+
+note all subarrays here are *contiguous* parts of the input array.
 '''
 
 class Solution:
     def maxSubarraySumCircular(self, nums: List[int]) -> int:
+        '''
         # step 1: original Kadane's for the case of subarray == nums[].
+
+        +------------------------------+---------------------------+------------------------------+
+        | non-selected part (optional) | selected maximum subarray | non-selected part (optional) |
+        +------------------------------+---------------------------+------------------------------+
+        '''
         s1 = cur_sum = nums[0]
         for num in nums[1:]:
             cur_sum = num + max(cur_sum, 0)  # restart subarray if cur_sum was negative
             s1 = max(s1, cur_sum)
         
         sumA = sum(nums)
+
+        '''
         # step 2: two-interval subarray, interior in nums[1:] by minimum Kadane's.
+
+        sum(nums) - minimum Kadane's subarray without nums[0] = circular selected part with nums[0]
+        +----------------------------+-------------------------------+--------------------------+
+        | selected part with nums[0] | non-selected minimum subarray | selected part (optional) |
+        +----------------------------+-------------------------------+--------------------------+
+        '''
         s2 = cur_sum = float('inf')
         for num in nums[1:]:
             cur_sum = num + min(cur_sum, 0)
             s2 = min(s2, cur_sum)
         s2 = sumA - s2
         
+        '''
         # step 3: two-interval subarray, interior in nums[:-1] by minimum Kadane's.
+
+        sum(nums) - minimum Kadane's subarray without nums[-1] = circular selected part with nums[-1]
+        +--------------------------+-------------------------------+-----------------------------+
+        | selected part (optional) | non-selected minimum subarray | selected part with nums[-1] |
+        +--------------------------+-------------------------------+-----------------------------+
+        '''
         s3 = cur_sum = float('inf')
         for num in nums[:-1]:
             cur_sum = num + min(cur_sum, 0)
