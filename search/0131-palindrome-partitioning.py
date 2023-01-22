@@ -1,0 +1,1 @@
+../all/0131-palindrome-partitioning.py
