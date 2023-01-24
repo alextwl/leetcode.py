@@ -1,0 +1,1 @@
+../all/0735-asteroid-collision.py
