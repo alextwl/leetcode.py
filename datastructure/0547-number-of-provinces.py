@@ -1,0 +1,1 @@
+../all/0547-number-of-provinces.py
