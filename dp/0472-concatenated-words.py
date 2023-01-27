@@ -1,0 +1,1 @@
+../all/0472-concatenated-words.py
