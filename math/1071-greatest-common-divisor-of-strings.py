@@ -1,0 +1,1 @@
+../all/1071-greatest-common-divisor-of-strings.py
