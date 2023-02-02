@@ -1,0 +1,1 @@
+../all/0953-verifying-an-alien-dictionary.py
