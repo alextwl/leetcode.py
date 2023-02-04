@@ -1,0 +1,1 @@
+../all/0567-permutation-in-string.py
