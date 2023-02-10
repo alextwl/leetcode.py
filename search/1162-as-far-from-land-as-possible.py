@@ -1,0 +1,1 @@
+../all/1162-as-far-from-land-as-possible.py
