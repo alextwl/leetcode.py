@@ -1,0 +1,1 @@
+../all/0540-single-element-in-a-sorted-array.py
