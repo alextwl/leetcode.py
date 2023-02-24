@@ -1,0 +1,1 @@
+../all/1675-minimize-deviation-in-array.py
