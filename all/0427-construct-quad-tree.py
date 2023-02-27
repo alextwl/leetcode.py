@@ -46,3 +46,67 @@ class Solution:
         
         return newGrid[0][0]
 
+
+'''
+top-down recursive approach
+'''
+
+
+class Solution:
+    def construct(self, grid: List[List[int]]) -> 'Node':
+        n = len(grid)
+        if n == 1:
+            return Node(grid[0][0], True, None, None, None, None)
+        
+        def buildQuad(x1, y1, x2, y2):
+            '''
+            :param x1: x-axis coordinate of top-left corner
+            :param y1: y-axis coordinate of top-left corner
+            :param x2: x-axis coordinate of bottom-right corner
+            :param y2: y-axis coordinate of bottom-right corner
+            '''
+            if x1 == x2 and y1 == y2:
+                # single cell of grid selected
+                return grid[x1][y1]
+            
+            hx = (x1+x2) >> 1
+            hy = (y1+y2) >> 1
+            '''
+            # in the sequence: topLeft, topRight, bottomLeft, bottomRight
+
+            +--------------+--------------+
+            |(x1,y1)       |(x1,hy+1)     |
+            |   topLeft    |   topRight   |
+            |       (hx,hy)|       (hx,y2)|
+            +--------------+--------------+
+            |(hx+1,y1)     |(hx+1,hy+1)   |
+            |  bottomLeft  |  bottomRight |
+            |       (x2,hy)|       (x2,y2)|
+            +--------------+--------------+
+            '''
+            leaves = [buildQuad(x1, y1, hx, hy),
+                      buildQuad(x1, hy+1, hx, y2),
+                      buildQuad(hx+1, y1, x2, hy),
+                      buildQuad(hx+1, hy+1, x2, y2)]
+            
+            if all(leaf == leaves[0] for leaf in leaves):
+                # all leaves are the same integer.
+                return leaves[0]
+            
+            # some or no leaves are integer, convert all leaves to Node.
+            for i in range(4):
+                if isinstance(leaves[i], int):
+                    leaves[i] = Node(bool(leaves[i]), True, None, None, None, None)
+            
+            return Node(True, False, *leaves)
+        
+        # start from the entire grid.
+        root = buildQuad(0, 0, n-1, n-1)
+
+        # corner case: if all cell values of the entire grid are the same,
+        #              buildQuad() shall return integer, we need to deal with it.
+        if isinstance(root, int):
+            return Node(bool(root), True, None, None, None, None)
+
+        return root
+
