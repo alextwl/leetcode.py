@@ -1,0 +1,1 @@
+../all/2444-count-subarrays-with-fixed-bounds.py
