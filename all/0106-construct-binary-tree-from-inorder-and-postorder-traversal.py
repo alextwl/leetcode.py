@@ -5,7 +5,6 @@ class Solution:
         
         root = TreeNode(postorder[-1])
         root_idx = inorder.index(root.val)
-        postorder_len = len(postorder)
         '''
         See problem 105 for preorder + inorder ver
         '''
