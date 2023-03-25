@@ -45,3 +45,52 @@ class Solution:
 
         return ans
 
+
+'''
+Union-Find approach
+'''
+
+import collections
+
+
+class Solution:
+    def countPairs(self, n: int, edges: List[List[int]]) -> int:
+        if n == 1:
+            return 0
+
+        # Union-Find structure & functions (rank ver)
+        parent = [i for i in range(n)]
+        rank = [0] * n
+
+        def find(node):
+            if parent[node] != node:
+                parent[node] = find(parent[node])
+            return parent[node]
+        
+        def union(x, y):
+            x, y = find(x), find(y)
+            if x == y:
+                return
+            if rank[x] < rank[y]:
+                parent[x] = y
+            elif rank[x] > rank[y]:
+                parent[y] = x
+            else:
+                parent[y] = x
+                rank[x] += 1
+        
+        for a, b in edges:
+            union(a, b)
+        
+        group_nodes = collections.defaultdict(int)
+        for i in range(n):
+            group_nodes[find(i)] += 1
+        
+        ans = 0
+        remaining_sum = n
+        for cnt in group_nodes.values():
+            remaining_sum -= cnt
+            ans += cnt * remaining_sum
+        
+        return ans
+
