@@ -1,0 +1,1 @@
+../all/0983-minimum-cost-for-tickets.py
