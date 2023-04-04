@@ -1,0 +1,1 @@
+../all/2405-optimal-partition-of-string.py
