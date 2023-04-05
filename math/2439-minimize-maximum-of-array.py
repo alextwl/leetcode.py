@@ -1,0 +1,1 @@
+../all/2439-minimize-maximum-of-array.py
