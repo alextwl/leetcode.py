@@ -46,3 +46,47 @@ class Solution:
         
         return ans
 
+
+'''
+simple dfs() return value ver
+
+float('inf') indicates a land is adjacent to the boundary.
+'''
+
+
+class Solution:
+    def numEnclaves(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        ans = 0  # total number of enclaves
+
+        def dfs(i, j):
+            '''
+            :return: the number of cells
+            '''
+            if not(0 <= i < m and 0 <= j < n):
+                '''
+                reached the boundary, the land is not an enclave.
+                '''
+                return float('inf')
+            
+            if grid[i][j] == 0:
+                return 0
+            
+            # visit it
+            grid[i][j] = 0
+
+            # traverse deeper
+            cells = 1
+            for x, y in [(1, 0), (-1, 0), (0, -1), (0, 1)]:
+                cells += dfs(i+x, j+y)
+            return cells
+
+        for i in range(m):
+            for j in range(n):
+                a = dfs(i, j)
+                if a != float('inf'):
+                    # the land is an enclave.
+                    ans += a
+        
+        return ans
+
