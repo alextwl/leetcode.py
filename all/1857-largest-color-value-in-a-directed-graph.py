@@ -1,0 +1,68 @@
+'''
+2023/04/09 daily challenge
+
+Topological sorting (zero indegree) approach
+
+See Kahn's algorithm:
+https://en.wikipedia.org/wiki/Topological_sorting#Kahn's_algorithm
+
+Runtime: 4982 ms, Beats: 5.36%, sux. :'(
+'''
+
+import collections
+from string import ascii_lowercase
+
+
+class Solution:
+    def largestPathValue(self, colors: str, edges: List[List[int]]) -> int:
+        n = len(colors)
+
+        # build graph
+        graph = {i: set() for i in range(n)}
+        node_indegrees = [0] * n  # each node's indegrees (== the count of edge destinated to the node)
+        for a, b in edges:
+            graph[a].add(b)
+            node_indegrees[b] += 1
+
+        # initiate counter for each node with its color counted.
+        node_counter = {i: collections.Counter(c) for i, c in enumerate(colors)}
+        # filter nodes with zero indegree
+        zero_indegree_nodes = set(i for i, indegree in enumerate(node_indegrees) if indegree == 0)
+
+        largest = 0
+        visited_count = 0
+        while(zero_indegree_nodes):
+            node = zero_indegree_nodes.pop()
+            # visit the node, only nodes where we start traversing from can be visited.
+            visited_count += 1
+            for child in graph[node]:
+                # merge each color's max value to the child
+                child_color = colors[child]
+                for c in ascii_lowercase:
+                    if child_color == c:
+                        # grow the color c's value from current counter if it's bigger than the child's
+                        # if the child's color is also the c. (== concatenate the path from the node/parent)
+                        node_counter[child][c] = max(node_counter[child][c], node_counter[node][c] + 1)
+                    else:
+                        node_counter[child][c] = max(node_counter[child][c], node_counter[node][c])
+                # remove the node as a parent of child (decrease the indegree)
+                node_indegrees[child] -= 1
+                if node_indegrees[child] == 0:
+                    '''
+                    no more parents to the child,
+                    we can add it into the set of zero indegree nodes
+                    and visit it in the next while-loop.
+                    '''
+                    zero_indegree_nodes.add(child)
+            # update the largeest color value with the current counter's maximum value
+            largest = max(largest, node_counter[node].most_common(1)[0][1])
+
+        if visited_count != n:
+            '''
+            all nodes should be visited (where start traversing from) once exactly,
+            if there's a loop, nodes in that loop cannot have zero indegree and they cannot be visited.
+            '''
+            return -1
+
+        return largest
+
