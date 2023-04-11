@@ -1,0 +1,1 @@
+../all/2390-removing-stars-from-a-string.py
