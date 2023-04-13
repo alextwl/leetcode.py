@@ -1,0 +1,1 @@
+../all/0946-validate-stack-sequences.py
