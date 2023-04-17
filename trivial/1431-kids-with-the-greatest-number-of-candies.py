@@ -1,0 +1,1 @@
+../all/1431-kids-with-the-greatest-number-of-candies.py
