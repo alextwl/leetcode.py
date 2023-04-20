@@ -22,18 +22,16 @@ class Solution:
 
         while(q):
             # BFS by level
-            min_node = float('inf')
-            max_node = float('-inf')
+            min_node = q[0][1]  # leftmost node's serial number
+            max_node = q[-1][1]  # rightmost node's serial number
+            # update ans
+            max_width = max(max_width, max_node - min_node + 1)
             for _ in range(len(q)):
                 node, sn = q.popleft()
-                min_node = min(min_node, sn)
-                max_node = max(max_node, sn)
                 if node.left:
                     q.append((node.left, sn*2))
                 if node.right:
                     q.append((node.right, sn*2 + 1))
-            # update ans
-            max_width = max(max_width, max_node - min_node + 1)
 
         return max_width
 
