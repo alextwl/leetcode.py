@@ -1,0 +1,1 @@
+../all/2336-smallest-number-in-infinite-set.py
