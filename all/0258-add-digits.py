@@ -19,10 +19,15 @@ class Solution:
         if num == 0:
             # special case: 0 is evenly divisible but there's only zero digit.
             return 0
-        
+
+        '''
         if (ans := num % 9) == 0:
             # special case: if the num is evenly divisible, return 9 for the requirement.
             return 9
 
         return ans
+        '''
+
+        # trick: oneliner without the condition for the zero remainder.
+        return (num-1) % 9 + 1
 
