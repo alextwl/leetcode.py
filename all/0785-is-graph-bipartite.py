@@ -47,3 +47,48 @@ class Solution:
 
         return True
 
+
+'''
+depth first search approach
+'''
+
+
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        n = len(graph)
+        
+        '''
+        the party number of each node,
+        there are only two party {1, -1}
+        and all nodes are initialized with 0 (no party).
+        '''
+        parties = [0] * n
+        def dfs(node, party):
+            '''
+            find if the node belongs to the specific party
+            and search its childern.
+            '''
+            if parties[node] != 0:
+                # the node is already assigned, verify its party.
+                return parties[node] == party
+            
+            # assign the party
+            # if there's conflict it shall be found when searching childern.
+            parties[node] = party
+
+            for v in graph[node]:
+                # search the child with the opposite party.
+                if not dfs(v, -party):
+                    return False
+
+            return True
+
+        # search all nodes
+        for u in range(n):
+            # search u only if u didn't belong to any party.
+            if parties[u] == 0:
+                if not dfs(u, 1):
+                    return False
+
+        return True
+
