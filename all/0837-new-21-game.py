@@ -25,11 +25,34 @@ class Solution:
 
         # start from point 1.
         for i in range(1, n+1):
+            '''
+            e.g. maxPts=10 for i <= maxPts with the first draw,
+            they have equal probability to be reached from dp[0]=1,
+            so the probabilities of each destination point are:
+            dp[1] = dp[0] / maxPts,
+            dp[2] = dp[0] / maxPts,
+            ...
+            dp[10] = dp[0] / maxPts.
+            (this is why the variable `window` is initialized with 1.0.)
+
+            e.g. i=11 for the 2nd and further draws,
+            there are various previous steps (11 > i >= 11-maxPts)
+            which can reach i=11 with current draw, including
+            from i=1 + 10 points, i=2 + 9 points, ..., i=10 + 1 point.
+            so the probability of i=11 will be the sum of previous steps' probabilities.
+            dp[11] = dp[1] / maxPts + \
+                     dp[2] / maxPts + \
+                     ...
+                     dp[10] / maxPts = sum(dp[1:11]) / maxPts = window / maxPts
+            '''
             dp[i] = window / maxPts
+
             if i < k:
+                # k not yet satisfied, next draw expected.
                 window += dp[i]
             else:
                 # win the game because i <= n and i > k
+                # we only count the winner part of probability
                 ans += dp[i]
 
             if i - maxPts >= 0:
