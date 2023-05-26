@@ -14,6 +14,14 @@ class Solution:
         for i, stones in enumerate(piles):
             dp[i][i] = stones
         
+        '''
+        the difference (dp) will be evaluated starting from the base cases
+        and expands the window:
+        dp[0][1], [1][2], [2][3], ..., [n-2][n-1],
+        dp[0][2], [1][3], [2][4], ..., [n-3][n-1],
+        ...,
+        dp[0][n-1]
+        '''
         for k in range(1, n):
             # j=i+k, maximize stone diffs from picking in i-th to j-th pile
             for i in range(n - k):
