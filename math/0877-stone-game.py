@@ -1,0 +1,1 @@
+../all/0877-stone-game.py
