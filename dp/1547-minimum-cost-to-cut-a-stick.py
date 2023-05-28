@@ -1,0 +1,1 @@
+../all/1547-minimum-cost-to-cut-a-stick.py
