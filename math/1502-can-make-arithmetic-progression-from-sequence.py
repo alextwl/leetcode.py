@@ -1,0 +1,1 @@
+../all/1502-can-make-arithmetic-progression-from-sequence.py
