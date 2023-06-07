@@ -22,9 +22,6 @@ class Solution:
                 if not(x or y):
                     flips += 1
             else:
-                if x:
-                    flips += 1
-                if y:
-                    flips += 1
+                flips += x + y  # flip all 1-bits
         return flips
     
