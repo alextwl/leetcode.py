@@ -24,4 +24,24 @@ class Solution:
             else:
                 flips += x + y  # flip all 1-bits
         return flips
-    
+
+
+'''
+non-zip ver
+'''
+
+class Solution:
+    def minFlips(self, a: int, b: int, c: int) -> int:
+        flips = 0
+        while(a or b or c):
+            if c & 1:
+                if not((a&1) or (b&1)):
+                    flips += 1
+            else:
+                flips += (a&1) + (b&1)
+            a >>= 1
+            b >>= 1
+            c >>= 1
+
+        return flips
+
