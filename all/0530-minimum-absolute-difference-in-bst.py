@@ -35,3 +35,36 @@ class Solution:
 
         return minAns
 
+
+'''
+2023/06/14 daily challenge
+
+inorder + breadth first search approach
+'''
+
+
+class Solution:
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        stack = [(root, False)]  # [(TreeNode, is_visited), ...]
+        ans = float('inf')
+        prev = float('-inf')
+
+        # BFS + inorder (LVR)
+        while(stack):
+            node, is_visited = stack.pop()
+            if is_visited:
+                diff = abs(node.val - prev)
+                ans = min(ans, diff)
+                prev = node.val
+            else:
+                # queue the right child
+                if node.right:
+                    stack.append((node.right, False))
+                # queue itself with traversed flag
+                stack.append((node, True))
+                # queue the left child
+                if node.left:
+                    stack.append((node.left, False))
+
+        return ans
+
