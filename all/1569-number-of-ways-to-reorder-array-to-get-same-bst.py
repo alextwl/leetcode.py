@@ -24,9 +24,9 @@ class Solution:
             right_nums = [v for v in nums if v > nums[0]]
 
             '''
-                            len(left_nums) or len(right_nums)
-            left * right * C
                             m-1 # root node nums[0] excluded.
+            left * right * C
+                            len(left_nums) or len(right_nums)
             '''
             return dfs(left_nums) * dfs(right_nums) * math.comb(m - 1, len(left_nums)) % 1_000_000_007
 
