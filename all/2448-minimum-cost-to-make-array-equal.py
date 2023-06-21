@@ -26,6 +26,10 @@ class Solution:
             prev = suffix[i]
         
         # try to set the equal value to nums[0]
+        '''
+        given nums = [1,2,3,5] and we know nums[0]=1,
+        convert it to [1,1,1,1] and calculate the total cost.
+        '''
         total_cost = 0
         it = iter(nums_cost)
         equal_value = next(it)[0]
@@ -35,6 +39,20 @@ class Solution:
         # minimize the total cost from nums[1] to nums[-1]
         min_cost = total_cost
         for i in range(1, n):
+            '''
+            the current value of total_cost is
+            the total cost for converting original nums to
+            [nums[i-1], nums[i-1], ..., nums[i-1]].
+
+            imagine that we want to convert it
+            to [nums[i], nums[i], ..., nums[i]],
+            we need to do more operations to the element 0..i-1
+            (by adding prefix sum to the cost)
+            and cancel more operations to the element i..n-1
+            (by substracting suffix sum from the cost
+            because the total cost includes operations costs for
+            converting all elements to nums[i-1].)
+            '''
             diff = nums_cost[i][0] - nums_cost[i-1][0]
             # add (previous prefix - current suffix)
             total_cost += (prefix[i-1] - suffix[i]) * diff
