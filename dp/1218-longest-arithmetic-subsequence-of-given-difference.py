@@ -1,0 +1,1 @@
+../all/1218-longest-arithmetic-subsequence-of-given-difference.py
