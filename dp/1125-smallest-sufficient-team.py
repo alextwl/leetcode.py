@@ -1,0 +1,1 @@
+../all/1125-smallest-sufficient-team.py
