@@ -1,0 +1,1 @@
+../all/0688-knight-probability-in-chessboard.py
