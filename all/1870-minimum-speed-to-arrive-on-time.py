@@ -29,8 +29,17 @@ class Solution:
         '''
         speed as two pointers
         the question said "Tests are generated such that the answer will not exceed 10**7.
-        '''
         left, right = 1, 10_000_000
+        '''
+
+        '''
+        smaller initial range of two pointers
+        '''
+        left = max(math.floor(sum(dist) / hour), 1)
+        '''
+        use the max dist per hour, or the last ride's minimum speed if all previous rides were completed in one hour.
+        '''
+        right = max(max(dist), math.ceil(dist[-1]/(hour - n + 1)))
 
         while(left < right):
             mid = (left + right) // 2
