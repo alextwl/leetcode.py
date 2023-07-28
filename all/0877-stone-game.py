@@ -1,5 +1,7 @@
 '''
 dynamic programming approach
+
+equivalent to problem 486 predict the winner
 '''
 
 class Solution:
