@@ -22,3 +22,47 @@ class Solution:
 
         return ans
 
+
+'''
+python built-in oneliner ver
+'''
+
+import itertools
+
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        '''
+         n
+        C
+         k
+        '''
+        return list(itertools.combinations(range(1, n+1), k))
+
+
+'''
+top-down recursive ver
+'''
+
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        if k == 0:
+            return [[]]
+
+        '''
+        Pascal's rule:
+
+         n    n-1    n-1
+        C  = C    + C
+         k    k      k-1
+
+        See https://en.wikipedia.org/wiki/Pascal%27s_rule
+        '''
+        ans = []
+        for i in range(k, n+1):
+            for prefix in self.combine(i-1, k-1):
+                ans.append(prefix + [i])
+
+        return ans
+
