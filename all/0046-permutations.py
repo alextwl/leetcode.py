@@ -32,3 +32,34 @@ class Solution:
         p()
         return ans
 
+
+'''
+2023/08/02 daily challenge
+
+depth first search + stack approach
+'''
+
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        ans = []
+        stack = []
+        fullset = set(nums)
+        pushed = set()
+
+        def dfs():
+            if len(stack) == n:
+                ans.append(stack.copy())
+                return
+            
+            for num in fullset - pushed:
+                pushed.add(num)
+                stack.append(num)
+                dfs()
+                stack.pop()
+                pushed.remove(num)
+        
+        dfs()
+        return ans
+
