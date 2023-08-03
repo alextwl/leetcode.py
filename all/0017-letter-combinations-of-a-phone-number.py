@@ -25,3 +25,22 @@ class Solution:
 
         return combs
 
+
+'''
+recursive approach
+'''
+
+CONV = {"2": "abc", "3": "def",
+        "4": "ghi", "5": "jkl", "6": "mno",
+        "7": "pqrs", "8": "tuv", "9": "wxyz"}
+
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        if len(digits) == 1:
+            return list(CONV[digits[0]])
+        
+        return [prefix + c for c in CONV[digits[-1]] for prefix in self.letterCombinations(digits[:-1])]
+
