@@ -34,3 +34,47 @@ class Solution:
         because we've check each segment from the beginning of s.
         '''
         return dp[-1]
+
+
+'''
+2023/08/04 daily challenge
+
+breadth first search approach
+'''
+
+import collections
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        words = set(wordDict)
+
+        q = collections.deque([0])  # start from index 0 of s.
+        visited = set()
+
+        # BFS
+        while(q):
+            node = q.popleft()
+
+            if node == len(s):
+                # we've reached the end of s, the word break is possible.
+                return True
+
+            for child in range(node+1, len(s)+1):
+                '''
+                search if a substring from s[node+1] to s[len(s)-1] existed in the wordDict.
+                '''
+                if child in visited:
+                    '''
+                    we can confirm that substring ended at s[child-1] can be segmented,
+                    no need to check and queue it again.
+                    '''
+                    continue
+
+                if s[node:child] in words:
+                    q.append(child)  # queue it to search next word started from s[child]
+                    visited.add(child)
+
+        # we cannot reach the end of s in the previous searches.
+        return False
+
