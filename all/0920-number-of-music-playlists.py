@@ -32,6 +32,10 @@ class Solution:
                 plus if we can replay any songs we've played before
                 when we've played k other songs.
                 the songs we can replay are the 1st to the (j-k)-th song **for the same goal.**
+                
+                (we cannot select an old song from a previous goal == the shorter playlist `j-1`
+                because we need to calculate the difference between j & k
+                and if we shorten the playlist, it couldn't include all j songs we've played before.)
                 '''
                 if j > k:
                     dp[i][j] += dp[i-1][j] * (j - k)
