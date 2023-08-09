@@ -1,0 +1,1 @@
+../all/2616-minimize-the-maximum-difference-of-pairs.py
