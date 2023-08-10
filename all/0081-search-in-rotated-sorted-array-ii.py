@@ -21,18 +21,22 @@ class Solution:
                 return True
             
             if v == nums[left]:
-                # shrink the search space
+                '''
+                we cannot decide whether mid exists in the 1st or 2nd side,
+                we can only shrink the search space from left
+                and skip to next round.
+                '''
                 left += 1
                 continue
-            
-            isPivotInLeft = nums[left] <= v
+
+            isMidInLeft = nums[left] <= v
             isTargetInLeft = nums[left] <= target
             
-            if isPivotInLeft ^ isTargetInLeft:
+            if isMidInLeft ^ isTargetInLeft:
                 '''
-                pivot and target exist in different sides.
+                mid and target exist in different sides.
                 '''
-                if isPivotInLeft:
+                if isMidInLeft:
                     # pivot in left, target in right
                     left = mid + 1
                 else:
@@ -40,7 +44,7 @@ class Solution:
                     right = mid - 1
             else:
                 '''
-                pivot and target exist in same side.
+                mid and target exist in same side.
                 just run binary search in the current space.
                 '''
                 if v < target:
