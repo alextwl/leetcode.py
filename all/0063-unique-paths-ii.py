@@ -34,3 +34,44 @@ class Solution:
         # traverse from the top-left corner
         return dfs(0, 0)
 
+
+'''
+2023/08/12 daily challenge
+
+bottom-up dynamic programming approach
+'''
+
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        # special case: if the starting & ending cell is an obstacle
+        if obstacleGrid[0][0] or obstacleGrid[-1][-1]:
+            return 0
+
+        m, n = len(obstacleGrid), len(obstacleGrid[0])
+        
+        dp = [[0] * n for _ in range(m)]
+        
+        # the starting cell
+        dp[0][0] = 1
+
+        '''
+        the sequence of iteration is important and
+        it follows the robot which can only move either down or right.
+        '''
+        for x, row in enumerate(obstacleGrid):
+            for y, cell in enumerate(obstacleGrid[x]):
+                if cell:
+                    # obstacle found
+                    continue
+
+                # get previous left cell
+                left = dp[x][y-1] if y >= 1 else 0
+                # get previous upper cell
+                up = dp[x-1][y] if x >= 1 else 0
+
+                # accumulate the count of pathes except the starting cell
+                if x or y:
+                    dp[x][y] = left + up
+
+        return dp[-1][-1]
+
