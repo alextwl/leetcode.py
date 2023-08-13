@@ -1,0 +1,1 @@
+../all/2369-check-if-there-is-a-valid-partition-for-the-array.py
