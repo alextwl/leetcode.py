@@ -58,3 +58,63 @@ class Solution:
 
         return ans
 
+
+'''
+monotonic deque approach
+
+learnt from official solution:
+https://leetcode.com/problems/sliding-window-maximum/solution/
+'''
+
+from collections import deque
+
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        ans = []
+        '''
+        a monotonic deque that keeps **indexes** of nums[] within sliding window,
+        and sorted by decreasing order.
+        '''
+        q = deque()
+
+        it = iter(nums)
+        
+        # insert initial k numbers
+        for i in range(k):
+            val = next(it)
+            while q and val >= nums[q[-1]]:
+                '''
+                the rightmost element of deque (== the minimum element)
+                is equal or smaller than the incoming element val,
+                that means for any further window with val,
+                the val always supercedes nums[q[-1]] as a candidate of the maximum number,
+                so we can feel free to discard q[-1].
+                '''
+                q.pop()
+            q.append(i)
+        
+        '''
+        the number pointed by the index of q[0]
+        is always the maximum number in the current sliding window.
+        
+        set the maximum of the initial window.
+        '''
+        ans.append(nums[q[0]])
+        
+        for i, val in enumerate(it, start=k):
+            '''
+            shrink the deque if it's longer than k
+            by checking the maximum number's index.
+            '''
+            if q and q[0] == i - k:
+                # the maximum number's index is outside of the window.
+                q.popleft()
+            while q and val >= nums[q[-1]]:
+                # again, discard all numbers which are superceded by val.
+                q.pop()
+            q.append(i)
+            ans.append(nums[q[0]])
+
+        return ans
+
