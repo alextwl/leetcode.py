@@ -32,3 +32,33 @@ class Solution:
 
         return dp
 
+
+'''
+in-place modification ver
+'''
+
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        m, n = len(mat), len(mat[0])
+        
+        q = collections.deque()  # (x, y)
+        for i, row in enumerate(mat):
+            for j, val in enumerate(row):
+                if val:
+                    row[j] = float('inf')
+                else:
+                    q.append((i, j))
+        
+        while(q):
+            x, y = q.popleft()
+            next_distance = mat[x][y] + 1
+            
+            for dx, dy in [(1, 0), (-1, 0), (0, -1), (0, 1)]:
+                dx += x
+                dy += y
+                if (0 <= dx < m) and (0 <= dy < n) and mat[dx][dy] > next_distance:
+                    mat[dx][dy] = next_distance
+                    q.append((dx, dy))
+
+        return mat
+
