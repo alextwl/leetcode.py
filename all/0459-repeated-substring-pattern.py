@@ -35,3 +35,19 @@ class Solution:
         '''
         return False
 
+
+'''
+mathematical approach (string concatenation)
+
+if we could repeat a substring of s,
+then s can be a substring of a rotated double-length s.
+
+learnt from official approach 2:
+https://leetcode.com/problems/repeated-substring-pattern/solution/
+'''
+
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        t = s + s
+        return True if s in t[1:-1] else False
+
