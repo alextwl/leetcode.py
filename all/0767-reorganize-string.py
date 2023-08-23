@@ -51,3 +51,43 @@ class Solution:
 
         return most_char.join(slots)
 
+
+'''
+even/odd approach
+
+learnt from official solution
+https://leetcode.com/problems/reorganize-string/solution/
+
+count the number of alphabets by counter,
+and fill the slots in 2 rounds with batchs of alphabets.
+
+round 1: fill even slots (0, 2, 4, ...)
+round 2: fill odd slots (1, 3, 5, ...)
+'''
+
+
+class Solution:
+    def reorganizeString(self, s: str) -> str:
+        d = collections.Counter(s)
+        most_char, most_len = d.most_common(1)[0]
+
+        '''
+        if the remaining chars were not enough to fill (len(slot)-1) at least once,
+        we cannot rearrange the s.
+        '''
+        if most_len > (len(s) - most_len + 1):
+            return ""
+
+        '''
+        fill the slots in even/odd index order
+        '''
+        n = len(s)
+        t = [''] * n
+        seq = iter(list(range(0, n, 2)) + list(range(1, n, 2)))
+
+        for char, clen in d.most_common():
+            for _ in range(clen):
+                t[next(seq)] = char
+
+        return ''.join(t)
+
