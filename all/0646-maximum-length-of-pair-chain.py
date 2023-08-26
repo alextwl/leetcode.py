@@ -1,6 +1,35 @@
 '''
 2023/08/26 daily challenge
 
+greedy + dp approach
+'''
+
+import collections
+
+
+class Solution:
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+        '''
+        sort by right node in ascending order
+        '''
+        pairs.sort(key=lambda x:x[1])
+        
+        last_node = -1001  # a value smaller than the input range
+        '''
+        so when we iterate pairs,
+        we can proceed only if the left node of current pair
+        is greater than last right node, and extend the chain length.
+        '''
+        chain_length = 0
+        for left, right in pairs:
+            if left > last_node:
+                chain_length += 1
+                last_node = right
+
+        return chain_length
+
+
+'''
 dynamic programming approach
 '''
 
