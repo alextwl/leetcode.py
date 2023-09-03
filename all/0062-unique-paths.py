@@ -51,3 +51,26 @@ class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         return factorial(m+n-2) // factorial(m-1) // factorial(n-1)
 
+
+'''
+2023/09/03 daily challenge
+
+math combination approach (simplified ver)
+'''
+
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        if n > m:
+            m, n = n, m
+        
+        ans = 1
+        for i in range(m+n-2, m-1, -1):
+            ans *= i
+
+        divisor = 1
+        for i in range(n-1, 1, -1):
+            divisor *= i
+
+        return ans // divisor
+
