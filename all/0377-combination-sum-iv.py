@@ -32,3 +32,35 @@ class Solution:
             return comb_sum
             
         return search(target)
+
+
+'''
+2023/09/09 daily challenge
+
+dynamic programming approach (iterative ver)
+'''
+
+
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        nums.sort()
+
+        '''
+        a dummy base case:
+        any num that equals to a target consists of a combination.
+        '''
+        dp = [1]
+
+        # iterate all possible subproblems in ascending order.
+        for subproblem in range(1, target+1):
+            comb_sum = 0
+            for num in nums:
+                if (next_target := subproblem - num) >= 0:
+                    comb_sum += dp[next_target]
+                else:
+                    # no need to evaluate larger num because next target becomes negative.
+                    break
+            dp.append(comb_sum)
+
+        return dp[-1]
+
