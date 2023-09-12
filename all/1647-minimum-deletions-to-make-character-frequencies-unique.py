@@ -46,3 +46,30 @@ class Solution:
 
         return ans
 
+
+'''
+concise ver
+'''
+
+import collections
+
+
+class Solution:
+    def minDeletions(self, s: str) -> int:
+        char_counts = collections.Counter(s)
+        used_set = set()  # used frequency set
+        ans = 0  # total deletion
+        
+        # there're only 26 alphabets so we may iterate at most 26*26 times.
+        for char, freq in char_counts.items():
+            while(freq > 0 and freq in used_set):
+                # duplicate frequency occured,
+                # try to delete an occurance until no more chars.
+                # (the frequency of 0 is ignored.)
+                freq -= 1
+                ans += 1  # delete 1 occurance
+            # occupy the freq
+            used_set.add(freq)
+
+        return ans
+
