@@ -1,0 +1,1 @@
+../all/1631-path-with-minimum-effort.py
