@@ -50,3 +50,52 @@ class Solution:
 
         return ans
 
+
+'''
+level order search approach (simplified BFS)
+
+the minimum level with all nodes visited is the answer,
+and we don't need to search deeper.
+'''
+
+import collections
+
+
+class Solution:
+    def shortestPathLength(self, graph: List[List[int]]) -> int:
+        n = len(graph)
+        full_mask = 2**n - 1  # the mask indicating all nodes are visited.
+        
+        level = 0
+        
+        # (node, visited_mask)
+        q = collections.deque([(i, 1 << i) for i in range(n)])
+        
+        # dp[i] = set of seen visited_mask at i-th node.
+        dp = [set() for _ in range(n)]
+        
+        while(q):
+            level_len = len(q)
+            
+            for _ in range(level_len):
+                node, visited_mask = q.popleft()
+                
+                if visited_mask in dp[node]:
+                    continue
+                
+                dp[node].add(visited_mask)
+                
+                if visited_mask == full_mask:
+                    return level
+                
+                # queue children
+                for child in graph[node]:
+                    q.append((child, visited_mask | (1 << child)))
+            
+            # goto next level
+            level += 1
+        
+        # undefined behavior: the question guarantees the input graph is always connected.
+        # this should not be happened.
+        return float('inf')
+
