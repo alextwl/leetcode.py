@@ -1,0 +1,1 @@
+../all/0287-find-the-duplicate-number.py
