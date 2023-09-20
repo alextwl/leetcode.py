@@ -13,6 +13,10 @@ class Solution:
             return -1
 
         # find the cycle first
+        '''
+        the pointers are ahead of dummy head 0 by 1 step
+        due to the design of while loop condition.
+        '''
         slow = nums[0]
         fast = nums[nums[0]]
 
@@ -23,6 +27,10 @@ class Solution:
         # so the slow & fast pointers meet in the cycle.
 
         # find the entry of cycle
+        '''
+        the 2nd slow pointer must start from dummy head 0
+        in order to meet the equation of finding cycle entry.
+        '''
         slow2 = 0
         while(slow != slow2):
             slow = nums[slow]
