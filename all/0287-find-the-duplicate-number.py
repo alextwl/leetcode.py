@@ -16,6 +16,10 @@ class Solution:
         '''
         the pointers are ahead of dummy head 0 by 1 step
         due to the design of while loop condition.
+
+        equal to:
+        slow = head.next
+        fast = head.next.next
         '''
         slow = nums[0]
         fast = nums[nums[0]]
