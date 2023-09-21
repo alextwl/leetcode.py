@@ -1,0 +1,1 @@
+../all/0004-median-of-two-sorted-arrays.py
