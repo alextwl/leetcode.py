@@ -64,3 +64,33 @@ class Solution:
         
         return max(word_max_chain.values())
 
+
+'''
+dynamic programming approach
+
+since the input is limited in 1 <= words[i].length <= 16,
+it's possible to use exhaustive method to delete any char from each word
+and accumulate the chain length by dynamic programming.
+
+learnt from
+https://leetcode.com/problems/longest-string-chain/discuss/294890/JavaC%2B%2BPython-DP-Solution
+'''
+
+import collections
+
+
+class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        '''
+        querying any missing predecessor word returns zero of chain's length,
+        and we can initialize any successor word with 1 of chain's length.
+        '''
+        dp = collections.defaultdict(int)
+        
+        # iterate word in ascending word length order
+        for w in sorted(words, key=len):
+            # dp[w] = max(dp[any-single-char-deleted-from w] + 1)
+            dp[w] = max(dp[w[:i] + w[i+1:]] + 1 for i in range(len(w)))
+        
+        return max(dp.values())
+
