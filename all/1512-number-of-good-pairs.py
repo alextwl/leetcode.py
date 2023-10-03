@@ -22,3 +22,19 @@ class Solution:
         counter = collections.Counter(nums)
         return sum((n * (n-1)) >> 1 for n in counter.values())
 
+
+'''
+time=O(n) ver
+'''
+
+class Solution:
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        pairs = 0
+        counter = dict()
+        
+        for v in nums:
+            pairs += counter.setdefault(v, 0)
+            counter[v] += 1
+        
+        return pairs
+
