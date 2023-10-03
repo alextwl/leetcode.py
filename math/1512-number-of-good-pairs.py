@@ -1,0 +1,1 @@
+../all/1512-number-of-good-pairs.py
