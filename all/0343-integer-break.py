@@ -29,3 +29,32 @@ class Solution:
         
         return dp[-1]
 
+
+'''
+2023/10/06 daily challenge
+
+botton-up dynamic programming approach
+'''
+
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        if n <= 3:
+            return n-1
+        
+        # dp[n] = the maximum product of n.
+        dp = [0] * (n+1)
+        
+        # base cases (**not** for n <= 3.)
+        dp[1] = 1  # impossible to split
+        dp[2] = 2  # don't split because the only possible split 1*1 is smaller than 2. keep it.
+        dp[3] = 3  # don't split because the only possible split 1*2 is smaller than 3. keep it.
+        
+        for v in range(4, n+1):
+            ans = v
+            for d in range(2, v):
+                # try to find maximum product by splitting.
+                ans = max(ans, d * dp[v - d])
+            dp[v] = ans
+
+        return dp[-1]
+
