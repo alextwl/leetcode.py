@@ -1,0 +1,1 @@
+../all/1095-find-in-mountain-array.py
