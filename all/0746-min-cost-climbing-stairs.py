@@ -21,3 +21,24 @@ class Solution:
         so the minimum cost is the minimum of dp[0], dp[1].
         '''
         return min(dp[0], dp[1])
+
+
+'''
+2023/10/13 daily challenge
+
+space=O(1) ver
+'''
+
+
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        it = iter(cost)
+        prev2 = next(it)
+        prev1 = next(it)
+
+        for curr in it:
+            curr += min(prev2, prev1)
+            prev2, prev1 = prev1, curr
+
+        return min(prev2, prev1)
+
