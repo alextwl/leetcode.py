@@ -1,0 +1,1 @@
+../all/2742-painting-the-walls.py
