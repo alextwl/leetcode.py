@@ -16,3 +16,23 @@ class Solution:
             lastrow = row
 
         return lastrow
+
+
+'''
+2023/10/16 daily challenge
+
+space=O(n) ver
+'''
+
+
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        row = [1] * (rowIndex + 1)
+
+        for row_len in range(1, rowIndex + 1):
+            prev = 1
+            for i in range(1, row_len):
+                prev, row[i] = row[i], prev + row[i]
+
+        return row
+
