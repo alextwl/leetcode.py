@@ -78,3 +78,37 @@ class Solution:
         # compare backspace-stripped strings of two inputs.
         return rebuild(s) == rebuild(t)
 
+
+'''
+2023/10/19 daily challenge
+
+space=O(1) ver
+
+actually it's space=O(n) because we cannot assign characters
+to a string so we always convert string to a list of characters.
+'''
+
+class Solution:
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        s, t = list(s), list(t)
+
+        i = 0
+        for k in range(len(s)):
+            if s[k] == '#':
+                if i:
+                    i -= 1
+            else:
+                s[i] = s[k]
+                i += 1
+
+        j = 0
+        for k in range(len(t)):
+            if t[k] == '#':
+                if j:
+                    j -= 1
+            else:
+                t[j] = t[k]
+                j += 1
+
+        return ''.join(s[:i]) == ''.join(t[:j])
+
