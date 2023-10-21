@@ -27,3 +27,19 @@ class Solution:
 
         return max_sum
 
+
+'''
+dynamic programming approach (TLE)
+'''
+
+
+class Solution:
+    def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
+        dp = [0] * len(nums)
+
+        for i, var in enumerate(nums):
+            prev_sum = max(dp[max(0, i-k):i], default=0)
+            dp[i] = max(prev_sum + var, var)
+
+        return max(dp)
+
