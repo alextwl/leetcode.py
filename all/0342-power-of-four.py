@@ -24,3 +24,15 @@ class Solution:
         if (len(binstr) - 1) % 2 != 0:
             return False
         return True
+
+
+'''
+2023/10/23 daily challenge
+
+oneliner for Python >= 3.10
+'''
+
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        return n > 0 and n.bit_count() == 1 and n.bit_length() & 1
+
