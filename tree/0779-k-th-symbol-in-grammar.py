@@ -1,0 +1,1 @@
+../all/0779-k-th-symbol-in-grammar.py
