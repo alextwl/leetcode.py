@@ -1,0 +1,1 @@
+../all/0005-longest-palindromic-substring.py

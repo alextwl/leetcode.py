@@ -38,3 +38,45 @@ class Solution:
                 end = i + maxlen // 2
         
         return s[start:end+1]
+
+
+'''
+2023/10/27 daily challenge
+
+dynamic programming approach
+
+evaluate every length of substrings with previously found palindromes
+'''
+
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        # dp[i][j] == True if s[i:j+1] is a palindrome, O(n**2) space
+        dp = [[False] * n for _ in range(n)]
+        
+        # the start & end indices of the longest palindrome
+        longest = (0, 0)
+        
+        # all single char is a palindrome
+        for i in range(n): dp[i][i] = True
+        
+        # evaluate length-2 palindromes
+        it = enumerate(s)
+        i, prev = next(it)
+        for j, curr in it:
+            if prev == curr:
+                dp[i][j] = True
+                longest = (i, j)
+            i, prev = j, curr
+        
+        # evaluate length > 2 palindromes by extending from existed
+        for delta in range(2, n):
+            for i in range(n - delta):
+                j = i + delta
+                # both start/end are the same && substring is also palindrome
+                if s[i] == s[j] and dp[i+1][j-1]:
+                    dp[i][j] = True
+                    longest = (i, j)
+        
+        return s[longest[0]:longest[1]+1]
+
