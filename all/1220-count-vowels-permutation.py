@@ -11,9 +11,16 @@ e.g. the next round of words ended with an 'a' will be current words ended in ['
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
         # last character occurance of words
+        # base case: each single vowel forms a valid string
         a = e = i = o = u = 1
         
         for _ in range(2, n+1):
+            # count strings which next vowel (a,e,i,o,u) can follow:
+            # ea, ia, ua,
+            # ae, ie,
+            # ei, oi,
+            # io,
+            # iu, ou.
             a, e, i, o, u =  e+i+u, a+i, e+o, i, i+o
         
         return (a+e+i+o+u) % (10**9 + 7)
