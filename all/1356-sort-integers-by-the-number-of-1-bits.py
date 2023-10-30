@@ -33,3 +33,23 @@ class Solution:
         arr.sort(key=lambda v: (hamming_weight(v), v))
         return arr
 
+
+'''
+Brian Kernighan's Algorithm (more efficient hamming weight)
+'''
+
+class Solution:
+    def sortByBits(self, arr: List[int]) -> List[int]:
+        def hamming_weight(val):
+            weight = 0
+            
+            while(val):
+                # remove the LSB until val zeroed
+                val &= val - 1
+                weight += 1
+            
+            return weight
+        
+        arr.sort(key=lambda v: (hamming_weight(v), v))
+        return arr
+
