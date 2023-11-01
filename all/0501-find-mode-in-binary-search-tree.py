@@ -33,3 +33,43 @@ class Solution:
 
         return list(modes)
 
+
+'''
+inorder traversal approach
+'''
+
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        arr = []
+        def inorder(node):
+            if node is None:
+                return
+            
+            inorder(node.left)
+            arr.append(node.val)
+            inorder(node.right)
+        
+        inorder(root)
+        
+        max_count = 0
+        curr_count = 0
+        curr_num = 0
+        modes = []
+        
+        for val in arr:
+            if val == curr_num:
+                curr_count += 1
+            else:
+                # value mismatch, restart the sequence of the same value.
+                curr_count = 1
+                curr_num = val
+            
+            if curr_count > max_count:
+                modes = []
+                max_count = curr_count
+            
+            if curr_count == max_count:
+                modes.append(val)
+
+        return modes
+
