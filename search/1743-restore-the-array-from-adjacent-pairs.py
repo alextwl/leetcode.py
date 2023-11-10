@@ -1,0 +1,1 @@
+../all/1743-restore-the-array-from-adjacent-pairs.py
