@@ -1,0 +1,1 @@
+../all/1846-maximum-element-after-decreasing-and-rearranging.py
