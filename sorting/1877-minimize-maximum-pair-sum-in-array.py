@@ -1,0 +1,1 @@
+../all/1877-minimize-maximum-pair-sum-in-array.py
