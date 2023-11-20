@@ -1,0 +1,1 @@
+../all/2391-minimum-amount-of-time-to-collect-garbage.py
