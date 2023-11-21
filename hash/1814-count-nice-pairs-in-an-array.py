@@ -1,0 +1,1 @@
+../all/1814-count-nice-pairs-in-an-array.py
