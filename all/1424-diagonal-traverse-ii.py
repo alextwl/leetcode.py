@@ -25,3 +25,36 @@ class Solution:
 
         return ans
 
+
+'''
+breadth first search approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def findDiagonalOrder(self, nums: List[List[int]]) -> List[int]:
+        height = len(nums)
+        q = collections.deque()
+        q.append((0, 0))
+
+        ans = []
+
+        # BFS
+        while(q):
+            row, col = q.popleft()
+            ans.append(nums[row][col])
+
+            # queue the cell under the current
+            # if it's another beginning of a diagonal line.
+            if col == 0 and (row + 1) < height:
+                q.append((row+1, 0))
+
+            # queue the right cell
+            if (col + 1) < len(nums[row]):
+                q.append((row, col+1))
+
+        return ans
+
