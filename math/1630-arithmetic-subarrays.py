@@ -1,0 +1,1 @@
+../all/1630-arithmetic-subarrays.py
