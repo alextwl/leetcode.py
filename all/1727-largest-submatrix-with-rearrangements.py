@@ -31,3 +31,47 @@ class Solution:
 
         return max_area
 
+
+'''
+no sort + no modification ver
+
+learnt from official solution 2
+https://leetcode.com/problems/largest-submatrix-with-rearrangements/solution/
+'''
+
+
+class Solution:
+    def largestSubmatrix(self, matrix: List[List[int]]) -> int:
+        m, n = len(matrix), len(matrix[0])
+        
+        max_area = 0
+        
+        # the previous row with descending order
+        # element = (vertical-accumulated height, column)
+        prev_desc_row = []
+        
+        for row in matrix:
+            curr_desc_row = []
+            # the set of column which height is accumulated from previous row.
+            checked = set()
+            
+            # check if cells of the current row can be accmululated from the previous.
+            for prev_height, j in prev_desc_row:
+                if row[j]:
+                    curr_desc_row.append((prev_height+1, j))
+                    checked.add(j)
+            
+            # check the remaining cells which height == 1
+            for j, cell in enumerate(row):
+                if cell and j not in checked:
+                    curr_desc_row.append((1, j))
+            
+            # curr_desc_row is already sorted due to the sequence of previous checking,
+            # we can feel free to find the maximum submatrix from the max height to the max width.
+            for width, (height, _) in enumerate(curr_desc_row):
+                max_area = max(max_area, (width+1) * height)
+            
+            prev_desc_row = curr_desc_row
+
+        return max_area
+
