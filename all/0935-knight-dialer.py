@@ -39,3 +39,37 @@ class Solution:
 
         return ans
 
+
+'''
+bottom-up dynamic programming ver
+'''
+
+
+class Solution:
+    def knightDialer(self, n: int) -> int:
+        # jump from any cell to next L-move destinations
+        jump_from = {1: [6, 8],
+                     2: [7, 9],
+                     3: [4, 8],
+                     4: [3, 9, 0],
+                     5: [],
+                     6: [1, 7, 0],
+                     7: [2, 6],
+                     8: [1, 3],
+                     9: [2, 4],
+                     0: [4, 6]}
+        
+        dp = [[0] * 10 for _ in range(n)]
+        # base cases
+        for cell in range(10):
+            dp[0][cell] = 1
+        
+        for k in range(1, n):
+            for cell in range(10):
+                steps = 0
+                for next_step in jump_from[cell]:
+                    steps = (steps + dp[k-1][next_step]) % 1_000_000_007
+                dp[k][cell] = steps
+
+        return sum(dp[-1]) % 1_000_000_007
+
