@@ -1,0 +1,1 @@
+../all/2147-number-of-ways-to-divide-a-long-corridor.py
