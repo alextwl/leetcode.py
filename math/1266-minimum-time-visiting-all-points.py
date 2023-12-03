@@ -1,0 +1,1 @@
+../all/1266-minimum-time-visiting-all-points.py
