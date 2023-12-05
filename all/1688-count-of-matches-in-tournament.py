@@ -14,3 +14,17 @@ class Solution:
 
         return ans
 
+
+'''
+oneliner ver
+
+each match eliminates a loser.
+
+there are 1 winner and n-1 losers,
+so the number of matches is n-1.
+'''
+
+class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        return n-1
+
