@@ -4,17 +4,20 @@
 counter approach
 '''
 
-import collections
-
-
 class Solution:
     def findSpecialInteger(self, arr: List[int]) -> int:
-        cnt = collections.defaultdict(int)        
         threshold = len(arr) // 4
 
+        prev, count = None, 0
+
         for num in arr:
-            cnt[num] += 1
-            if cnt[num] > threshold:
+            if num == prev:
+                count += 1
+            else:
+                prev = num
+                count = 1
+
+            if count > threshold:
                 return num
 
         # undefined behavior
