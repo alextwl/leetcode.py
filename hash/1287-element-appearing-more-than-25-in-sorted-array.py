@@ -1,0 +1,1 @@
+../all/1287-element-appearing-more-than-25-in-sorted-array.py
