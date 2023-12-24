@@ -1,0 +1,1 @@
+../all/1758-minimum-changes-to-make-alternating-binary-string.py
