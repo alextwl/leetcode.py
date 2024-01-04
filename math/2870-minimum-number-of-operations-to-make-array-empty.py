@@ -1,0 +1,1 @@
+../all/2870-minimum-number-of-operations-to-make-array-empty.py
