@@ -44,3 +44,24 @@ class Solution:
         # two trees are leaf-similar.
         return True
 
+
+'''
+2024/01/09 daily challenge
+
+inorder traversal approach
+'''
+
+import collections
+
+
+class Solution:
+    def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+        def inorder(node):
+            if node is None:
+                return []
+            if node.left is None and node.right is None:
+                return [node.val]
+            
+            return inorder(node.left) + inorder(node.right)
+        return inorder(root1) == inorder(root2)
+
