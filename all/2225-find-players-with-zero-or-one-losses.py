@@ -52,3 +52,26 @@ class Solution:
         
         return [allwin, oneloss]
 
+
+'''
+2024/01/15 daily challenge
+
+set theory approach
+'''
+
+
+class Solution:
+    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+        winners = set()  # a set of winners
+        losers = set()  # a set of losers
+        loser_more = set()  # a set of losers who lost more than one match
+        
+        for w, l in matches:
+            winners.add(w)
+            if l in losers:
+                loser_more.add(l)
+            else:
+                losers.add(l)
+
+        return [sorted(winners - losers), sorted(losers - loser_more)]
+
