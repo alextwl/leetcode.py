@@ -31,3 +31,23 @@ class Solution:
         
         return dp(n, k)
 
+
+'''
+dynamic programming approach (iterative)
+'''
+
+
+class Solution:
+    def kInversePairs(self, n: int, k: int) -> int:
+        dp1 = [0] * (k+1)
+        dp1[0] = 1
+        
+        for i in range(1, n+1):
+            dp0, dp1 = dp1, [1]
+            for remain in range(1, k+1):
+                gap = 0 if remain < i else dp0[remain - i]
+                # pick + skip - gap
+                dp1.append((dp1[-1] + dp0[remain] - gap) % 1_000_000_007)
+
+        return dp1[-1]
+
