@@ -1,20 +1,22 @@
 '''
 2022/08/16 daily challenge
+2024/02/05 daily challenge
+
+hash & set approach
 '''
+
+
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        scount = dict()
-        firstseen = dict()
+        first_index = dict()
+        repeated = set()
         
-        for idx, char in enumerate(s):
-            if char in scount:
-                scount[char] += 1
-            else:
-                scount[char] = 1
-                firstseen[char] = idx
-        
-        uniques = [firstseen[char] for char, count in scount.items() if count == 1]
-        
-        if not uniques:
-            return -1
-        return min(uniques)
+        for i, c in enumerate(s):
+            if c in first_index:
+                repeated.add(c)
+                del first_index[c]
+            elif c not in repeated:
+                first_index[c] = i
+
+        return min(first_index.values(), default=-1)
+
