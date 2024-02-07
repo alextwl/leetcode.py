@@ -34,3 +34,19 @@ class Solution:
         # retrieve chars c from buckets in k's decreasing order
         return ''.join(c * k for k in sorted(buckets, reverse=True) for c in buckets[k])
 
+
+
+'''
+2024/02/07 daily challenge
+
+counter built-in sort by frequency approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        return "".join(c * t for c, t in collections.Counter(s).most_common())
+
