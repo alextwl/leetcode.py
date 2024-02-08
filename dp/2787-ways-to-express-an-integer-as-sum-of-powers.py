@@ -1,0 +1,1 @@
+../all/2787-ways-to-express-an-integer-as-sum-of-powers.py
