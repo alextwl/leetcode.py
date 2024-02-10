@@ -1,0 +1,1 @@
+../all/0647-palindromic-substrings.py
