@@ -22,3 +22,26 @@ class Solution:
 
         return ans
 
+
+'''
+two pointers approach
+'''
+
+
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        ans = [0] * len(nums)
+
+        # note the rearranged array begins with a positive integer
+        j, k = 0, 1  # the indices of next positive/negative integer
+
+        for i, v in enumerate(nums):
+            if v > 0:
+                ans[j] = v
+                j += 2
+            else:
+                ans[k] = v
+                k += 2
+
+        return ans
+
