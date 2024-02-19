@@ -1,0 +1,1 @@
+../all/0231-power-of-two.py
