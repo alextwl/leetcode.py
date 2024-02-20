@@ -12,3 +12,28 @@ class Solution:
             remaining -= num
         
         return remaining
+
+
+'''
+2024/02/20 daily challenge
+
+exclusive or approach
+
+doing XOR the same number twice will cancel it,
+so the remaining value that wasn't cancelled is the answer.
+'''
+
+
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        ans = 0
+
+        # XOR [0, n]
+        for i in range(1, len(nums)+1):
+            ans ^= i
+        # XOR nums
+        for i in nums:
+            ans ^= i
+        
+        return ans
+
