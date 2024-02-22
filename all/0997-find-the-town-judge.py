@@ -1,8 +1,12 @@
 '''
 2023/01/23 daily challenge
+2024/02/22 daily challenge
 
 Set + counter approach
+
+count trustee relationships (incoming edges) for all persons (vertices)
 '''
+
 
 class Solution:
     def findJudge(self, n: int, trust: List[List[int]]) -> int:
