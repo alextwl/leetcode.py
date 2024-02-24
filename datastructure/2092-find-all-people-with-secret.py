@@ -1,0 +1,1 @@
+../all/2092-find-all-people-with-secret.py
