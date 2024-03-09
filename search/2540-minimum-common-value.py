@@ -1,0 +1,1 @@
+../all/2540-minimum-common-value.py
