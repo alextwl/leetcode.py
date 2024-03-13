@@ -1,0 +1,1 @@
+../all/2485-find-the-pivot-integer.py
