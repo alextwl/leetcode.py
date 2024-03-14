@@ -26,3 +26,35 @@ class Solution:
 
         return ans
 
+
+'''
+sliding window approach
+'''
+
+
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        ans = 0
+        
+        window_sum = 0
+        leading_zero_count = 0  # count leading zeros in the sliding window
+        left = 0
+        for right, right_val in enumerate(nums):
+            window_sum += right_val
+            
+            while left < right and \
+                    (nums[left] == 0 or window_sum > goal):
+                if nums[left] == 1:
+                    window_sum -= 1
+                    leading_zero_count = 0
+                else:
+                    leading_zero_count += 1
+                
+                left += 1
+
+            if window_sum == goal:
+                # accumulate valid window plus (leading zeros + current window)
+                ans += 1 + leading_zero_count
+
+        return ans
+
