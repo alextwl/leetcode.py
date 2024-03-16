@@ -1,0 +1,1 @@
+../all/0525-contiguous-array.py
