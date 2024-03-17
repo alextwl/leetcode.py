@@ -1,52 +1,40 @@
 '''
 2023/01/16 daily challenge
+2024/03/17 daily challenge
 
-binary search + merge slices approach
+binary search approach (refined ver)
 '''
+
 
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        if not intervals:
-            return [newInterval]
-
-        n = len(intervals)
         newStart, newEnd = newInterval
-        # find left bound by start interval
-        left, right = 0, n-1
-        while(left <= right):
-            mid = (left+right) // 2
-            if (midStart := intervals[mid][0]) > newStart:
-                right = mid - 1
-            elif midStart < newStart:
+        
+        # binary search
+        left, right = 0, len(intervals) - 1
+        
+        # let right index pointing a position which is left to the newInterval.
+        while (left <= right):
+            mid = left + (right - left) // 2
+            mid_val = intervals[mid]
+            
+            if mid_val[1] < newStart:
                 left = mid + 1
             else:
-                left = mid
-                break
-        # check if previous interval was overlapped and adjust the position
-        leftBound = left
-        if leftBound > 0 and intervals[leftBound-1][1] >= newStart:
-            leftBound -= 1
-        # if the insertion point is already the leftmost terminal
-        # and the first interval is not overlapped, just insert it and return.
-        if leftBound == 0 and intervals[0][0] > newEnd:
-            intervals.insert(0, newInterval)
-            return intervals
-        # if the insertion point is already the rightmost terminal, just append it.
-        if leftBound == n:
-            intervals.append(newInterval)
-            return intervals
+                right = mid - 1
 
-        # time to merge slices
-        rightBound = leftBound
-        for i in range(leftBound, n):
-            iStart, iEnd = intervals[i]
-            # check if it's overlapped
-            if (min(iEnd, newEnd) - max(iStart, newStart)) >= 0:
-                rightBound = i+1  # intervals[i] is to be merged
-                newStart = min(newStart, iStart)
-                newEnd = max(newEnd, iEnd)
-            else:
+        # the last interval which is not overlapped in the left slice
+        prefix_end_idx = right
+        # merge middle slice
+        for i in range(prefix_end_idx + 1, len(intervals)):
+            if newEnd < intervals[i][0]:
                 break
+            
+            newStart = min(newStart, intervals[i][0])
+            newEnd = max(newEnd, intervals[i][1])
+        else:
+            # the new interval overlaps the end of intervals
+            i = len(intervals)
 
-        return intervals[:leftBound] + [[newStart, newEnd]] + intervals[rightBound:]
+        return intervals[:prefix_end_idx+1] + [[newStart, newEnd]] + intervals[i:]
 
