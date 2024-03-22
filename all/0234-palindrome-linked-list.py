@@ -46,3 +46,47 @@ class Solution:
             right = right.next
         
         return True
+
+
+'''
+2024/03/22 daily challenge
+
+reversing linked list approach (two-pass recursive ver)
+
+time=O(2.5n)=O(n), space=O(1)
+'''
+
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        # count length
+        l = 0
+        node = head
+        while(node):
+            l += 1
+            node = node.next
+
+        quo, rem = divmod(l, 2)
+
+        # reverse the first half part
+        n1, n2 = None, head
+        for _ in range(quo):
+            n3 = n2.next
+            n2.next = n1
+            n1, n2 = n2, n3
+
+        # let n1 be the reversed head of the 1st half,
+        # let n2 be the head of the 2nd half.
+
+        # skip the central node if existed
+        if rem:
+            n2 = n2.next
+
+        # verify from heads near the center.
+        while(n1 and n2):
+            if n1.val != n2.val:
+                return False
+            n1 = n1.next
+            n2 = n2.next
+
+        return True
+
