@@ -51,7 +51,7 @@ class Solution:
 '''
 2024/03/22 daily challenge
 
-reversing linked list approach (two-pass recursive ver)
+reversing linked list approach (two-pass iterative ver)
 
 time=O(2.5n)=O(n), space=O(1)
 '''
