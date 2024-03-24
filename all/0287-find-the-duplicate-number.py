@@ -43,3 +43,17 @@ class Solution:
         # the entry point (== the duplicate number) found
         return slow
 
+
+'''
+2024/03/24 daily challenge
+
+counter approach (one-liner ver)
+'''
+
+import collections
+
+
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        return collections.Counter(nums).most_common(1)[0][0]
+
