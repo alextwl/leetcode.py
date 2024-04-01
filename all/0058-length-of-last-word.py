@@ -21,3 +21,16 @@ class Solution:
 
         return ans
 
+
+'''
+pythonic oneliner ver
+'''
+
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        # str.split() without delimiter specified splits
+        # string by whitespace delimiter and
+        # discards empty substrings automatically.
+        return len(s.split()[-1])
+
