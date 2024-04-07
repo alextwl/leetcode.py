@@ -85,3 +85,39 @@ class Solution:
         # return the validity of full s[0:] with zero open parentheses (all balanced)
         return dp[0][0]
 
+
+'''
+two pointer approach
+
+the intuition is similar to the two-pass stack approach of problem 1249.
+
+count open parentheses & wildcards from left,
+count closing parentheses & wildcard from right,
+and validate if it's impossible to balance.
+'''
+
+
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        n = len(s)
+        open_count = close_count = 0
+
+        for i, j in zip(range(n), range(n-1, -1, -1)):
+            if s[i] == ')':
+                open_count -= 1
+            else:
+                # s[i] == '(' or '*'
+                open_count += 1
+
+            if s[j] == '(':
+                close_count -= 1
+            else:
+                # s[j] == ')' or '*'
+                close_count += 1
+
+            if open_count < 0 or close_count < 0:
+                # not enough open/closing parentheses
+                return False
+
+        return True
+
