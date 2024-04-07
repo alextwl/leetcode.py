@@ -44,3 +44,44 @@ class Solution:
         # all open parentheses should be balanced and the stack is empty
         return not(stack_open)
 
+
+'''
+bottom-up dynamic programming approach
+'''
+
+
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        n = len(s)
+        # dp[i][j] = the boolean of validity for the substring s[i:]
+        #            with j open parentheses **unbalanced**
+        dp = [[False] * (n+1) for _ in range(n+1)]
+        
+        # base case: empty string with zero open parentheses is valid
+        dp[-1][0] = True
+        
+        for i in range(n-1, -1, -1):
+            for j in range(n):
+                # try to insert s[i] to the beginning of s[i+1:] substring
+                # and calculate its validity
+                is_valid = False
+
+                if s[i] == '*':
+                    # use '*' as '(', so there're one more open parentheses unbalanced
+                    is_valid |= dp[i+1][j+1]
+                    # use '*' as ')', balance a pair of parentheses
+                    if j > 0:
+                        is_valid |= dp[i+1][j-1]
+                    # use '*' as an empty char
+                    is_valid |= dp[i+1][j]
+                elif s[i] == '(':
+                    is_valid |= dp[i+1][j+1]
+                elif j > 0:
+                    # s[i] == ')' and there's sufficient open parentheses to be balanced
+                    is_valid |= dp[i+1][j-1]
+                
+                dp[i][j] = is_valid
+
+        # return the validity of full s[0:] with zero open parentheses (all balanced)
+        return dp[0][0]
+
