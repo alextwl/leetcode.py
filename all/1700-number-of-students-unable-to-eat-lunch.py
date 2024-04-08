@@ -40,3 +40,32 @@ class Solution:
 
         return len(q)
 
+
+'''
+counter approach
+'''
+
+
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        # the remaining number of square sandwitches students needed
+        squares = sum(students)
+        # the remaining number of circular sandwitches students needed
+        circulars = len(students) - squares
+
+        # iterate sandwiches and for each loop
+        # consider if we could serve the remaining students the top sandwich.
+        for sw in sandwiches:
+            # early break for infinite loops if no more student would take
+            # the top sandwich
+            if (sw == 0 and circulars == 0) or (sw == 1 and squares == 0):
+                break
+            
+            # sandwich served
+            if sw == 0:
+                circulars -= 1
+            else:
+                squares -= 1
+
+        return squares + circulars
+
