@@ -1,0 +1,1 @@
+../all/0402-remove-k-digits.py
