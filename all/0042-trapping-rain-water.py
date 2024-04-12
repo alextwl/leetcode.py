@@ -51,3 +51,41 @@ class Solution2:
             water += min(left_max, right_max) - height[idx]
         
         return water
+
+
+'''
+2024/04/12 daily challenge
+
+monotonic stack approach
+'''
+
+
+class Solution3:
+    def trap(self, height: List[int]) -> int:
+        water = 0
+        stack = []  # previous higher terrarin (position, height)
+        
+        for right, right_height in enumerate(height):
+            last_floor = None  # memorize last floor of height of low-lying area
+            while stack:
+                left, left_height = stack[-1]
+                ceiling = min(left_height, right_height)
+
+                if last_floor is not None:
+                    # there're lower low-lying area in the right side,
+                    # time to trap the water.
+                    # note both the point of right and left do not trap water,
+                    # so the water range is (right - left - 1).
+                    water += (right - left - 1) * (ceiling - last_floor)
+                
+                last_floor = ceiling
+
+                if left_height <= right_height:
+                    stack.pop()
+                else:
+                    break
+
+            stack.append((right, right_height))
+
+        return water
+
