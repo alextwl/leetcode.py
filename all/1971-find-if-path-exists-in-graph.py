@@ -32,3 +32,38 @@ class Solution:
 
         return False
 
+
+'''
+2024/04/21 daily challenge
+
+Union-find approach (rank ver)
+'''
+
+
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        uf = [i for i in range(n)]
+        rank = [0] * n
+
+        def find(x):
+            if uf[x] != x:
+                uf[x] = find(uf[x])
+            return uf[x]
+
+        def union(x, y):
+            x, y = find(x), find(y)
+
+            if rank[x] >= rank[y]:
+                rank[x] += 1
+                uf[y] = x
+            else:
+                rank[y] += 1
+                uf[x] = y
+
+            return
+
+        for u, v in edges:
+            union(u, v)
+
+        return find(source) == find(destination)
+
