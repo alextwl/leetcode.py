@@ -1,0 +1,1 @@
+../all/0752-open-the-lock.py
