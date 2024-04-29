@@ -13,3 +13,16 @@ class Solution:
             k ^= v
         return k.bit_count()
 
+
+'''
+oneliner ver
+'''
+
+
+import functools
+
+
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        return functools.reduce(int.__xor__, nums, k).bit_count()
+
