@@ -1,0 +1,1 @@
+../all/2997-minimum-number-of-operations-to-make-array-xor-equal-to-k.py
