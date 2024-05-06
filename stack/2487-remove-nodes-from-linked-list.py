@@ -1,0 +1,1 @@
+../all/2487-remove-nodes-from-linked-list.py
