@@ -35,3 +35,32 @@ class Solution:
 
         return self.reverseList(head)
 
+
+'''
+math approach (single pointer)
+
+learnt from official solution 5:
+https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/solution/
+
+since the multiplier is known and fixed,
+it's possible to predict whether a carry would occur
+before traversing the child node.
+'''
+
+
+class Solution:
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head.val > 4:
+            head = ListNode(val=0, next=head)
+        
+        node = head
+        while node:
+            node.val = (node.val * 2) % 10
+            
+            if node.next and node.next.val > 4:
+                node.val += 1
+            
+            node = node.next
+        
+        return head
+
