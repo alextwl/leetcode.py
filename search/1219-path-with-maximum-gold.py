@@ -1,0 +1,1 @@
+../all/1219-path-with-maximum-gold.py
