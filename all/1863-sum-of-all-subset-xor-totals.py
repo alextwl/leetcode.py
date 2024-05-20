@@ -1,0 +1,24 @@
+'''
+2024/05/20 daily challenge
+
+backtracing approach
+'''
+
+
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        def recurse_subset(i, xor_sum):
+            if i == n:
+                return xor_sum
+
+            xor_i = recurse_subset(i + 1, xor_sum ^ nums[i])
+            non_xor_i = recurse_subset(i + 1, xor_sum)
+
+            # no need to trace visited nodes,
+            # we can just accumulate each value of subset XOR.
+            return xor_i + non_xor_i
+
+        return recurse_subset(0, 0)
+
