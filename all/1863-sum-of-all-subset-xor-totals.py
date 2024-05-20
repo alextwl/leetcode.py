@@ -22,3 +22,20 @@ class Solution:
 
         return recurse_subset(0, 0)
 
+
+'''
+bitwise OR & shift approach inspired from patterns
+
+learnt from official solution 3:
+https://leetcode.com/problems/sum-of-all-subset-xor-totals/solution/
+'''
+
+
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans = 0
+        for v in nums:
+            ans |= v
+        return ans << (n - 1)
+
