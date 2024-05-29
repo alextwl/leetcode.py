@@ -32,3 +32,25 @@ class Solution:
 
         return steps
 
+
+'''
+greedy method approach
+
+observe the pattern of steps.
+'''
+
+
+class Solution:
+    def numSteps(self, s: str) -> int:
+        steps = 0
+        carry = 0
+        for c in reversed(s[1:]):
+            digit = int(c) + carry
+            if digit & 1:
+                steps += 2
+                carry = 1
+            else:
+                steps += 1
+
+        return steps + carry
+
