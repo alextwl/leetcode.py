@@ -1,0 +1,1 @@
+../all/3110-score-of-a-string.py
