@@ -1,0 +1,1 @@
+../all/0846-hand-of-straights.py
