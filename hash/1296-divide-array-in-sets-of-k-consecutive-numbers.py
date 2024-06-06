@@ -1,0 +1,1 @@
+../all/1296-divide-array-in-sets-of-k-consecutive-numbers.py
