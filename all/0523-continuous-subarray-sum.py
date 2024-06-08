@@ -1,5 +1,6 @@
 '''
 2022/10/26 daily challenge
+2024/06/08 daily challenge
 
 hash map approach, learnt from the official solution.
 
@@ -49,6 +50,8 @@ class Solution:
                 and check if r > l.
                 
                 the condition also guarantees the subarray size is >= 2 since r > l.
+                if hashmap[rem] == i, it means there's only one element
+                in the subarray (also nums[i] % k == 0), and it's invalid.
                 '''
                 return True
 
