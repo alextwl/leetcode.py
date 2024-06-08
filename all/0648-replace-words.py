@@ -25,10 +25,13 @@ class Trie:
             if c in t.children:
                 t = t.children[c]
                 if t.end:
+                    # shortest prefix found, return only the prefix part.
                     return word[:i+1]
             else:
+                # prefix not found, stop searching
                 break
-
+        # prefix of word not found in the dictionary,
+        # so just output it untouched.
         return word
 
 
@@ -41,10 +44,7 @@ class Solution:
 
         ans = []
         for w in sentence.split():
-            if w[0] in root.children:
-                ans.append(root.query(w))
-            else:
-                ans.append(w)
+            ans.append(root.query(w))
 
         return ' '.join(ans)
 
