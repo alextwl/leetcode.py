@@ -57,3 +57,27 @@ class Solution:
 
         return ans
 
+
+'''
+summation ver
+'''
+
+
+import collections
+
+
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        prefix_sum = 0
+        dp = [0] * k
+        # base case: a single element divisible by k also forms a subarray divisible by k.
+        dp[0] = 1
+
+        runmod = 0
+
+        for v in nums:
+            runmod = (v + runmod) % k
+            dp[runmod] += 1
+
+        return sum(((m * (m - 1)) >> 1) for m in dp)
+
