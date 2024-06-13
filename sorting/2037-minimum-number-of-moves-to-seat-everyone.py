@@ -1,0 +1,1 @@
+../all/2037-minimum-number-of-moves-to-seat-everyone.py
