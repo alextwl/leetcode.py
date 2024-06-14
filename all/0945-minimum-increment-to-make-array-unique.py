@@ -40,3 +40,39 @@ class Solution:
 
         return moves
 
+
+'''
+space=O(max(nums)) ver
+
+Runtime: 529 ms, faster than 99.77% of Python3 online submissions
+'''
+
+
+class Solution:
+    def minIncrementForUnique(self, nums: List[int]) -> int:
+        m = max(nums)
+        
+        # build the frequencies of numbers
+        ctr = [0] * (m + 1)
+        for v in nums:
+            ctr[v] += 1
+        
+        moves = 0
+        carry = 0
+
+        # check each frequency of number and do increment
+        for freq in ctr:
+            # move all unassigned numbers to the current position
+            moves += carry
+            # proceed incoming numbers
+            carry += freq
+            # assign one number to the current position
+            if carry:
+                carry -= 1
+
+        # assign remaining numbers to the positions after max(nums)
+        if carry:
+            moves += (carry * (carry + 1)) >> 1
+
+        return moves
+
