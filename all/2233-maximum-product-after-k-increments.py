@@ -1,5 +1,7 @@
 '''
 min heap approach
+
+always increment the smallest by 1.
 '''
 
 import heapq
