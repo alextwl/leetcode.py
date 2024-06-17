@@ -1,0 +1,1 @@
+../all/0633-sum-of-square-numbers.py
