@@ -87,3 +87,31 @@ class Solution:
 
         return nice
 
+
+'''
+prefix sum approach
+
+the sum is the occurance of odd numbers.
+'''
+
+
+import collections
+
+
+class Solution:
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        nice = 0
+        prefix_sums = collections.defaultdict(int)
+        prefix_sums[0] = 1  # base case
+        
+        # the running sum of odd number count
+        running_sum = 0
+        for i, v in enumerate(nums):
+            if v & 1:
+                running_sum += 1
+            if (diff := running_sum - k) in prefix_sums:
+                nice += prefix_sums[diff]
+            prefix_sums[running_sum] += 1
+
+        return nice
+
