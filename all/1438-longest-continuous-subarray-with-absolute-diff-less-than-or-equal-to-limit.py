@@ -68,15 +68,14 @@ class Solution:
             dq_max.append(v)
 
             # shrink from left if over limit
-            while (dq_max[0] - dq_min[0] > limit):
+            if (dq_max[0] - dq_min[0] > limit):
                 u = nums[left]
+                # pop at most one element, no need to shrink more
                 if dq_max[0] == u:
                     dq_max.popleft()
                 if dq_min[0] == u:
                     dq_min.popleft()
                 left += 1
 
-            max_len = max(max_len, right - left + 1)
-
-        return max_len
+        return len(nums) - left
 
