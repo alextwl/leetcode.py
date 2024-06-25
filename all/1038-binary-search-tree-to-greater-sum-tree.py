@@ -2,6 +2,9 @@
 2024/06/25 daily challenge
 
 inorder traversal approach (recursive ver)
+
+same to problem 538:
+https://leetcode.com/problems/convert-bst-to-greater-tree/
 '''
 
 
