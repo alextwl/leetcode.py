@@ -19,3 +19,15 @@ class Solution:
 
         return -1  # undefined
 
+
+'''
+greedy method approach
+
+the first two (any two) edges must share a center node.
+'''
+
+
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        return edges[0][0] if edges[0][0] in edges[1] else edges[0][1]
+
