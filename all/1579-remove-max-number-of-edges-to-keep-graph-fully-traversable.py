@@ -1,5 +1,6 @@
 '''
 2023/04/30 daily challenge
+2024/06/30 daily challenge
 
 union find approach
 
@@ -55,17 +56,15 @@ class Solution:
         uf_alice = uf_both  # (alice & bob) + alice only edges
         uf_bob = uf_both.copy()  # (alice & bob) + bob only edges
 
-        # proceed Type 1 edges (Alice only)
         for t, u, v in edges:
             if t == 1:
+                # proceed Type 1 edges (Alice only)
                 if union(uf_alice, u, v):
                     alice_edges += 1
                 else:
                     removable += 1
-
-        # proceed Type 2 edges (Bob only)
-        for t, u, v in edges:
-            if t == 2:
+            elif t == 2:
+                # proceed Type 2 edges (Bob only)
                 if union(uf_bob, u, v):
                     bob_edges += 1
                 else:
