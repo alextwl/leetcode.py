@@ -1,0 +1,1 @@
+../all/1550-three-consecutive-odds.py
