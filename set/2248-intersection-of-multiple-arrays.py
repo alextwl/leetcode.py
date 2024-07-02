@@ -1,0 +1,1 @@
+../all/2248-intersection-of-multiple-arrays.py
