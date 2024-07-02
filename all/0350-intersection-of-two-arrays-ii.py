@@ -14,3 +14,19 @@ class Solution:
             ans += [num] * min(freq1[num], freq2[num])
         
         return ans
+
+
+'''
+2024/07/02 daily challenge
+
+counter approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        return list((collections.Counter(nums1) & collections.Counter(nums2)).elements())
+
