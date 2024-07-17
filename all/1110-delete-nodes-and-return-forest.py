@@ -38,3 +38,36 @@ class Solution:
 
         return ans
 
+
+'''
+postorder traversal approach (recursion ver)
+'''
+
+
+class Solution:
+    def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
+        forest = []
+        exclusions = set(to_delete)
+
+        def postorder(node):
+            if node is None:
+                return None
+
+            # LRV
+            node.left = postorder(node.left)
+            node.right = postorder(node.right)
+
+            if node.val in exclusions:
+                if node.left:
+                    forest.append(node.left)
+                if node.right:
+                    forest.append(node.right)
+                return None
+            return node
+
+        if postorder(root):
+            # the root is alive
+            forest.append(root)
+
+        return forest
+
