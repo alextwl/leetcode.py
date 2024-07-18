@@ -1,0 +1,1 @@
+../all/1530-number-of-good-leaf-nodes-pairs.py
