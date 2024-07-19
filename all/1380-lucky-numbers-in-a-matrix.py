@@ -28,3 +28,18 @@ class Solution:
 
         return ans
 
+
+'''
+greedy method approach
+
+there's exactly one lucky number or none.
+'''
+
+
+class Solution:
+    def luckyNumbers(self, matrix: List[List[int]]) -> List[int]:
+        row_mins = set(map(min, matrix))
+        col_maxs = set(map(max, zip(*matrix)))
+        ans = list(row_mins & col_maxs)
+        return ans
+
