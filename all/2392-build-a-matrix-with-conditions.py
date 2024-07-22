@@ -44,10 +44,20 @@ class Solution:
         if not order_rows or not order_cols:
             return []
         
+        # treat the matrix as two different topologies,
+        # and we are going to find the position of 1..k numbers.
+        #
+        # for rowConditions & colConditions we can treat it
+        # as the precedences between two vertices in the topology,
+        # so that we can use topology sort to find an order that satisfies the conditions.
+        #
+        # since there're two different groups of conditions to be met,
+        # we can find each vertex's position in these two conditions' topology sort order,
+        # and convert it to the matrix's coordinate.
         ans = [[0] * k for _ in range(k)]
-        for i, v1 in enumerate(order_rows):
-            for j, v2 in enumerate(order_cols):
-                if v1 == v2:
-                    ans[i][j] = v1
+        for i, v in enumerate(order_rows):
+            j = order_cols.index(v)
+            ans[i][j] = v
+
         return ans
 
