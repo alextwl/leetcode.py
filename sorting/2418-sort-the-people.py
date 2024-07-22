@@ -1,0 +1,1 @@
+../all/2418-sort-the-people.py
