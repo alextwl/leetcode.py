@@ -32,3 +32,6 @@ class Solution:
 
         return ans
 
+
+# TODO: use binary indexed tree
+
