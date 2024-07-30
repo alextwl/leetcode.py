@@ -51,3 +51,23 @@ class Solution:
                 stack.append(c)
         return ans
 
+
+'''
+dynamic programming approach
+'''
+
+
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        dp = [0] * (len(s) + 1)  # dp[i] = min deletions of s[:i]
+
+        b_cnt = 0
+        for i, c in enumerate(s):
+            if c == 'b':
+                dp[i+1] = dp[i]
+                b_cnt += 1
+            else:
+                dp[i+1] = min(dp[i] + 1, b_cnt)  # min(remove a, keep a)
+
+        return dp[-1]
+
