@@ -31,3 +31,23 @@ class Solution:
         
         return min_ans
 
+
+'''
+stack approach
+'''
+
+
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        stack = []
+        ans = 0
+        for c in s:
+            if stack and stack[-1] == 'b' and c == 'a':
+                # remove pairs of a previous 'b' and an incoming 'a'
+                # which are out of groups of suffix-b & prefix-a substrings.
+                stack.pop()
+                ans += 1
+            else:
+                stack.append(c)
+        return ans
+
