@@ -1,0 +1,1 @@
+../all/2678-number-of-senior-citizens.py
