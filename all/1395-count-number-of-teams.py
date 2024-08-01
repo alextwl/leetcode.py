@@ -33,5 +33,47 @@ class Solution:
         return ans
 
 
-# TODO: use binary indexed tree
+'''
+binary indexed tree (Fenwick tree) approach
+'''
+
+
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        def update_bit(tree, i, cnt):
+            while i < len(tree):
+                tree[i] += cnt
+                i += i & (-i)  # move to the next node of binary indexed tree
+        
+        def get_prefix_sum(tree, i):
+            prefix = 0
+            while i > 0:
+                prefix += tree[i]
+                i -= i & (-i)  # move to the parent node
+            return prefix
+        
+        max_val = max(rating)
+        left_tree = [0] * (max_val + 1)
+        right_tree = [0] * (max_val + 1)
+        
+        # build right side tree
+        for v in rating:
+            update_bit(right_tree, v, 1)
+        
+        ans = 0
+        # build left side tree
+        for v in rating:
+            update_bit(right_tree, v, -1)  # remove from right tree
+            
+            smaller_left_sum = get_prefix_sum(left_tree, v - 1)
+            smaller_right_sum = get_prefix_sum(right_tree, v - 1)
+            larger_left_sum = get_prefix_sum(left_tree, max_val) - get_prefix_sum(left_tree, v)
+            larger_right_sum = get_prefix_sum(right_tree, max_val) - get_prefix_sum(right_tree, v)
+            
+            # accumulate increasing/decreasing pairs
+            ans += smaller_left_sum * larger_right_sum + larger_left_sum * smaller_right_sum
+            
+            update_bit(left_tree, v, 1)  # add to left tree
+        
+        return ans
 
