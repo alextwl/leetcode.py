@@ -1,0 +1,1 @@
+../all/1460-make-two-arrays-equal-by-reversing-subarrays.py
