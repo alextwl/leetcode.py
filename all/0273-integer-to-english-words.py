@@ -57,3 +57,59 @@ class Solution:
                 ans.append(group_words)
         
         return ' '.join(reversed(ans))
+
+
+'''
+2024/08/07 daily challenge
+
+hash + stack + divisor approach (arithmetic conversion ver)
+'''
+
+
+class Solution:
+    def numberToWords(self, num: int) -> str:
+        if num == 0:
+            return "Zero"
+        
+        words = {1: "One", 2: "Two", 3: "Three",
+                 4: "Four", 5: "Five", 6: "Six",
+                 7: "Seven", 8: "Eight", 9: "Nine",
+                 10: "Ten", 11: "Eleven", 12: "Twelve",
+                 13: "Thirteen", 14: "Fourteen", 15: "Fifteen",
+                 16: "Sixteen", 17: "Seventeen", 18: "Eighteen",
+                 19: "Nineteen", 20: "Twenty", 30: "Thirty",
+                 40: "Forty", 50: "Fifty", 60: "Sixty",
+                 70: "Seventy", 80: "Eighty", 90: "Ninety"}
+        
+        group_words = ["Billion", "Million", "Thousand"]
+        
+        def parse_below_1000(num):
+            subs = []
+            hundreds, r1 = divmod(num, 100)
+            if hundreds:
+                subs.append(words[hundreds])
+                subs.append("Hundred")
+            if r1 > 20:
+                r2 = r1 % 10
+                subs.append(words[r1 - r2])
+                if r2:
+                    subs.append(words[r2])
+            elif r1:
+                subs.append(words[r1])
+            return ' '.join(subs)
+
+        quo, rem = divmod(num, 1000)
+
+        stack = []
+        if rem:
+            stack.append(parse_below_1000(rem))
+
+        while quo:
+            quo, rem = divmod(quo, 1000)
+            the_word = group_words.pop()
+            if rem:
+                stack.append(the_word)
+                stack.append(parse_below_1000(rem))
+        
+        return ' '.join(reversed(stack))
+
