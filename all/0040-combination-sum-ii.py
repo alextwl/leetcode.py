@@ -33,3 +33,30 @@ class Solution:
         backtrack(target, 0, list())
         return ans
 
+
+'''
+dynamic programming approach (bottom-up, iterative)
+
+use set[tuple] to avoid duplicate combinations.
+'''
+
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        # filter elements <= target
+        nums = [v for v in candidates if v <= target]
+        nums.sort()
+
+        # dp[i] = set of unique combination tuples which sum == i
+        dp = [set() for _ in range(target + 1)]
+        dp[0].add(tuple())
+
+        for i, v in enumerate(nums):
+            for j in range(target - v, -1, -1):
+                for comb in dp[j]:
+                    # select nums[i]
+                    new_comb = list(comb) + [v]
+                    dp[j+v].add(tuple(new_comb))
+
+        return list(dp[-1])
+
