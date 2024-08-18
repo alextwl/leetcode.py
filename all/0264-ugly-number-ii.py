@@ -39,3 +39,47 @@ class Solution:
             ugly.append(min(c2, c3, c5))
 
         return ugly[-1]
+
+
+'''
+2024/08/18 daily challenge
+
+min heap approach
+
+always generate the ugly number in the sorted order of multiplications:
+2 * 2 * 2 * ... * 3 * 3 * ... * 5,
+maintain 3 heaps and merge it.
+'''
+
+
+import heapq
+
+
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+        if n == 1:
+            return 1
+        
+        h2 = [2]
+        h3 = [3]
+        h5 = [5]
+        
+        for _ in range(1, n):
+            if h2[0] < h3[0] and h2[0] < h5[0]:
+                # next ugly has only 1 prime factor which is 2.
+                current = heapq.heappop(h2)
+                heapq.heappush(h2, current * 2)
+                heapq.heappush(h3, current * 3)
+                heapq.heappush(h5, current * 5)
+            elif h3[0] < h5[0]:
+                # next ugly has 2 prime factors which are 2 & 3.
+                current = heapq.heappop(h3)
+                heapq.heappush(h3, current * 3)
+                heapq.heappush(h5, current * 5)
+            else:
+                # next ugly has 3 prime factors including 2, 3 & 5.
+                current = heapq.heappop(h5)
+                heapq.heappush(h5, current * 5)
+
+        return current
+
