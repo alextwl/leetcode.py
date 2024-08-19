@@ -63,3 +63,27 @@ class Solution:
 
         return dp[-1]
 
+
+'''
+prime factorization approach
+
+learnt from official solution 4:
+https://leetcode.com/problems/2-keys-keyboard/solution/
+'''
+
+
+class Solution:
+    def minSteps(self, n: int) -> int:
+        steps = 0
+
+        d = 2  # select divisor from prime factor 2
+        while n > 1:
+            # note the d is always a prime if it could divide the current n.
+            while n % d == 0:
+                # 1 Copy All + (d - 1) times of pasting (n//d) length == d operations
+                steps += d
+                n //= d
+            d += 1
+
+        return steps
+
