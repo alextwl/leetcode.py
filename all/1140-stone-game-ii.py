@@ -51,3 +51,38 @@ class Solution:
         '''
         return dp[0][1]
 
+
+'''
+2024/08/20 daily challenge
+
+dynamic programming approach (recursive ver)
+'''
+
+
+import functools
+
+
+class Solution:
+    def stoneGameII(self, piles: List[int]) -> int:
+        n = len(piles)
+        suffix_sums = []
+        running_sum = 0
+        for stone in reversed(piles):
+            running_sum += stone
+            suffix_sums.append(running_sum)
+        suffix_sums.reverse()
+        
+        @functools.cache
+        def max_stones(pos, m):
+            if pos + 2*m >= n:
+                # take all remaining piles
+                return suffix_sums[pos]
+            
+            opponents = float('inf')  # opponent's stone
+            for x in range(1, 2 * m + 1):
+                opponents = min(opponents, max_stones(pos + x, max(x, m)))
+            
+            return suffix_sums[pos] - opponents
+        
+        return max_stones(0, 1)  # start from pos=0, M=1
+
