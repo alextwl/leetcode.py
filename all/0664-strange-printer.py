@@ -48,3 +48,39 @@ class Solution:
 
         return dp[0][n-1] + 1  # for the 1st print not counted in the DP loop.
 
+
+'''
+2024/08/21 daily challenge
+
+dynamic programming approach (recursive ver)
+'''
+
+import functools
+import itertools
+
+
+class Solution:
+    def strangePrinter(self, s: str) -> int:
+        # remove consecutive duplicate chars
+        s = ''.join(c for c, _ in itertools.groupby(s))
+
+        @functools.cache
+        def get_min_turns(left, right):
+            if left > right:
+                return 0
+
+            # the worst case with one more turn to generate s[left]
+            min_turns = 1 + get_min_turns(left + 1, right)
+
+            for k in range(left + 1, right + 1):
+                if s[left] == s[k]:
+                    # split the problem into:
+                    # s[left:k] + s[k+1:right]
+                    # so we can combine s[k] into the turn of generating s[left].
+                    min_turns = min(min_turns,
+                                    get_min_turns(left, k - 1) + get_min_turns(k + 1, right))
+
+            return min_turns
+
+        return get_min_turns(0, len(s) - 1)
+
