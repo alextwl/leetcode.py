@@ -18,3 +18,23 @@ class Solution:
 
         return ans
 
+
+'''
+oneliner ver
+'''
+
+
+class Solution:
+    def construct2DArray(self, orig: List[int], m: int, n: int) -> List[List[int]]:
+        return [] if len(orig) != m * n else [orig[n*i:n*(i+1)] for i in range(m)]
+
+
+'''
+oneliner + new bulit-in func in python 3.12
+'''
+
+
+class Solution:
+    def construct2DArray(self, orig: List[int], m: int, n: int) -> List[List[int]]:
+        return [] if len(orig) != m * n else list(itertools.batched(orig, n=n))
+
