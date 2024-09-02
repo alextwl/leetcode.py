@@ -20,3 +20,20 @@ class Solution:
 
         return bisect.bisect_right(prefix_sums, k)
 
+
+'''
+simulation approach
+
+surprisingly a bit faster than prefix sum + binary search ver.
+'''
+
+
+class Solution:
+    def chalkReplacer(self, chalk: List[int], k: int) -> int:
+        k %= sum(chalk)
+        for i, v in enumerate(chalk):
+            if k < v:
+                return i
+            k -= v
+        return 0  # undefined
+
