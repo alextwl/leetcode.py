@@ -1,0 +1,1 @@
+../all/1945-sum-of-digits-of-string-after-convert.py
