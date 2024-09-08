@@ -1,5 +1,6 @@
 '''
 2023/09/06 daily challenge
+2024/09/08 daily challenge
 
 two-pass iteration approach
 
@@ -11,35 +12,28 @@ and try to split it into equal-sized parts.
 class Solution:
     def splitListToParts(self, head: Optional[ListNode], k: int) -> List[Optional[ListNode]]:
         # anyway let's count the number of nodes first.
+        n = 0
         node = head
-        total = 0
         while(node):
-            total += 1
+            n += 1
             node = node.next
-        
-        part_size, remainders = divmod(total, k)
-        
-        ans = []
+
+        quo, rem = divmod(n, k)
+
+        prev = dummyhead = ListNode(next=head)
         node = head
-        # construct parts which its size == (part_size+1)
-        earlier_size = part_size + 1
-        for _ in range(remainders):
-            part_head = prev = node
-            for _ in range(earlier_size):
-                prev, node = node, node.next
+        ans = []
+
+        for _ in range(k):
             prev.next = None
-            ans.append(part_head)
-        
-        # construct remaining smaller parts (size == part_size)
-        for _ in range(k - remainders):
-            part_head = prev = node
-            for _ in range(part_size):
-                prev, node = node, node.next
-            # it's possible when prev == part_head == None
-            # so let's do more checks here.
-            if prev:
-                prev.next = None
-            ans.append(part_head)
+            ans.append(node)
+            i = quo
+            if rem:
+                i += 1
+                rem -= 1
+            for _ in range(i):
+                prev = node
+                node = node.next
 
         return ans
 
