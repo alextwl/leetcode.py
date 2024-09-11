@@ -22,3 +22,15 @@ class Solution:
     def minBitFlips(self, start: int, goal: int) -> int:
         return bin(start ^ goal)[2:].count('1')
 
+
+'''
+2024/09/11 daily challenge
+
+XOR + built-in counter
+'''
+
+
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+        return (start ^ goal).bit_count()
+
