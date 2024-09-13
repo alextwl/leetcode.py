@@ -1,0 +1,1 @@
+../all/1310-xor-queries-of-a-subarray.py
