@@ -49,3 +49,47 @@ class Solution:
 
         return dp[-1]
 
+
+'''
+2024/09/23 daily challenge
+
+Trie + dynamic programming approach
+'''
+
+
+class Trie:
+    def __init__(self, words = None):
+        self.children = {}
+        self.end_of_word = False
+
+        if words is not None:
+            for w in words:
+                node = self
+                for c in w:
+                    if c not in node.children:
+                        node.children[c] = Trie()
+                    node = node.children[c]
+                node.end_of_word = True
+
+
+class Solution:
+    def minExtraChar(self, s: str, dictionary: List[str]) -> int:
+        trie = Trie(dictionary)
+
+        n = len(s)
+        dp = [0] * (n + 1)
+
+        for i in range(n - 1, -1, -1):
+            # assume s[i] is an extra char
+            dp[i] = dp[i+1] + 1
+            # search the trie
+            node = trie
+            for j in range(i, n):
+                if s[j] not in node.children:
+                    break
+                node = node.children[s[j]]
+                if node.end_of_word:
+                    dp[i] = min(dp[i], dp[j + 1])
+
+        return dp[0]
+
