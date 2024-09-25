@@ -1,0 +1,1 @@
+../all/2416-sum-of-prefix-scores-of-strings.py
