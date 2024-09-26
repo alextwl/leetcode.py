@@ -52,3 +52,25 @@ class MyCalendar:
         self.bookings.add((start, end))
         return True
 
+
+'''
+manual insort_right ver
+'''
+
+
+import bisect
+
+
+class MyCalendar:
+    def __init__(self):
+        self.reservations = []
+
+    def book(self, start: int, end: int) -> bool:
+        i = bisect.bisect_right(self.reservations, (start, end))
+        if i > 0 and self.reservations[i-1][1] > start:
+            return False
+        if i < len(self.reservations) and end > self.reservations[i][0]:
+            return False
+        self.reservations.insert(i, (start, end))
+        return True
+
