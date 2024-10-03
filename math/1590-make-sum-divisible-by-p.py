@@ -1,0 +1,1 @@
+../all/1590-make-sum-divisible-by-p.py
