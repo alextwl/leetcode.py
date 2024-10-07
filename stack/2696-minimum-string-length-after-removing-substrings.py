@@ -1,0 +1,1 @@
+../all/2696-minimum-string-length-after-removing-substrings.py
