@@ -1,0 +1,1 @@
+../all/1942-the-number-of-the-smallest-unoccupied-chair.py
