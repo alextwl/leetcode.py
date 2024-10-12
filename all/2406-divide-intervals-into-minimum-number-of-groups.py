@@ -46,3 +46,28 @@ class Solution:
 
         return max_sum
 
+
+'''
+line sweep approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def minGroups(self, intervals: List[List[int]]) -> int:
+        freq = collections.defaultdict(int)
+
+        for left, right in intervals:
+            freq[left] += 1
+            freq[right + 1] -= 1
+
+        running_sum = 0
+        max_overlap = 1
+        for t in sorted(freq.keys()):
+            running_sum += freq[t]
+            max_overlap = max(max_overlap, running_sum)
+
+        return max_overlap
+
