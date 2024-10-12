@@ -1,0 +1,1 @@
+../all/2406-divide-intervals-into-minimum-number-of-groups.py
