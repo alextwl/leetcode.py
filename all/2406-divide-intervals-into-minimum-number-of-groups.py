@@ -24,3 +24,25 @@ class Solution:
 
         return max_overlap
 
+
+'''
+prefix sum approach
+'''
+
+
+class Solution:
+    def minGroups(self, intervals: List[List[int]]) -> int:
+        events = []  # (time, 1 for left and -1 for right+1)
+        for left, right in intervals:
+            events.append((left, 1))
+            events.append((right + 1, -1))  # note the right is inclusive, so subtract the count at the next time point.
+        events.sort()
+
+        prefix_sum = 0
+        max_sum = 1  # at least 1 group present
+        for _, v in events:
+            prefix_sum += v
+            max_sum = max(max_sum, prefix_sum)
+
+        return max_sum
+
