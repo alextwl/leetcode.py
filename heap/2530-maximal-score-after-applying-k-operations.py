@@ -1,0 +1,1 @@
+../all/2530-maximal-score-after-applying-k-operations.py
