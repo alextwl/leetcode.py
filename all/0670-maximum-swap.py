@@ -42,3 +42,41 @@ class Solution:
 
         return int(''.join(s))
 
+
+'''
+two-pass greedy ver
+
+learnt from official solution:
+https://leetcode.com/problems/maximum-swap/solution/
+'''
+
+
+import itertools
+
+
+class Solution:
+    def maximumSwap(self, num: int) -> int:
+        s = list(str(num))
+        n = len(s)
+
+        max_right_index = [0] * n
+        max_right_index[-1] = n - 1
+
+        # 1st pass: build indices of max value in the right side of each position
+        for prev, curr in itertools.pairwise(range(n - 1, -1, -1)):
+            if s[curr] > s[max_right_index[prev]]:
+                max_right_index[curr] = curr
+            else:
+                max_right_index[curr] = max_right_index[prev]
+
+        # 2nd pass: find possible swap
+        for i in range(n):
+            j = max_right_index[i]
+            if s[i] < s[j]:
+                # do swap
+                s[i], s[j] = s[j], s[i]
+                return int(''.join(s))
+
+        # no need to swap
+        return num
+
