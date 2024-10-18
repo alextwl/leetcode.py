@@ -51,3 +51,25 @@ class Solution:
 
         return ans
 
+
+'''
+combinatorial approach
+'''
+
+
+import collections
+import functools
+import itertools
+
+
+class Solution:
+    def countMaxOrSubsets(self, nums: List[int]) -> int:
+        d = collections.defaultdict(int)
+
+        for cnt in range(1, len(nums) + 1):
+            for subset in itertools.combinations(nums, cnt):
+                mask = functools.reduce(int.__or__, subset)
+                d[mask] += 1
+
+        return d[functools.reduce(int.__or__, nums)]
+
