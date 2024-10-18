@@ -73,3 +73,27 @@ class Solution:
 
         return d[functools.reduce(int.__or__, nums)]
 
+
+'''
+yet another dynamic programming approach (bottom up ver)
+
+runtime:4ms!
+'''
+
+
+import functools
+
+
+class Solution:
+    def countMaxOrSubsets(self, nums: List[int]) -> int:
+        d = {0: 1}  # base case: 1 empty subset
+
+        # add each element of nums to existed subsets
+        for v in nums:
+            prev_subset_counts = list(d.items()).copy()
+            for mask, cnt in prev_subset_counts:
+                new_mask = mask | v
+                d[new_mask] = d.get(new_mask, 0) + cnt
+
+        return d[functools.reduce(int.__or__, nums)]
+
