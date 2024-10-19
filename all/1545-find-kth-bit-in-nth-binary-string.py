@@ -32,10 +32,10 @@ class Solution:
             # the middle bit is always 1
             return "1"
         elif middle > k:
-            # the query bit is in the right part, need to recurse Sn-1
+            # the query bit is in the left part, need to recurse Sn-1
             return self.findKthBit(n - 1, k)
-        # shortcut: the query bit is in the left part,
-        # we can find it and invert it.
+        # middle < k shortcut: the query bit is in the right part,
+        # but we can find it in the left part of Sn-1 and invert it.
         target_bit = self.findKthBit(n - 1, (middle << 1) - k)
         return "1" if target_bit == "0" else "0"
 
