@@ -1,0 +1,1 @@
+../all/1277-count-square-submatrices-with-all-ones.py
