@@ -1,0 +1,1 @@
+../all/2501-longest-square-streak-in-an-array.py
