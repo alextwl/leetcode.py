@@ -1,0 +1,1 @@
+../all/1671-minimum-number-of-removals-to-make-mountain-array.py
