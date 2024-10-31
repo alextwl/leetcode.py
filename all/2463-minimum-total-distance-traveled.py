@@ -52,3 +52,37 @@ class Solution:
 
         return solve(0, 0)
 
+
+'''
+bottom-up dynamic programming approach (iterative ver)
+'''
+
+
+class Solution:
+    def minimumTotalDistance(self, robot: List[int], factory: List[List[int]]) -> int:
+        robot.sort()
+        factory.sort()
+        factorypos = []
+
+        # flatten the positions of all factories.
+        for pos, limit in factory:
+            factorypos.extend([pos] * limit)
+
+        m, n = len(robot), len(factorypos)
+
+        # dp[i][j] = the minimum moves for robot_i and factory_j pair.
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        for row in dp:
+            # out of available factories
+            row[-1] = float('inf')
+        # base case, when no both robot & factory left, the necessary move is zero.
+        dp[-1][-1] = 0
+
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                repair_here = abs(robot[i] - factorypos[j]) + dp[i+1][j+1]
+                goto_next_factory = dp[i][j+1]
+                dp[i][j] = min(repair_here, goto_next_factory)
+
+        return dp[0][0]
+
