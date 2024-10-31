@@ -86,3 +86,39 @@ class Solution:
 
         return dp[0][0]
 
+
+'''
+space-optimized dynamic programming approach (iterative ver)
+'''
+
+
+class Solution:
+    def minimumTotalDistance(self, robot: List[int], factory: List[List[int]]) -> int:
+        robot.sort()
+        factory.sort()
+        factorypos = []
+
+        # flatten the positions of all factories.
+        for pos, limit in factory:
+            factorypos.extend([pos] * limit)
+
+        m, n = len(robot), len(factorypos)
+
+        prev = [0] * (n + 1)
+        curr = [0] * (n + 1)
+
+        for i in range(m - 1, -1, -1):
+            if i != m - 1:
+                # for robot without available factory case
+                prev[-1] = float('inf')
+            curr[-1] = float('inf')
+
+            for j in range(n - 1, -1, -1):
+                repair_here = abs(robot[i] - factorypos[j]) + prev[j + 1]
+                goto_next_factory = curr[j + 1]
+                curr[j] = min(repair_here, goto_next_factory)
+
+            prev, curr = curr, prev
+
+        return prev[0]
+
