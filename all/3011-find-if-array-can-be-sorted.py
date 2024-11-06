@@ -28,3 +28,23 @@ class Solution:
 
         return True
 
+
+'''
+bubble sort ver
+
+it works because an element cannot be swapped to the sorted position
+if elements between them had different bit counts.
+'''
+
+
+class Solution:
+    def canSortArray(self, nums: List[int]) -> bool:
+        n = len(nums)
+        for i in range(n):
+            for j in range(n - i - 1):
+                if nums[j] > nums[j + 1]:
+                    if nums[j].bit_count() != nums[j + 1].bit_count():
+                        return False
+                    nums[j], nums[j + 1] = nums[j + 1], nums[j]
+        return True
+
