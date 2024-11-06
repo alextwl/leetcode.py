@@ -79,3 +79,29 @@ class Solution:
 
         return True
 
+
+'''
+Forward & backward pass (2-pass scanning)
+
+learnt from official solution 3:
+https://leetcode.com/problems/find-if-array-can-be-sorted/solution/
+'''
+
+
+class Solution:
+    def canSortArray(self, nums: List[int]) -> bool:
+        n = len(nums)
+        for i in range(n - 1):
+            if nums[i] > nums[i+1]:
+                if nums[i].bit_count() != nums[i+1].bit_count():
+                    return False
+                nums[i], nums[i+1] = nums[i+1], nums[i]
+
+        for i in range(n - 1, 0, -1):
+            if nums[i-1] > nums[i]:
+                if nums[i-1].bit_count() != nums[i].bit_count():
+                    return False
+                nums[i-1], nums[i] = nums[i], nums[i-1]
+
+        return True
+
