@@ -48,3 +48,34 @@ class Solution:
                     nums[j], nums[j + 1] = nums[j + 1], nums[j]
         return True
 
+
+'''
+split array into groups (segments) by set bits
+and check min/max integrity.
+'''
+
+
+class Solution:
+    def canSortArray(self, nums: List[int]) -> bool:
+        prev_bits = nums[0].bit_count()
+        prev_max = float('-inf')
+        curr_min = curr_max = nums[0]
+        
+        for v in nums:
+            if v.bit_count() != prev_bits:
+                if prev_max > curr_min:
+                    return False
+                prev_max = curr_max
+                # start new group
+                prev_bits = v.bit_count()
+                curr_min = curr_max = v
+            else:
+                curr_min = min(curr_min, v)
+                curr_max = max(curr_max, v)
+
+        # check the last group
+        if prev_max > curr_min:
+            return False
+
+        return True
+
