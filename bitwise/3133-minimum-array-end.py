@@ -1,0 +1,1 @@
+../all/3133-minimum-array-end.py
