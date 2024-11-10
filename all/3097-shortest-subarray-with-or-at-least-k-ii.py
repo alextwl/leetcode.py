@@ -34,3 +34,34 @@ class Solution:
 
         return -1 if min_len == float('inf') else min_len
 
+
+'''
+dynamic programming approach
+'''
+
+
+class Solution:
+    def minimumSubarrayLength(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        min_len = float('inf')
+
+        # dp[bitwise-OR value of a subarray] = the maximum left pointer of a subarray
+        dp = dict()
+
+        for right, v in enumerate(nums):
+            new_dp = {v: right}  # for [nums[right]] single-element subarray case
+
+            # add nums[right] to all previous subarrays
+            # if there're duplicate bitwise-OR values, pick the larger left pointer
+            for or_val, left in dp.items():
+                or_val |= v
+                new_dp[or_val] = max(new_dp.get(or_val, left), left)
+
+            # try to shrink the target subarray
+            dp = new_dp
+            for or_val, left in dp.items():
+                if or_val >= k:
+                    min_len = min(min_len, right - left + 1)
+
+        return -1 if min_len == float('inf') else min_len
+
