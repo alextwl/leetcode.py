@@ -1,0 +1,1 @@
+../all/2601-prime-subtraction-operation.py
