@@ -44,3 +44,51 @@ class Solution:
 
         return True
 
+
+'''
+Sieve of Eratosthenes + two pointer approach
+
+learnt from official solution 3:
+https://leetcode.com/problems/prime-subtraction-operation/solution/
+'''
+
+
+import math
+
+
+class Solution:
+    def primeSubOperation(self, nums: List[int]) -> bool:
+        n = len(nums)
+        max_val = max(nums)
+        # sieve[i] == 1 indicates unmarked, a prime number
+        sieve = [1] * (max_val + 1)
+        
+        # mark all non-primes
+        sieve[1] = 0
+        for i in range(2, math.isqrt(max_val + 1) + 1):
+            if sieve[i]:
+                # mark all multiples of i starting from i's square
+                for j in range(i * i, max_val + 1, i):
+                    sieve[j] = 0
+        
+        curr = 1  # the target value of nums[i]
+        i = 0
+        while i < n:
+            diff = nums[i] - curr
+            if diff < 0:
+                # nums[i] is already less than curr
+                return False
+            
+            # try to grow curr and check if we can do operation on nums[i]
+            if sieve[diff] or diff == 0:
+                # we can subtract nums[i] by diff as a prime,
+                # or nums[i] can equal to curr,
+                # we can move to nums[i+1]
+                i += 1
+                curr += 1
+            else:
+                # just try for the next curr
+                curr += 1
+
+        return True
+
