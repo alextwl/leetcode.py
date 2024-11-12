@@ -1,0 +1,1 @@
+../all/2070-most-beautiful-item-for-each-query.py
