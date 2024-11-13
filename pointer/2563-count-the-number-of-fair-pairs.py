@@ -1,0 +1,1 @@
+../all/2563-count-the-number-of-fair-pairs.py
