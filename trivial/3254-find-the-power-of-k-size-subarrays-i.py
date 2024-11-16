@@ -1,0 +1,1 @@
+../all/3254-find-the-power-of-k-size-subarrays-i.py
