@@ -1,0 +1,1 @@
+../all/2516-take-k-of-each-character-from-left-and-right.py
