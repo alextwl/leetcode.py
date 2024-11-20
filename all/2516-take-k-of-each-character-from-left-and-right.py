@@ -25,7 +25,8 @@ class Solution:
             window_cnt[c] += 1
 
             # shrink the window from left
-            while left <= right and any(cnt[d] - window_cnt[d] < k for d in "abc"):
+            # no need to shrink more because we want to maximize the window
+            if any(cnt[d] - window_cnt[d] < k for d in "abc"):
                 window_cnt[s[left]] -= 1
                 left += 1
 
