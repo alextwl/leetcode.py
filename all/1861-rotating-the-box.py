@@ -37,3 +37,39 @@ class Solution:
 
         return ans
 
+
+'''
+pythonic matrix rotation ver
+'''
+
+
+class Solution:
+    def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
+        # alter the gravity: let stones fall right.
+        for row in box:
+            i = 0
+            empty = stone = 0
+            for cell in row:
+                if cell == '.':
+                    empty += 1
+                elif cell == '#':
+                    stone += 1
+                else:
+                    # cell == '*'
+                    for _ in range(empty):
+                        row[i] = '.'
+                        i += 1
+                    for _ in range(stone):
+                        row[i] = '#'
+                        i += 1
+                    empty = stone = 0
+                    i += 1
+            for _ in range(empty):
+                row[i] = '.'
+                i += 1
+            for _ in range(stone):
+                row[i] = '#'
+                i += 1
+        # rotate the matrix in pythonic way
+        return list(zip(*box[::-1]))
+
