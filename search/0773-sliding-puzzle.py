@@ -1,0 +1,1 @@
+../all/0773-sliding-puzzle.py

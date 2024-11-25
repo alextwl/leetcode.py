@@ -50,3 +50,69 @@ class Solution:
 
         return min_steps.get(goal, -1)
 
+
+'''
+level order traversal approach (BFS)
+
+runtime=4ms
+'''
+
+
+import collections
+
+
+class Solution:
+    def slidingPuzzle(self, board: List[List[int]]) -> int:
+        # convert the board to an 1-D array
+        # and predefine each cell's next hop.
+        '''
+        +---+---+---+
+        | 0 | 1 | 2 |    +---+---+---+---+---+---+
+        +---+---+---+ => | 0 | 1 | 2 | 3 | 4 | 5 |
+        | 3 | 4 | 5 |    +---+---+---+---+---+---+
+        +---+---+---+
+        '''
+        next_hops = {0: [1, 3],
+                     1: [0, 4, 2],
+                     2: [1, 5],
+                     3: [0, 4],
+                     4: [3, 1, 5],
+                     5: [4, 2]}
+
+        goal = (1, 2, 3, 4, 5, 0)
+
+        q = collections.deque()
+        x = y = -1
+        # search the starting point 0
+        for i, row in enumerate(board):
+            for j, cell in enumerate(row):
+                if cell == 0:
+                    x, y = i, j
+                    break
+            if x != -1:
+                break
+        q.append((x*3 + y, board[0] + board[1]))
+
+        # level order BFS
+        step = 0
+        seen = set()
+        while q:
+            width = len(q)
+            for _ in range(width):
+                idx, state = q.popleft()
+                key = tuple(state)
+                if key in seen:
+                    continue
+                if key == goal:
+                    return step
+                seen.add(key)
+
+                # queue deeper
+                for next_idx in next_hops[idx]:
+                    next_state = state.copy()
+                    next_state[idx], next_state[next_idx] = next_state[next_idx], next_state[idx]
+                    q.append((next_idx, next_state))
+            step += 1
+
+        return -1
+
