@@ -23,8 +23,10 @@ class Solution:
         while q:
             x, y, path_len = q.popleft()
 
+            # must do comparsion here against infinite loop
             if dist[(x, y)] <= path_len:
                 continue
+
             dist[(x, y)] = path_len
 
             if (x, y) == term_node:
@@ -33,7 +35,7 @@ class Solution:
             for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 dx += x
                 dy += y
-                if 0 <= dx <= m1 and 0 <= dy <= n1:
+                if 0 <= dx <= m1 and 0 <= dy <= n1 and (dx, dy) not in dist::
                     # 0-1 switch
                     if grid[dx][dy]:
                         q.append((dx, dy, path_len + 1))
