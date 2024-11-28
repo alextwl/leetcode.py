@@ -1,0 +1,1 @@
+../all/2290-minimum-obstacle-removal-to-reach-corner.py
