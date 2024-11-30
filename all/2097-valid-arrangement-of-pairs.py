@@ -1,7 +1,7 @@
 '''
 2024/11/30 daily challenge
 
-Hierholzer's algorithm approach (find an Euler circuit)
+Hierholzer's algorithm approach (find an Euler circuit/Eulerian path)
 '''
 
 import collections
@@ -22,11 +22,16 @@ class Solution:
         # find the head node
         head = -1
         for node, cnt in out_deg.items():
+            # since the problem guaranteed there exists a valid arrangement,
+            # there may exist a start node which has insufficient indegrees
+            # and cannot pair with equivalent number of end nodes, so that
+            # we can only start from it.
             if cnt == in_deg[node] + 1:
                 head = node
                 break
         else:
-            # start from the first pair's start node if previous criteria not found
+            # we can feel free to start from the first pair's start node
+            # because all edges are in cycles.
             head = pairs[0][0]
 
         circuit = []
