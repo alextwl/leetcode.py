@@ -1,0 +1,1 @@
+../all/1346-check-if-n-and-its-double-exist.py
