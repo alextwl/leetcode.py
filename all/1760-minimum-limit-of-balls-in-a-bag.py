@@ -6,8 +6,6 @@ binary search approach
 change the problem to "binary search the maximum size of a bag."
 '''
 
-import math
-
 
 class Solution:
     def minimumSize(self, nums: List[int], maxops: int) -> int:
@@ -17,7 +15,7 @@ class Solution:
             ops = 0
             for v in nums:
                 if v > max_size:
-                    ops += math.ceil(v / max_size) - 1
+                    ops += (v - 1) // max_size
                     if ops > maxops:
                         return False
             return ops <= maxops
