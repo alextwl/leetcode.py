@@ -82,3 +82,38 @@ class Solution:
 
         return max_sum
 
+
+'''
+greedy method approach
+
+learnt from official solution 3:
+https://leetcode.com/problems/two-best-non-overlapping-events/solution/
+'''
+
+
+class Solution:
+    def maxTwoEvents(self, events: List[List[int]]) -> int:
+        tv = []  # (time, flag=1 if it's starttime else 0, value)
+
+        for starttime, endtime, value in events:
+            tv.append((starttime, 1, value))
+            # increase endtime by 1 to ensure it's sorted after all events overlapped by starttime.
+            tv.append((endtime + 1, 0, value))
+
+        tv.sort()  # order by time
+
+        max_value = 0
+        max_sum = 0
+        for _, flag, v in tv:
+            if flag:
+                # encounter a start time, try to pair it with previous maximum value.
+                #
+                # note the value stored in max_value is guaranteed non-overlapped with current event
+                # because the endtimes of all overlapped previous events are not yet processed.
+                max_sum = max(max_sum, v + max_value)
+            else:
+                # an event ended, try to maximize the value
+                max_value = max(max_value, v)
+
+        return max_sum
+
