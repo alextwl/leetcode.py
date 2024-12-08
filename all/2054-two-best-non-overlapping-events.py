@@ -46,3 +46,39 @@ class Solution:
 
         return pickup(0, 0)
 
+
+'''
+min heap approach
+
+(1) push events to min-heap
+(2) pop previous non-overlapped events and try to maximize the previous maximum value
+(3) try to pair the max value with the current event's value
+'''
+
+
+import heapq
+
+
+class Solution:
+    def maxTwoEvents(self, events: List[List[int]]) -> int:
+        events.sort()
+
+        h = []
+
+        max_value = 0  # maximum value of an event we've seen. (and it might be paired with current event)
+        max_sum = 0
+
+        for starttime, endtime, value in events:
+            # pop all previous non-overlapped events and consider if we can pick its value.
+            while h and h[0][0] < starttime:
+                _, v = heapq.heappop(h)
+                max_value = max(max_value, v)
+
+            # try to pair the previous maximum value with the current event's value.
+            max_sum = max(max_sum, max_value + value)
+
+            # push to min heap to be a candidate for further possible pairs.
+            heapq.heappush(h, (endtime, value))
+
+        return max_sum
+
