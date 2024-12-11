@@ -1,0 +1,1 @@
+../all/2779-maximum-beauty-of-an-array-after-applying-operation.py
