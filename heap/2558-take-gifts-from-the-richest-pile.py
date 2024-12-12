@@ -1,0 +1,1 @@
+../all/2558-take-gifts-from-the-richest-pile.py
