@@ -29,3 +29,32 @@ class Solution:
                 mark[i+1] = True
         return score
 
+
+'''
+monotonic stack approach
+
+time=O(n)
+'''
+
+
+class Solution:
+    def findScore(self, nums: List[int]) -> int:
+        stack = []  # a decreasing stack
+        score = 0
+
+        for v in nums:
+            if not stack or v < stack[-1]:
+                stack.append(v)
+            else:
+                while stack:
+                    score += stack.pop()
+                    if stack:
+                        # skip neighbor because it's marked
+                        stack.pop()
+        while stack:
+            score += stack.pop()
+            if stack:
+                stack.pop()
+
+        return score
+
