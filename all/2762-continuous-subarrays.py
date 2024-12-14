@@ -79,3 +79,42 @@ class Solution:
 
         return ans
 
+
+'''
+monotonic stack approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def continuousSubarrays(self, nums: List[int]) -> int:
+        # monotonic v-increasing/decreasing stacks: (i, v)
+        q_min = collections.deque()
+        q_max = collections.deque()
+
+        ans = 0
+        left = 0
+        for right, v in enumerate(nums):
+            while q_min and q_min[-1][1] >= v:
+                q_min.pop()
+            q_min.append((right, v))
+
+            while q_max and q_max[-1][1] <= v:
+                q_max.pop()
+            q_max.append((right, v))
+
+            while q_min and q_max and q_max[0][1] - q_min[0][1] > 2:
+                # pop from left of either max/min element
+                if q_max[0][0] < q_min[0][0]:
+                    left = q_max[0][0] + 1
+                    q_max.popleft()
+                else:
+                    left = q_min[0][0] + 1
+                    q_min.popleft()
+            # accumulate counts of more subarrays
+            ans += right - left + 1
+
+        return ans
+
