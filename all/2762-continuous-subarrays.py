@@ -35,3 +35,47 @@ class Solution:
 
         return ans
 
+
+'''
+two pointers + sigma summation formula approach
+'''
+
+
+class Solution:
+    def continuousSubarrays(self, nums: List[int]) -> int:
+        ans = 0
+        # window attributes
+        w_min = w_max = nums[0]
+        w_len = 0
+
+        left = 0
+        for right, v in enumerate(nums):
+            w_min = min(w_min, v)
+            w_max = max(w_max, v)
+
+            # check violation
+            if w_max - w_min > 2:
+                w_len = right - left  # == (right - 1) - left + 1
+                # summation formula
+                ans += w_len * (w_len + 1) // 2
+
+                # start a new window **here**
+                left = right
+                w_min = w_max = v
+
+                # try to expand left boundary
+                while left > 0 and abs((u := nums[left - 1]) - v) <= 2:
+                    left -= 1
+                    w_min = min(w_min, u)
+                    w_max = max(w_max, u)
+                if left < right:
+                    w_len = right - left
+                    # remove overlapped part expanded from left by summation formula
+                    ans -= w_len * (w_len + 1) // 2
+
+        # sum up last subarray
+        w_len = right - left + 1  # nums[right] is included
+        ans += w_len * (w_len + 1) // 2
+
+        return ans
+
