@@ -1,0 +1,1 @@
+../all/1475-final-prices-with-a-special-discount-in-a-shop.py
