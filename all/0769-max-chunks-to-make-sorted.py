@@ -45,3 +45,23 @@ class Solution:
 
         return len(stack)
 
+
+'''
+prefix sum approach
+'''
+
+
+class Solution:
+    def maxChunksToSorted(self, arr: List[int]) -> int:
+        chunks = 0
+        prefix0 = prefix1 = 0
+
+        # note all the elements are unique and within 0 <= arr[i] < 10.
+        for v0, v1 in zip(arr, range(10)):
+            prefix0 += v0
+            prefix1 += v1
+            if prefix0 == prefix1:
+                chunks += 1
+
+        return chunks
+
