@@ -45,3 +45,25 @@ class Solution:
 
         return root
 
+
+'''
+depth first search approach (recursive ver)
+'''
+
+
+class Solution:
+    def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        def dfs(left, right, lv):
+            if left is None:
+                # it's perfect so check only left.
+                return
+            if lv & 1:
+                # swap the values of each node
+                left.val, right.val = right.val, left.val
+            lv += 1
+            dfs(left.left, right.right, lv)
+            dfs(left.right, right.left, lv)
+
+        dfs(root.left, root.right, 1)
+        return root
+
