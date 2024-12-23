@@ -51,3 +51,39 @@ class Solution:
             stack.append((heights[i], i))
 
         return ans
+
+
+'''
+min heap approach
+
+push queries to min heap when iterating heights of the buildings.
+'''
+
+
+class Solution:
+    def leftmostBuildingQueries(self, heights: List[int], queries: List[List[int]]) -> List[int]:
+        h = []  # min heap: (height, index)
+        ans = [-1] * len(queries)
+        new_q = [list() for _ in range(len(heights))]
+
+        for i, (a, b) in enumerate(queries):
+            if a > b:
+                a, b = b, a
+
+            if heights[b] > heights[a] or a == b:
+                # in a < b case, if b's height was higher than a's,
+                # then a & b will definitely meet at b.
+                ans[i] = b
+            else:
+                new_q[b].append((heights[a], i))
+
+        for j, height in enumerate(heights):
+            while h and h[0][0] < height:
+                _, i = heapq.heappop(h)
+                # the current building j is higher and the nearest answer for popped query i.
+                ans[i] = j
+            for query in new_q[j]:
+                heapq.heappush(h, query)
+
+        return ans
+
