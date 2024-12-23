@@ -25,7 +25,10 @@ class Solution:
             else:
                 new_q[b].append((heights[a], i))
 
-        # monotonic stack
+        # monotonic stack: strictly decreasing
+        # store "next taller building's height."
+        # note stack[0] is the farthest and stack[-1] is the nearest
+        # from the current query (building of y.)
         stack = []
         for i in range(len(heights) - 1, -1, -1):
             width = len(stack)
@@ -33,6 +36,7 @@ class Solution:
                 # binary search
                 left, right = 0, width - 1
                 pos = -1
+                # (left) farthest&higher...nearest&lower (right)
                 while left <= right:
                     mid = (left + right) // 2
                     if stack[mid][0] > h:
