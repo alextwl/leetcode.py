@@ -1,9 +1,13 @@
 '''
 2024/12/23 daily challenge
 
-level order traversal + hash approach
+level order traversal + hash + in-place sorting approach
 
 use a dict to track index-value in the array of each level.
+
+also see https://en.wikipedia.org/wiki/Cycle_sort
+cycle sort provides minimal overwrites (swaps) required
+for a completed in-place sorting.
 '''
 
 
@@ -28,6 +32,7 @@ class Solution:
                 if node.right is not None:
                     q.append(node.right)
 
+                # in-place overwrite
                 if arr[i] != inc_arr[i]:
                     swaps += 1
                     a, b = arr[i], inc_arr[i]
