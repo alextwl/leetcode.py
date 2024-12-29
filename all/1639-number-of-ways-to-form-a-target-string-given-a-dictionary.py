@@ -67,3 +67,37 @@ class Solution:
 
         return dp[-1] % MODULO
 
+
+'''
+2024/12/29 daily challenge
+
+dynamic programming approach (recursive ver)
+'''
+
+
+import collections
+import functools
+
+
+class Solution:
+    def numWays(self, words: List[str], target: str) -> int:
+        kcnts = [collections.Counter(k_chars) for k_chars in zip(*words)]
+        m, n = len(target), len(kcnts)
+
+        @functools.cache
+        def dp(i, k):
+            if i == m:
+                return 1
+            if k == n:
+                return 0
+
+            ways = 0
+            # select k-th char
+            if target[i] in kcnts[k]:
+                ways += kcnts[k][target[i]] * dp(i+1, k+1)
+            # not select k-th char
+            ways += dp(i, k+1)
+            return ways % 1_000_000_007
+
+        return dp(0, 0)
+
