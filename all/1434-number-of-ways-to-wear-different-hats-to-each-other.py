@@ -39,3 +39,37 @@ class Solution:
 
         return dp(1, 0)
 
+
+'''
+dynamic programming approach (iterative ver)
+'''
+
+
+class Solution:
+    def numberWays(self, hats: List[List[int]]) -> int:
+        hat2ppl = [list() for _ in range(41)]  # note the index of hat starts from 1.
+        for person, perferred_hats in enumerate(hats):
+            for hat in perferred_hats:
+                hat2ppl[hat].append(1 << person)
+
+        full = (1 << len(hats)) - 1
+        # dp[hat][person_mask]
+        # hat=0: useless, 41: for case of hats exhausted
+        dp = [[0] * (1 << len(hats)) for _ in range(42)]
+        for i in range(1, 42):
+            dp[i][full] = 1
+
+        for mask in range(full, -1, -1):
+            for hat in range(40, 0, -1):
+                # case 1: not choosing the hat
+                ret = dp[hat+1][mask]
+                # case 2: choosing the hat by preferred persons
+                for person_mask in hat2ppl[hat]:
+                    if mask & person_mask == 0:
+                        # the guy is available
+                        ret = (ret + dp[hat+1][mask|person_mask]) % 1_000_000_007
+                dp[hat][mask] = ret
+
+        # bottom-up: all combinations are accumulated to the first hat with empty person
+        return dp[1][0]
+
