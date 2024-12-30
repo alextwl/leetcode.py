@@ -45,3 +45,23 @@ class Solution:
         # sum the number of strings with valid lengthes [low, high] only.
         return sum(dp[good] for good in range(low, high+1)) % 1_000_000_007
 
+
+'''
+2024/12/30 daily challenge
+
+dynamic programming approach (optimized)
+
+do modulo in every iteration significantly boosts runtime up 10x times.
+'''
+
+
+class Solution:
+    def countGoodStrings(self, low: int, high: int, zero: int, one: int) -> int:
+        dp = [0] * (high + 1)
+        dp[0] = 1
+
+        for i in range(min(zero, one), high + 1):
+            dp[i] = (dp[i - zero] + dp[i - one]) % 1_000_000_007
+
+        return sum(dp[low:]) % 1_000_000_007
+
