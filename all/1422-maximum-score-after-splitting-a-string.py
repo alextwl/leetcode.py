@@ -31,3 +31,37 @@ class Solution:
 
         return max_score
 
+
+'''
+2025/01/01 daily challenge
+
+one pass ver
+
+learnt from official solution 3:
+https://leetcode.com/problems/maximum-score-after-splitting-a-string/editorial/#approach-3-one-pass
+
+score = left zeros + right ones
+      = left zeros + (total ones - left ones)
+
+running score = score - total ones
+so the final answer is (running_score + total ones) = best score
+'''
+
+
+class Solution:
+    def maxScore(self, s: str) -> int:
+        zeros = ones = 0  # left zeros & left ones
+        running_score = -500
+        # iterate over the array except the last char for the right substring.
+        for c in s[:-1]:
+            if c == '0':
+                zeros += 1
+            else:
+                ones += 1
+            running_score = max(running_score, zeros - ones)
+        # complete the total ones
+        if s[-1] == '1':
+            ones += 1
+        # apply the derivative formula
+        return running_score + ones
+
