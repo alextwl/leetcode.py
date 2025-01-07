@@ -62,3 +62,52 @@ class Solution:
 
         return ans
 
+
+'''
+Knuth-Morris-Pratt (KMP) approach
+'''
+
+
+class Solution:
+    def stringMatching(self, words: List[str]) -> List[str]:
+        ans = []
+
+        # kmp string matching
+        for i, w0 in enumerate(words):
+            # build LPS
+            lps = [0] * len(w0)
+            k = 1
+            l = 0
+            while k < len(w0):
+                if w0[k] == w0[l]:
+                    l += 1
+                    lps[k] = l
+                    k += 1
+                else:
+                    if l > 0:
+                        l = lps[l-1]
+                    else:
+                        k += 1
+            # match
+            for j, w1 in enumerate(words):
+                if i == j:
+                    continue
+                k0 = 0  # substring index
+                k1 = 0  # target index
+                while k1 < len(w1):
+                    if w0[k0] == w1[k1]:
+                        k0 += 1
+                        k1 += 1
+                        if k0 == len(w0):
+                            ans.append(w0)
+                            break
+                    else:
+                        if k0 > 0:
+                            k0 = lps[k0 - 1]
+                        else:
+                            k1 += 1
+                else:
+                    continue
+                break
+        return ans
+
