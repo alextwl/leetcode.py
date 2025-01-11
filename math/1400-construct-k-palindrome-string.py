@@ -1,0 +1,1 @@
+../all/1400-construct-k-palindrome-string.py
