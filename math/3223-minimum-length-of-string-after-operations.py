@@ -1,0 +1,1 @@
+../all/3223-minimum-length-of-string-after-operations.py
