@@ -1,0 +1,1 @@
+../all/2657-find-the-prefix-common-array-of-two-arrays.py
