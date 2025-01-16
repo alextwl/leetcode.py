@@ -1,0 +1,1 @@
+../all/2425-bitwise-xor-of-all-pairings.py
