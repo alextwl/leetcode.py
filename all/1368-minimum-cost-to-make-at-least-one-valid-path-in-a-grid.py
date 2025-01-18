@@ -39,3 +39,50 @@ class Solution:
 
         return dist[-1][-1]
 
+
+'''
+2025/01/18 daily challenge
+
+depth first search + breadth first search approach
+
+use DFS to traverse 0-weight edges and
+use BFS to traverse 1-weight edges.
+'''
+
+
+import collections
+
+
+class Solution:
+    def minCost(self, grid: List[List[int]]) -> int:
+        arrows = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # right, left, up, down
+        m, n = len(grid), len(grid[0])
+
+        dp = [[-1] * n for _ in range(m)]
+        q = collections.deque()  # (i, j)
+
+        def dfs(i, j, path_len):
+            if not (0 <= i < m and 0 <= j < n):
+                return
+            if dp[i][j] != -1:
+                return
+            
+            dp[i][j] = path_len
+            q.append((i, j))
+            dx, dy = arrows[grid[i][j] - 1]
+            dfs(i + dx, j + dy, path_len)
+
+        dfs(0, 0, 0)
+
+        cost = 0
+        # BFS in level order
+        while q:
+            cost += 1
+            width = len(q)
+            for _ in range(width):
+                x, y = q.popleft()
+                for dx, dy in arrows:
+                    dfs(x + dx, y + dy, cost)
+
+        return dp[-1][-1]
+
