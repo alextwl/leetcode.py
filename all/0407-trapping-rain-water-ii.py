@@ -67,3 +67,61 @@ class Solution:
 
         return ans
 
+
+'''
+2025/01/19 daily challenge
+
+breadth first search + min heap approach
+
+learnt from official editorial:
+https://leetcode.com/problems/trapping-rain-water-ii/editorial/
+'''
+
+
+import heapq
+
+
+class Solution:
+    def trapRainWater(self, heightMap: List[List[int]]) -> int:
+        m, n = len(heightMap), len(heightMap[0])
+        flags = [[0] * n for _ in range(m)]  # 0b1=visited, 0b10=boundary
+
+        h = []  # (height, i, j)
+
+        # add initial boundary
+        for j in range(0, n):
+            flags[0][j] = 0b10
+            heapq.heappush(h, (heightMap[0][j], 0, j))
+            flags[-1][j] = 0b10
+            heapq.heappush(h, (heightMap[-1][j], m-1, j))
+        for i in range(1, m-1):
+            flags[i][0] = 0b10
+            heapq.heappush(h, (heightMap[i][0], i, 0))
+            flags[i][-1] = 0b10
+            heapq.heappush(h, (heightMap[i][-1], i, n-1))
+        
+        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        water = 0
+        while h:
+            curr_height, i, j = heapq.heappop(h)
+
+            # visit (i, j)
+            flags[i][j] = 0b11
+
+            for dx, dy in dirs:
+                dx += i
+                dy += j
+                if 0 <= dx < m and 0 <= dy < n:
+                    if flags[dx][dy]:
+                        continue
+                    # queue it (add to the boundary)
+                    flags[dx][dy] = 0b10
+                    adj_height = heightMap[dx][dy]
+                    if adj_height < curr_height:
+                        water += curr_height - adj_height
+                        # overwrite it to trap more water
+                        heightMap[dx][dy] = adj_height = curr_height
+                    heapq.heappush(h, (adj_height, dx, dy))
+
+        return water
+
