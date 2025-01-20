@@ -1,0 +1,1 @@
+../all/2661-first-completely-painted-row-or-column.py
