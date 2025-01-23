@@ -76,3 +76,39 @@ class Solution:
 
         return connected
 
+
+'''
+count by rows and scan servers which is single in a row but
+can be grouped with servers in the same column.
+'''
+
+
+class Solution:
+    def countServers(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        col_counts = [0] * n  # index: col
+        # it indicates there's a single server if value != -1.
+        row_last_server = [-1] * m  # index: row, value: col
+
+        connected = 0
+
+        # connect all servers in a row
+        for i, row in enumerate(grid):
+            row_server_count = 0
+            for j, cell in enumerate(row):
+                if cell:
+                    row_server_count += 1
+                    col_counts[j] += 1
+                    row_last_server[i] = j
+            if row_server_count > 1:
+                connected += row_server_count
+                row_last_server[i] = -1
+
+        # count server which is the only server in a row
+        # and there're more servers in the same column.
+        for j in row_last_server:
+            if j != -1 and col_counts[j] > 1:
+                connected += 1
+
+        return connected
+
