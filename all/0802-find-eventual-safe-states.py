@@ -43,3 +43,32 @@ class Solution:
         # return all nodes with zero indegree
         return [i for i, incomings in enumerate(indegree) if incomings == 0]
 
+
+'''
+2025/01/24 daily challenge
+
+topological sort on a reversed graph (same to the previous submission)
+'''
+
+
+import collections
+
+
+class Solution:
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        rev = [list() for _ in range(len(graph))]
+        outdegrees = [0] * len(graph)
+        for i, next_hops in enumerate(graph):
+            for node in next_hops:
+                rev[node].append(i)
+            outdegrees[i] = len(next_hops)
+        
+        q = collections.deque([i for i, v in enumerate(outdegrees) if v == 0])
+        while q:
+            node = q.popleft()
+            for prev_node in rev[node]:
+                outdegrees[prev_node] -= 1
+                if outdegrees[prev_node] == 0:
+                    q.append(prev_node)
+        return [i for i, v in enumerate(outdegrees) if v == 0]
+
