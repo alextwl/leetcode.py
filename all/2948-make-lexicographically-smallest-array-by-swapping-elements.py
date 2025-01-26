@@ -5,6 +5,18 @@ sorting + grouping approach
 
 learnt from official editorial:
 https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/editorial/
+
+property: if a can swap with b and b can swap with c,
+then a can eventually be swapped with c.
+
+intuition: we split the sorted array into one or multiple groups,
+and any elements in the same group can swap freely.
+
+assign group numbers to each element (position) in the original array,
+and then rebuild the array by group.
+in the rearrangement of each position of original array,
+the smallest unused element of its group is
+popped and inserted to the original array.
 '''
 
 
