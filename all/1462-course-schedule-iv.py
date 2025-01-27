@@ -30,3 +30,25 @@ class Solution:
 
         return [u in deps[v] for u, v in queries]
 
+
+'''
+modified Floyd Warshall algorithm
+
+time=O(n**3), it's feasible because numCourses <= 100.
+'''
+
+
+class Solution:
+    def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        is_prereq = [[False] * numCourses for _ in range(numCourses)]
+
+        for a, b in prerequisites:
+            is_prereq[a][b] = True
+
+        for node in range(numCourses):
+            for u in range(numCourses):
+                for v in range(numCourses):
+                    is_prereq[u][v] |= is_prereq[u][node] and is_prereq[node][v]
+
+        return [is_prereq[u][v] for u, v in queries]
+
