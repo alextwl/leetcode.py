@@ -1,0 +1,1 @@
+../all/1752-check-if-array-is-sorted-and-rotated.py
