@@ -1,0 +1,1 @@
+../all/1790-check-if-one-string-swap-can-make-strings-equal.py
