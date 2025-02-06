@@ -1,0 +1,1 @@
+../all/1726-tuple-with-same-product.py
