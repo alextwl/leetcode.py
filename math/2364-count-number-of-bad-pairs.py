@@ -1,0 +1,1 @@
+../all/2364-count-number-of-bad-pairs.py
