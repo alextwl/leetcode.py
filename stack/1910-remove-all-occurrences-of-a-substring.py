@@ -1,0 +1,1 @@
+../all/1910-remove-all-occurrences-of-a-substring.py
