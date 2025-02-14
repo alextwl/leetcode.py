@@ -1,0 +1,1 @@
+../all/1352-product-of-the-last-k-numbers.py
