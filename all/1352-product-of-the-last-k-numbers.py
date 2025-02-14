@@ -30,3 +30,32 @@ class ProductOfNumbers:
             return 0
         return self.overall // self.prefix[j]
 
+
+'''
+optimized ver
+
+reset the product instead of counting zeroes.
+'''
+
+
+class ProductOfNumbers:
+    def __init__(self):
+        self.prefix = [1]       # prefix product
+        self.overall = 1        # overall product
+
+    def add(self, num: int) -> None:
+        if num:
+            # non-zero product
+            self.overall *= num
+            self.prefix.append(self.overall)
+        else:
+            # zero occured, reset the prefix
+            self.prefix = [1]
+            self.overall = 1
+
+    def getProduct(self, k: int) -> int:
+        j = len(self.prefix) - k - 1
+        if j < 0:
+            return 0
+        return self.overall // self.prefix[j]
+
