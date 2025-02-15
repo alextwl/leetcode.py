@@ -1,0 +1,1 @@
+../all/2698-find-the-punishment-number-of-an-integer.py
