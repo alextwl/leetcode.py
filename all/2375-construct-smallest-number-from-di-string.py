@@ -66,13 +66,13 @@ class Solution:
         arr = []
         stack = []
 
-        # iterate from the smallest number,
+        # iterate from the smallest number (so it's naturally increasing),
         # delay the placement of number when encountering 'D' pattern
         # to ensure the lexicographical order is smallest.
         for idx in range(n + 1):
             stack.append(idx + 1)  # since idx is 0-indexed, push the next number
 
-            # LIFO: pop all stack elements and push it to arr
+            # pop all stack elements and push it to arr
             # when we reach the end or encounter the increasing pattern.
             if idx == n or pattern[idx] == 'I':
                 while stack:
