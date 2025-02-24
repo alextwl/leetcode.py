@@ -5,6 +5,14 @@ depth first search + breadth first search approach
 
 do DFS for bob, record arrival depth for each node,
 and then BFS for alice.
+
+note the constraints:
+ * edges.length == n - 1
+ * edges represents a valid tree
+
+a tree is also an acyclic undirected graph,
+so there's no cycle, no orphaned node,
+and the path from bob to node 0 is single & fixed.
 '''
 
 
