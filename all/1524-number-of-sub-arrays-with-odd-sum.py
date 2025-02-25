@@ -51,3 +51,39 @@ class Solution:
                 evens += 1
         return odds * evens % 1_000_000_007
 
+
+'''
+dynamic programming approach (bottom-up ver)
+'''
+
+
+class Solution:
+    def numOfSubarrays(self, arr: List[int]) -> int:
+        n = len(arr)
+
+        #dp0/dp1[i] = count of even/odd sum subarrays ending at arr[i]
+        dp0 = [0] * n
+        dp1 = [0] * n
+
+        # init from the last element of arr
+        if arr[-1] & 1:
+            dp1[-1] = 1
+        else:
+            dp0[-1] = 1
+
+        for i in range(n - 2, -1, -1):
+            if arr[i] & 1:
+                # current element: an odd number
+                # (current + previous even sum subarrays) and current itself are new odd sum subarrays
+                dp1[i] = (dp0[i+1] + 1) % 1_000_000_007
+                # current + previous odd sum subarrays = equal number of even sum subarrays
+                dp0[i] = dp1[i+1]
+            else:
+                # current element: an even number
+                # (current + previous odd sum subarrays) and current itself are new even sum subarrays
+                dp0[i] = (dp0[i+1] + 1) % 1_000_000_007
+                # current + previous odd sum subarrays = equal number of odd sum subarrays
+                dp1[i] = dp1[i+1]
+
+        return sum(dp1) % 1_000_000_007
+
