@@ -29,3 +29,25 @@ class Solution:
             ans = ans % 1_000_000_007
         return ans
 
+
+'''
+simplified ver
+'''
+
+
+class Solution:
+    def numOfSubarrays(self, arr: List[int]) -> int:
+        ans = 0
+        # counters of parity of prefix sum
+        odds = 0
+        evens = 1  # initial zero sum is also an even sum
+        prefix_sum = 0
+
+        for v in arr:
+            prefix_sum += v
+            if prefix_sum & 1:
+                odds += 1
+            else:
+                evens += 1
+        return odds * evens % 1_000_000_007
+
