@@ -56,3 +56,42 @@ class Solution:
 
         return ans if ans > 2 else 0
 
+
+'''
+two pointers + dynamic programming approach
+
+learnt from official editorial 3:
+https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/editorial/#approach-3-optimized-dynamic-programming
+'''
+
+
+class Solution:
+    def lenLongestFibSubseq(self, arr: List[int]) -> int:
+        n = len(arr)
+        v2i = {v: i for i, v in enumerate(arr)}
+        # dp[x][y] = the length of fibonacci subsequence ending with [..., x, y].
+        dp = [[0] * n for _ in range(n)]
+
+        ans = 0
+        for i2 in range(2, n):
+            x2 = arr[i2]
+
+            # two pointer to search eligible pairs
+            i0 = 0  # left
+            i1 = i2 - 1  # right
+            while i0 < i1:
+                x0x1 = arr[i0] + arr[i1]
+                if x0x1 > x2:
+                    i1 -= 1
+                elif x0x1 < x2:
+                    i0 += 1
+                else:
+                    # eligible pair found
+                    dp[i1][i2] = dp[i0][i1] + 1
+                    ans = max(ans, dp[i1][i2])
+                    # continue shrinking the window
+                    # because there may be more eligible pairs
+                    i0 += 1
+                    i1 -= 1
+        return ans + 2 if ans else 0
+
