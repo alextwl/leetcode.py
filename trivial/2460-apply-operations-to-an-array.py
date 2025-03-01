@@ -1,0 +1,1 @@
+../all/2460-apply-operations-to-an-array.py
