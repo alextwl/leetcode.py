@@ -54,3 +54,34 @@ class Solution:
                 return False
         return True
 
+
+'''
+bitwise (3-ary, ternary) approach
+
+learnt from official editorial 3:
+https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/editorial/#approach-3-ternary-representation
+
+consider the powers of 3 in ternary form:
+
+3**0 = 1
+3**1 = 10
+3**2 = 100
+3**3 = 1000
+... and so on.
+
+we can see any valid sum has only 0 or 1's bits in ternary:
+
+e.g. n = 91 = 3**0 + 3**2 + 3**4 = 10101 in ternary
+
+so if we can find any 2's bit, the input number is not a sum of powers of three.
+'''
+
+
+class Solution:
+    def checkPowersOfThree(self, n: int) -> bool:
+        while n:
+            n, rem = divmod(n, 3)
+            if rem == 2:
+                return False
+        return True
+
