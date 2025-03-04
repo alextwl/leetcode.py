@@ -32,6 +32,13 @@ math + greedy method approach
 always pick the power up in the descending order.
 
 actually we cannot skip any power in each round or we cannot form the sum.
+
+formula by official editorial 2:
+3**0 + 3**1 + ... + 3**(n-1) = (3**n - 1) / 2 < 3**n
+https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/editorial/#approach-2-optimized-iterative-approach
+
+also see
+https://en.wikipedia.org/wiki/Perfect_totient_number#Multiples_and_powers_of_three
 '''
 
 
