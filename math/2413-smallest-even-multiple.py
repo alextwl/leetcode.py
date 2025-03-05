@@ -1,0 +1,1 @@
+../all/2413-smallest-even-multiple.py
