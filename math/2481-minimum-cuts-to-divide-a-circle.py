@@ -1,0 +1,1 @@
+../all/2481-minimum-cuts-to-divide-a-circle.py
