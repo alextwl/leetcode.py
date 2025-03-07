@@ -39,3 +39,42 @@ class Solution:
 
         return closest
 
+
+'''
+twin prime shortcut approach
+
+learnt from official editorial 2:
+https://leetcode.com/problems/closest-prime-numbers-in-range/editorial/#approach-2-analyze-distance-between-twin-primes
+
+also see:
+https://en.wikipedia.org/wiki/Twin_prime
+'''
+
+
+class Solution:
+    def closestPrimes(self, left: int, right: int) -> List[int]:
+        def is_prime(p):
+            for div in range(2, int(p**0.5) + 1):
+                if p % div == 0:
+                    return False
+            return True
+
+        prev = 0
+        min_diff = float('inf')
+        closest = (-1, -1)
+        for v in range(max(2, left), right + 1):
+            if v > 2 and v & 1 == 0:
+                # skip even numbers (except 2)
+                continue
+            if is_prime(v):
+                # we can return it immediately if it's a twin prime.
+                if prev:
+                    if v <= prev + 2:
+                        return [prev, v]
+                    diff = v - prev
+                    if diff < min_diff:
+                        min_diff = diff
+                        closest = (prev, v)
+                prev = v
+        return closest
+
