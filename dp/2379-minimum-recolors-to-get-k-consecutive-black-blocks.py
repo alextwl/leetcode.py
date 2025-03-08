@@ -1,0 +1,1 @@
+../all/2379-minimum-recolors-to-get-k-consecutive-black-blocks.py
