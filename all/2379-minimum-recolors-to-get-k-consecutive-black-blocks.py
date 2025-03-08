@@ -36,3 +36,36 @@ class Solution:
             return recolor
         return dfs(0, 0)
 
+
+'''
+k-length sliding window approach
+'''
+
+
+class Solution:
+    def minimumRecolors(self, blocks: str, k: int) -> int:
+        it = iter(blocks)
+        # build a k-length window
+        w = 0  # number of white blocks to be recolored
+        for _ in range(k):
+            if next(it) == 'W':
+                w += 1
+        # b = k - w
+        min_recolors = w
+
+        # slide the window
+        i = 0
+        for c in it:
+            if c == 'W':
+                w += 1
+            # else:
+            #     b += 1
+            if blocks[i] == 'W':
+                w -= 1
+            # else:
+            #     b -= 1
+            if w < min_recolors:
+                min_recolors = w
+            i += 1
+        return min_recolors
+
