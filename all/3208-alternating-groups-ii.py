@@ -25,3 +25,35 @@ class Solution:
             j += 1
         return groups
 
+
+'''
+one-pass (without window) approach
+
+count the length of contiguous tiles and
+calculate the number of alternating groups directly.
+'''
+
+
+class Solution:
+    def numberOfAlternatingGroups(self, colors: List[int], k: int) -> int:
+        n = len(colors)
+        seq_len = 1
+        prev = colors[0]
+
+        ans = 0
+
+        # instead of using double-length array, we extend the iteration only (k-1) tiles.
+        for i in range(1, n + k - 1):
+            tile = colors[i % n]
+            if prev == tile:
+                # consecutive tiles of alt group broken, reset the length.
+                seq_len = 0
+
+            seq_len += 1
+            # consecutive tiles of length m form (m-k+1) alt groups.
+            if seq_len >= k:
+                ans += 1
+            prev = tile
+
+        return ans
+
