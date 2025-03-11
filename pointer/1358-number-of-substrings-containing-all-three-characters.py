@@ -1,0 +1,1 @@
+../all/1358-number-of-substrings-containing-all-three-characters.py
