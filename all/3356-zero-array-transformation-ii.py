@@ -37,3 +37,37 @@ class Solution:
                 l = mid + 1
         return l
 
+
+'''
+line sweeping approach
+
+learnt from official editorial 2:
+https://leetcode.com/problems/zero-array-transformation-ii/editorial/#approach-2-line-sweep
+
+iterate through nums and apply enough queries to difference array.
+'''
+
+
+class Solution:
+    def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
+        k = 0  # the counter of applied queries
+        diff = [0] * (len(nums) + 1)
+        delta = 0
+        m = len(queries)
+
+        for i, v in enumerate(nums):
+            # apply queries until nums[i] equals zero
+            while v > delta + diff[i]:
+                # apply next query to the difference array
+                k += 1
+                if k > m:
+                    return -1
+
+                a, b, w = queries[k-1]
+                # no need to proceed the query if its range was prior to nums[i].
+                if b >= i:
+                    diff[max(a, i)] += w
+                    diff[b+1] -= w
+            delta += diff[i]
+        return k
+
