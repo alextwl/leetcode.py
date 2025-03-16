@@ -24,3 +24,27 @@ class Solution:
                 l = mid + 1
         return l
 
+
+'''
+min heap approach
+
+pick workers with the smallest cost of time.
+'''
+
+
+import collections
+import heapq
+
+
+class Solution:
+    def repairCars(self, ranks: List[int], cars: int) -> int:
+        h = [(r, r, 1, v) for r, v in collections.Counter(ranks).items()]  # (time for next repair, rank, next car, freq)
+        heapq.heapify(h)
+
+        while cars > 0:
+            t, r, cnt, f = h[0]
+            cars -= f  # there're f workers with the same rank, fixing f cars simutaneously.
+            cnt += 1
+            heapq.heapreplace(h, (r * cnt * cnt, r, cnt, f))
+        return t  # total time costed by the last group of workers is the ans
+
