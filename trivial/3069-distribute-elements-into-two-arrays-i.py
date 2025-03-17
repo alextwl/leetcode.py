@@ -1,0 +1,1 @@
+../all/3069-distribute-elements-into-two-arrays-i.py
