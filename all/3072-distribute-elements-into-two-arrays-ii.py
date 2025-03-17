@@ -48,3 +48,51 @@ class Solution:
 
         return arr1 + arr2
 
+
+'''
+yet another binary search approach
+
+implement greaterCount() with non-increasing sorted lists.
+'''
+
+
+class Solution:
+    def resultArray(self, nums: List[int]) -> List[int]:
+        def greaterCount(arr, val):
+            # a non-increasing sorted arr is required
+            # binary search
+            l, r = 0, len(arr) - 1
+            while l <= r:
+                mid = (l + r) // 2
+                if arr[mid] > val:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+            # the position val to be inserted into is
+            # also the count of elements greater than val.
+            return l
+
+        it = iter(nums)
+        arr1 = [next(it)]
+        s1 = arr1.copy()  # non-increasing sorted arr1
+        arr2 = [next(it)]
+        s2 = arr2.copy()  # non-increasing sorted arr2
+
+        for v in it:
+            cnt1 = greaterCount(s1, v)
+            cnt2 = greaterCount(s2, v)
+            if cnt1 > cnt2:
+                arr1.append(v)
+                s1.insert(cnt1, v)
+            elif cnt1 < cnt2:
+                arr2.append(v)
+                s2.insert(cnt2, v)
+            elif len(arr1) > len(arr2):
+                arr2.append(v)
+                s2.insert(cnt2, v)
+            else:
+                arr1.append(v)
+                s1.insert(cnt1, v)
+
+        return arr1 + arr2
+
