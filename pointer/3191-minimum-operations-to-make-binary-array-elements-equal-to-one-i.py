@@ -1,0 +1,1 @@
+../all/3191-minimum-operations-to-make-binary-array-elements-equal-to-one-i.py
