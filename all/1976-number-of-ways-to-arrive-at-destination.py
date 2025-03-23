@@ -44,3 +44,45 @@ class Solution:
 
         return dp[0]
 
+
+'''
+simplified top-down ver
+'''
+
+
+import heapq
+
+
+class Solution:
+    def countPaths(self, n: int, roads: List[List[int]]) -> int:
+        dp = [0] * n
+        shortest = [float('inf')] * n
+        dp[0] = 1
+        shortest[0] = 0
+
+        g = {u: dict() for u in range(n)}
+        for u, v, t in roads:
+            g[u][v] = t
+            g[v][u] = t
+        
+        h = [(0, 0)]  # [(path_len, dst)]
+        
+        term = n - 1
+        while h:
+            path_len, dst = heapq.heappop(h)
+
+            # shortcut: skip path longer than terminal's
+            if path_len > shortest[term]:
+                continue
+            
+            for next_hop, t in g[dst].items():
+                t += path_len
+                if t == shortest[next_hop]:
+                    dp[next_hop] = (dp[dst] + dp[next_hop]) % 1_000_000_007
+                elif t < shortest[next_hop]:
+                    dp[next_hop] = dp[dst]
+                    shortest[next_hop] = t
+                    heapq.heappush(h, (t, next_hop))
+
+        return dp[-1]
+
