@@ -1,0 +1,1 @@
+../all/3394-check-if-grid-can-be-cut-into-sections.py
