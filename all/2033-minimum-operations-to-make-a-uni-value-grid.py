@@ -44,3 +44,71 @@ class Solution:
 
         return ops
 
+
+'''
+prefix/suffix sums approach
+
+iterate all elements by calculating total difference to it as an uni-value,
+and minimize the difference.
+
+the equation can be optimized with sorted array and prefix/suffix sums.
+
+assume arr[i] is an uni-value, the equation of total difference is:
+
+            arr[i] - arr[0]         arr[i] - arr[i-1]
+left_diff = --------------- + ... + -----------------
+                   x                       x
+            arr[i] * i - (arr[0] + arr[1] + ... + arr[i-1])
+          = -----------------------------------------------
+                                 x
+            arr[i] * i - prefix[i]
+          = ----------------------
+                       x
+
+             arr[n-1] - arr[i]         arr[i+1] - arr[i]
+right_diff = ----------------- + ... + -----------------
+                     x                         x
+             (arr[n-1] + arr[n-2] + ... + arr[i+1]) - arr[i] * (n - i - 1)
+           = -------------------------------------------------------------
+                                         x
+             suffix[i] - arr[i] * (n - i - 1)
+           = --------------------------------
+                            x
+
+the minimal number of operations = min((left_diff + right_diff) // x for each element in arr)
+'''
+
+
+class Solution:
+    def minOperations(self, grid: List[List[int]], x: int) -> int:
+        arr = []
+        for row in grid:
+            arr.extend(row)
+        
+        arr.sort()
+        n = len(arr)
+
+        # prefix & suffix sums (excluding current val for each position)
+        prefix = [0] * n
+        suffix = [0] * n
+        curr_sum = 0
+        rem = arr[0] % x
+        for i, v in enumerate(arr):
+            if v % x != rem:
+                return -1
+            prefix[i] = curr_sum
+            curr_sum += v
+        curr_sum = 0
+        for i, v in enumerate(reversed(arr), start=1):
+            suffix[-i] = curr_sum
+            curr_sum += v
+        
+        min_diff = float('inf')
+        # find the uni-value by minimizing the total difference
+        for i in range(n):
+            left_diff = (arr[i] * i - prefix[i])
+            right_diff = (suffix[i] - arr[i] * (n - i - 1))
+            min_diff = min(min_diff, left_diff + right_diff)
+        
+        return min_diff // x
+
