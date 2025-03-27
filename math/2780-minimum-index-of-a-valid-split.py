@@ -1,0 +1,1 @@
+../all/2780-minimum-index-of-a-valid-split.py
