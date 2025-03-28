@@ -1,0 +1,1 @@
+../all/2503-maximum-number-of-points-from-grid-queries.py
