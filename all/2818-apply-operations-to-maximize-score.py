@@ -134,3 +134,44 @@ class Solution:
             k -= ops
         return ans
 
+
+'''
+pre-build prime score list in global approach
+'''
+
+
+# pre-build prime scores in the range of [0, 10**5]
+SCORES = [0] * 100_001
+for i in range(2, 100_001):
+    if SCORES[i] == 0:
+        for j in range(i, 100_001, i):
+            SCORES[j] += 1
+
+
+class Solution:
+    def maximumScore(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+
+        # build infos of the relative dominants for later subarray selections.
+        next_dom = [n] * n  # next dominants of nums
+        prev_dom = [-1] * n  # previous dominants of nums
+
+        # monotonic stack in prime score decreasing order
+        stack = []  # indices of prime scores
+        for i, v in enumerate(nums):
+            while stack and SCORES[nums[stack[-1]]] < SCORES[v]:
+                next_dom[stack.pop()] = i
+            if stack:
+                prev_dom[i] = stack[-1]
+            stack.append(i)
+
+        sorted_nums = [(i, v) for i, v in enumerate(nums)]
+        sorted_nums.sort(key=lambda x: -x[1])
+        ans = 1
+        # count scores
+        for i, v in sorted_nums:
+            ops = min(k, (next_dom[i] - i) * (i - prev_dom[i]))
+            ans = (ans * pow(v, ops, 1_000_000_007)) % 1_000_000_007
+            k -= ops
+        return ans
+
