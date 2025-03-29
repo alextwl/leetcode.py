@@ -124,23 +124,13 @@ class Solution:
                 prev_dom[i] = stack[-1]
             stack.append(i)
 
-        # power() helper with 10**9-7 modulo
-        def power_mod(base, exp):
-            ret = 1
-            while exp:
-                if exp & 1:
-                    ret = (ret * base) % 1_000_000_007
-                base = (base * base) % 1_000_000_007
-                exp //= 2
-            return ret
-
         sorted_nums = [(i, v) for i, v in enumerate(nums)]
         sorted_nums.sort(key=lambda x: -x[1])
         ans = 1
         # count scores
         for i, v in sorted_nums:
             ops = min(k, (next_dom[i] - i) * (i - prev_dom[i]))
-            ans = (ans * power_mod(v, ops)) % 1_000_000_007
+            ans = (ans * pow(v, ops, 1_000_000_007)) % 1_000_000_007
             k -= ops
         return ans
 
