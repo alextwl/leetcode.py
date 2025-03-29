@@ -1,0 +1,1 @@
+../all/2818-apply-operations-to-maximize-score.py
