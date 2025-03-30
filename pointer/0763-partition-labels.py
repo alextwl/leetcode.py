@@ -1,0 +1,1 @@
+../all/0763-partition-labels.py
