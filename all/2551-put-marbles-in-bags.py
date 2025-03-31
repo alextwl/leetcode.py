@@ -1,5 +1,6 @@
 '''
 2023/07/08 daily challenge
+2025/03/31 daily challenge
 
 sorting approach
 
@@ -38,4 +39,34 @@ class Solution:
             ans += next(max_it) - next(min_it)
 
         return ans
+
+
+'''
+sorting + sum diff approach
+
+the score of distribution is the sum of bag scores which consist of
+weights of left & right bounds, it's equivalent to
+
+"1st marble + marbles in the both sides of split points + last marble",
+
+so that we can change the problem to
+
+max(k-1 split point scores) - min(k-1 split point scores).
+
+no need to count 1st & last marbles because the diff cancels it eventually.
+'''
+
+
+import itertools
+
+
+class Solution:
+    def putMarbles(self, weights: List[int], k: int) -> int:
+        if k == 1 or k == len(weights):
+            # shortcut for speedup
+            return 0
+        n = len(weights)
+        split_points = [a + b for a, b in itertools.pairwise(weights)]
+        split_points.sort()
+        return sum(split_points[-k+1:]) - sum(split_points[:k-1])
 
