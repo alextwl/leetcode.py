@@ -1,5 +1,6 @@
 '''
 2023/05/12 daily challenge
+2025/04/01 daily challenge
 
 dynamic programming approach (bottom-up)
 
@@ -39,4 +40,22 @@ class Solution:
             dp[i] = max(points, dp[i+1])
 
         return dp[0]
+
+
+'''
+top-down ver
+'''
+
+
+class Solution:
+    def mostPoints(self, questions: List[List[int]]) -> int:
+        n = len(questions)
+        dp = [0] * (n + 1)
+
+        for i, (pt, skips) in enumerate(questions):
+            dp[i + 1] = max(dp[i + 1], dp[i])
+            j = min(n, i + skips + 1)
+            dp[j] = max(dp[j], dp[i] + pt)
+
+        return dp[-1]
 
