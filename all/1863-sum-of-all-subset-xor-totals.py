@@ -1,5 +1,6 @@
 '''
 2024/05/20 daily challenge
+2025/04/05 daily challenge
 
 backtracing approach
 '''
@@ -38,4 +39,23 @@ class Solution:
         for v in nums:
             ans |= v
         return ans << (n - 1)
+
+
+'''
+brute force approach
+
+the input range is small, we can generate all possible subsets
+and summarize its XOR values.
+'''
+
+
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        prev_xors = [0]  # existed subsets
+        for v in nums:
+            curr_xors = []
+            for x in prev_xors:
+                curr_xors.append(x ^ v)
+            prev_xors.extend(curr_xors)
+        return sum(prev_xors)
 
