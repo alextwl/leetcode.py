@@ -67,3 +67,40 @@ class Solution:
 
         return max(dp, key=len)
 
+
+'''
+yet another top-down ver
+'''
+
+
+class Solution:
+    def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
+        dp = {}  # dp[subset_len] = [subset_1, subset_2, ...]
+        nums.sort()
+
+        max_len = 1
+        it = iter(nums)
+        dp[1] = [[next(it)]]
+
+        for v in it:
+            appended = False
+            # try to find existed largest subset and append it.
+            for sub_len in range(max_len, 0, -1):
+                next_len = sub_len + 1
+                for sub_list in dp[sub_len]:
+                    if v % sub_list[-1] == 0:
+                        if next_len > max_len:
+                            max_len = next_len
+                            dp[next_len] = [sub_list + [v]]
+                        else:
+                            dp[next_len].append(sub_list + [v])
+                        appended = True
+                        break
+                if appended:
+                    break
+                # add a new subset of only v itself.
+                if sub_len == 1:
+                    dp[1].append([v])
+        # return the first (any) largest subset
+        return dp[max_len][0]
+
