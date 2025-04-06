@@ -1,5 +1,6 @@
 '''
 2024/02/09 daily challenge
+2025/04/06 daily challenge
 
 dynamic programming approach (recursive ver)
 
@@ -42,4 +43,27 @@ class Solution:
                 ans = sub
 
         return ans
+
+
+'''
+dynamic programming approach (bottom-up ver)
+'''
+
+
+class Solution:
+    def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        nums.sort()
+
+        dp = [[v] for v in nums]
+
+        for i in range(n - 2, -1, -1):
+            div = nums[i]
+            max_subset = []
+            for j in range(i + 1, n):
+                if len(dp[j]) > len(max_subset) and nums[j] % div == 0:
+                    max_subset = dp[j]
+            dp[i].extend(max_subset)
+
+        return max(dp, key=len)
 
