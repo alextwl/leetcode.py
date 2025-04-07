@@ -71,3 +71,62 @@ class Solution:
 
         return dp[half]
 
+
+'''
+bitwise knapsack approach
+
+consider the previous approach,
+the inner loop is actually doing shiftings to the right side of dp space,
+we can simplify it by bitwise operations.
+
+for example of [1,5,11], half=11.
+
+dp[0] = True  # base case
+dp == [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+   == 0b1
+
+i=0, v=1:
+dp[11] ... dp[2] remain False.
+dp[1] = dp[1] | dp[0] = False | True = True
+dp == [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+   == (0b1 << 1) | 1 == 0b11
+
+i=1, v=5:
+dp[11] ... dp[7] remain False
+dp[6] = dp[6] | dp[6-5] = False | True = True
+dp[5] = dp[5] | dp[5-5] = True
+dp == [1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, ...
+   == (0b11 << 5) | 0b11 = 0b0b110011
+
+i=2, v=11:
+dp[11] = dp[11] | dp[11-11] = False | True = True
+dp == [1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, ...
+   == (0b110011 << 11) | 0b0b110011
+   == 0b11001100000110011
+
+i=3, v=5:
+dp[11] = True
+dp[10] = dp[10] | dp[10-5] = False | True = True
+dp[9] ... dp[7] remain False
+dp[6], dp[5] remain True
+dp == [1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, ...
+   == (0b11001100000110011 << 5) | 0b11001100000110011
+   == 0b1100111001111001110011
+
+the answer is dp[11] == bool(0b1100111001111001110011 & (1 << 11)).
+'''
+
+
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        total = sum(nums)
+        if total & 1:
+            return False
+        half = total >> 1
+
+        dp = 1
+        for v in nums:
+            dp |= dp << v
+        
+        return (dp & (1 << half)) > 0
+
