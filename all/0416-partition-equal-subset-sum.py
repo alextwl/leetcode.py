@@ -46,3 +46,28 @@ class Solution:
         full_sum = sum(nums)
         return full_sum & 1 == 0 and isSubsetValid(full_sum >> 1, 0)
 
+
+'''
+2025/04/07 daily challenge
+
+knapsack + dynamic programming approach
+'''
+
+
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        total = sum(nums)
+        if total & 1:
+            return False
+        half = total >> 1
+
+        # dp[i] = availability of subset sum i.
+        dp = [False] * (total + 1)
+        dp[0] = True  # base case: not picking any number
+
+        for v in nums:
+            for curr_sum in range(half, v - 1, -1):
+                dp[curr_sum] = dp[curr_sum] or dp[curr_sum - v]
+
+        return dp[half]
+
