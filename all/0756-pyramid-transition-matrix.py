@@ -41,3 +41,37 @@ class Solution:
 
         return dfs(bottom)
 
+
+'''
+simplified DFS (backtracking ver)
+
+search from left to right, bottom to top.
+'''
+
+
+import collections
+
+
+class Solution:
+    def pyramidTransition(self, bottom: str, allowed: List[str]) -> bool:
+        pat = collections.defaultdict(list)
+        for a, b, c in allowed:
+            pat[(a, b)].append(c)
+        
+        def dfs(curr_row, next_row):
+            i = len(next_row)
+            if i == len(curr_row) - 1:
+                if i == 1:
+                    # top of pyramid reached
+                    return True
+                # continue building the next row
+                return dfs(next_row, [])
+            # search adjacent cells
+            for next_adj in pat[(curr_row[i], curr_row[i+1])]:
+                next_row.append(next_adj)
+                if dfs(curr_row, next_row):
+                    return True
+                next_row.pop()
+            return False
+        return dfs(bottom, [])
+
