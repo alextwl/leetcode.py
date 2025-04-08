@@ -1,0 +1,1 @@
+../all/0756-pyramid-transition-matrix.py
