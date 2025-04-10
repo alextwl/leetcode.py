@@ -1,0 +1,1 @@
+../all/2999-count-the-number-of-powerful-integers.py
