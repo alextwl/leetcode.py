@@ -1,0 +1,1 @@
+../all/3272-find-the-count-of-good-integers.py
