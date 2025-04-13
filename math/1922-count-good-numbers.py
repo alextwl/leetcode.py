@@ -1,0 +1,1 @@
+../all/1922-count-good-numbers.py
