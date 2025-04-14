@@ -1,0 +1,1 @@
+../all/1534-count-good-triplets.py
