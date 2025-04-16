@@ -1,0 +1,1 @@
+../all/2537-count-the-number-of-good-subarrays.py
