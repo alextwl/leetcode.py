@@ -1,5 +1,6 @@
 '''
 2022/10/18 daily challenge
+2025/04/18 daily challenge
 
 intuitive approach.
 
@@ -50,3 +51,31 @@ class Solution:
             last_c2s = c2s(last_c2s)
         
         return ''.join(map(str, last_c2s))  # say the digit string.
+
+
+'''
+recursion approach
+'''
+
+
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        if n == 1:
+            return "1"
+
+        s = self.countAndSay(n - 1)
+        prev = s[0]
+        cnt = 0
+        t = []
+        for c in s:
+            if c != prev:
+                t.append(str(cnt))
+                t.append(prev)
+                prev = c
+                cnt = 1
+            else:
+                cnt += 1
+        t.append(str(cnt))
+        t.append(prev)
+        return ''.join(t)
+
