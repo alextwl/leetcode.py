@@ -5,6 +5,9 @@ combinatorial + dynamic programming approach
 
 learnt from official editorial:
 https://leetcode.com/problems/count-the-number-of-ideal-arrays/editorial/
+
+good explanation to read:
+https://leetcode.com/problems/count-the-number-of-ideal-arrays/solutions/6675762/explaining-the-editorial-by-kosievdmerwe-gvhh/
 '''
 
 
