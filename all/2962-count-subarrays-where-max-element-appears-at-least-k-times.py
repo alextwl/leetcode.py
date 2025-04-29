@@ -1,5 +1,6 @@
 '''
 2024/03/29 daily challenge
+2925/04/29 daily challenge
 
 sliding window approach
 
@@ -33,4 +34,28 @@ class Solution:
             count += left
 
         return count
+
+
+'''
+frequency + index tracking approach
+
+learnt from official editorial 2:
+https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/editorial/#approach-2-track-indexes-of-max-element
+'''
+
+
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        max_val = max(nums)
+        max_val_indices = []
+
+        ans = 0
+        for i, val in enumerate(nums):
+            if val == max_val:
+                max_val_indices.append(i)
+
+            if len(max_val_indices) >= k:
+                ans += max_val_indices[-k] + 1
+
+        return ans
 
