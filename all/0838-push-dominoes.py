@@ -1,5 +1,6 @@
 '''
 2022/09/27 daily challenge
+2025/05/02 daily challenge
 
 intuitive: calculate the distances from L & R dominoes
 time=O(3n), space=O(2n)
@@ -65,3 +66,48 @@ class Solution:
                 ans.append(domino)
         
         return ''.join(ans)
+
+
+'''
+finite state machine approach
+'''
+
+
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+        stack = []
+        prev_state = '.'
+        uprights = 0  # count of dominos whose states are to be determined.
+
+        for c in dominoes:
+            if c == '.':
+                uprights += 1
+            elif c == 'L':
+                if prev_state == 'R':
+                    # find the centre domino where force is going to be balanced
+                    quo, rem = uprights >> 1, uprights & 1
+                    stack.append('R' * quo)
+                    if rem: stack.append('.')
+                    stack.append('L' * quo)
+                else:
+                    stack.append('L' * uprights)
+                uprights = 0
+                prev_state = 'L'
+                stack.append('L')
+            else:
+                # c == 'R':
+                if uprights:
+                    if prev_state == 'R':
+                        stack.append('R' * uprights)
+                        uprights = 0
+                    else:
+                        stack.append('.' * uprights)
+                        uprights = 0
+                prev_state = 'R'
+                stack.append('R')
+
+        if uprights:
+            stack.append(('R' if prev_state == 'R' else '.') * uprights)
+
+        return ''.join(stack)
+
