@@ -1,0 +1,1 @@
+../all/1128-number-of-equivalent-domino-pairs.py
