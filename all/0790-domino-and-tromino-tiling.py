@@ -1,5 +1,6 @@
 '''
 2022/12/24 daily challenge
+2025/05/05 daily challenge
 
 dynamic programming approach
 
@@ -87,4 +88,31 @@ class Solution:
             t0 = (t1 + d2) % MODULO
 
         return d0
+
+
+'''
+faster formula ver
+
+dp[n] = dp[n-1] + dp[n-2] + (dp[n-3] + ... + dp[0]) * 2
+      = dp[n-1] + dp[n-3] + (dp[n-2] + dp[n-3] + (dp[n-4] + ... + dp[0]) * 2))
+                            |                                                |
+                            +--- this part can be translated into dp[n-1] ---+
+      = dp[n-1] + dp[n-3] + dp[n-1]
+      = dp[n-3] + dp[n-1] * 2
+'''
+
+
+class Solution:
+    def numTilings(self, n: int) -> int:
+        if n < 3:
+            return n
+
+        p3, p2, p1 = 1, 1, 2
+
+        ans = 0
+        for _ in range(3, n + 1):
+            ans = (p3 + p1 * 2) % 1_000_000_007
+            p3, p2, p1 = p2, p1, ans
+
+        return ans
 
