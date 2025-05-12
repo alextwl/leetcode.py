@@ -1,0 +1,1 @@
+../all/2094-finding-3-digit-even-numbers.py
