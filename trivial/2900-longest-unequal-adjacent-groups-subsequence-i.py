@@ -1,0 +1,1 @@
+../all/2900-longest-unequal-adjacent-groups-subsequence-i.py
