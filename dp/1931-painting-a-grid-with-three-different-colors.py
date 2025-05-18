@@ -1,0 +1,1 @@
+../all/1931-painting-a-grid-with-three-different-colors.py
