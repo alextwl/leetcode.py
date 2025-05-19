@@ -1,0 +1,1 @@
+../all/3024-type-of-triangle.py
