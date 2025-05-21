@@ -54,3 +54,37 @@ class Solution:
         
         return
 
+
+'''
+2025/05/21 daily challenge
+
+set approach
+
+runtime=3ms, space=O(m+n)
+'''
+
+
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        m, n = len(matrix), len(matrix[0])
+        row_set = set()
+        col_set = set()
+
+        for i, row in enumerate(matrix):
+            for j, val in enumerate(row):
+                if val == 0:
+                    row_set.add(i)
+                    col_set.add(j)
+
+        zero_row = [0] * n
+        for i in row_set:
+            matrix[i] = zero_row
+        for j in col_set:
+            for row in matrix:
+                row[j] = 0
+
+        return
+
