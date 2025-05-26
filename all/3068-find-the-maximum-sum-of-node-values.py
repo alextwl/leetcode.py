@@ -13,6 +13,10 @@ u & v modified while all nodes between them are unchanged
 due to the nature of XOR operation.
 
 [u ^ k, p1 ^ k ^ k, ..., pn ^ k ^ k, v ^ k] = [u ^ k, p1, ..., pn, v ^ k]
+
+note: why we need to apply XOR on even nodes?
+because each XOR operation affects both two terminal nodes of an edge.
+we cannot just apply XOR operations on odd number of nodes.
 '''
 
 import functools
