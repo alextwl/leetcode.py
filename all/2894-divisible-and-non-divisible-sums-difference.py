@@ -32,3 +32,16 @@ class Solution:
         l = n // m
         return (n * (n+1) // 2) - (m * l + m * (l * (l-1)) // 2) * 2
 
+
+'''
+yet another easier ver
+
+m + 2*m + 3*m + ... + l*m = (l * (l + 1) // 2) * m
+'''
+
+
+class Solution:
+    def differenceOfSums(self, n: int, m: int) -> int:
+        l = n // m
+        return (n * (n+1) // 2) - m * l * (l+1)
+
