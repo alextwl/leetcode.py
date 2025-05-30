@@ -44,3 +44,48 @@ class Solution:
 
         return ans
 
+
+'''
+single loop ver
+
+since each node has at most 1 outgoing edge,
+we can run BFS from both node1 & node2 by single loop simultaneously
+without the need to estimate the distance.
+'''
+
+
+class Solution:
+    def closestMeetingNode(self, edges: List[int], node1: int, node2: int) -> int:
+        a, b = node1, node2
+        seen1, seen2 = set(), set()
+
+        # traverse from both node1 & node2 simultaneously.
+        while a != -1 or b != -1:
+            # cycle detection
+            if a in seen1:
+                a = -1
+            if b in seen2:
+                b = -1
+
+            # visit nodes
+            if a != -1:
+                seen1.add(a)
+            if b != -1:
+                seen2.add(b)
+
+            # check if both nodes already reached from another sources
+            if a in seen2 and b in seen1:
+                return min(a, b)  # node with smaller index prevails
+            if a in seen2:
+                return a
+            if b in seen1:
+                return b
+
+            # go to next nodes
+            if a != -1:
+                a = edges[a]
+            if b != -1:
+                b = edges[b]
+        # not found
+        return -1
+
