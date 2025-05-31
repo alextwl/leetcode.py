@@ -1,5 +1,6 @@
 '''
 2023/01/24 daily challenge
+2025/05/31 daily challenge
 
 breadth first search approach
 '''
@@ -46,4 +47,47 @@ class Solution:
                     q.append((jumpFrom.get(label, label), moves))
 
         return minMoves.get(n2, -1)
+
+
+'''
+level order traversal approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def snakesAndLadders(self, board: List[List[int]]) -> int:
+        # flatten the board (serialize into 1D array)
+        n = len(board)
+        n2 = n * n
+        arr = [0]
+        rev = 0
+        for row in reversed(board):
+            if rev:
+                arr += row[::-1]
+            else:
+                arr += row
+            rev ^= 1
+
+        # BFS
+        q = collections.deque([1])
+        visited = set()
+        dice_rolls = 1
+        while q:
+            width = len(q)
+            for _ in range(width):
+                node = q.popleft()
+                if node in visited:
+                    continue
+                visited.add(node)
+                for next_hop in range(node + 1, min(node + 6, n2) + 1):
+                    if arr[next_hop] != -1:
+                        next_hop = arr[next_hop]
+                    if next_hop == n2:
+                        return dice_rolls
+                    q.append(next_hop)
+            dice_rolls += 1
+        return -1
 
