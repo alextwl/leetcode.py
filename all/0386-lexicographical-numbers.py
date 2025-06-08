@@ -1,5 +1,6 @@
 '''
 2024/09/21 daily challenge
+2025/06/08 daily challenge
 
 depth first search approach
 '''
@@ -26,4 +27,28 @@ class Solution:
             dfs(i)
 
         return ans
+
+
+'''
+backtracking without recursive function
+'''
+
+
+class Solution:
+    def lexicalOrder(self, n: int) -> List[int]:
+        ret = []
+        v = 1
+        # flatten the sequence of DFS calls
+        # since there're n numbers, we'll visit & append the ans n times exactly
+        for _ in range(n):
+            ret.append(v)
+            if (next_num := v * 10) <= n:
+                v = next_num
+            else:
+                if v >= n:
+                    v //= 10
+                v += 1
+                while v % 10 == 0:
+                    v //= 10
+        return ret
 
