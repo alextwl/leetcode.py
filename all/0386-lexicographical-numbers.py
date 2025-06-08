@@ -45,10 +45,8 @@ class Solution:
             if (next_num := v * 10) <= n:
                 v = next_num
             else:
-                if v >= n:
+                while v >= n or v % 10 == 9:
                     v //= 10
                 v += 1
-                while v % 10 == 0:
-                    v //= 10
         return ret
 
