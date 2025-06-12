@@ -1,0 +1,1 @@
+../all/3423-maximum-difference-between-adjacent-elements-in-a-circular-array.py
