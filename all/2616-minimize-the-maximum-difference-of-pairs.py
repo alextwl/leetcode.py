@@ -1,5 +1,6 @@
 '''
 2023/08/09 daily challenge
+2025/06/13 daily challenge
 
 binary search + greedy approach
 
@@ -66,4 +67,29 @@ class Solution:
                 left = mid + 1
 
         return left
+
+
+'''
+dynamic programming approach (time limit exceeded)
+
+learnt from the equation of recurrence relation in hint 3.
+'''
+
+
+class Solution:
+    def minimizeMax(self, nums: List[int], p: int) -> int:
+        nums.sort()
+        n = len(nums)
+        dp = [0] * n
+        prev_dp = [0] * (n + 1)
+
+        for pair_size in range(1, p + 1):
+            p_range = list(range(n - 2 * pair_size, 2 * (p - pair_size) - 1, -1))
+            dp[p_range[0] + 1] = float('inf')  # workaround for the 1st iteration
+            for i in p_range:
+                # fn(i, x)
+                dp[i] = min(dp[i+1], max(nums[i+1] - nums[i], prev_dp[i+2]))
+            dp, prev_dp = prev_dp, dp
+
+        return prev_dp[0]  # fn(0, p)
 
