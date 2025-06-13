@@ -80,16 +80,30 @@ class Solution:
     def minimizeMax(self, nums: List[int], p: int) -> int:
         nums.sort()
         n = len(nums)
+        # dp[i] = f(i, x) the minimum max diff of x pairs starting from nums[i]
         dp = [0] * n
+        # prev_dp[i] = f(i, x-1) the minimum max diff of (x - 1) pairs starting from nums[i]
+        # one extra value is workaround for the 1st iteration
         prev_dp = [0] * (n + 1)
 
+        # build answer from 1 pair to p pairs.
         for pair_size in range(1, p + 1):
+            # manipulate indices of possible values for new pairs
             p_range = list(range(n - 2 * pair_size, 2 * (p - pair_size) - 1, -1))
             dp[p_range[0] + 1] = float('inf')  # workaround for the 1st iteration
             for i in p_range:
-                # fn(i, x)
+                '''
+                dp in two cases:
+
+                f(i, x) = min(skip nums[i] as a value of the first new pair,
+                              equation with the 1st new pair including nums[i])
+                        = min(f(i+1, x),
+                              max(nums[i+1] - nums[i], f(i+2, x-1))
+                              )
+                '''
                 dp[i] = min(dp[i+1], max(nums[i+1] - nums[i], prev_dp[i+2]))
             dp, prev_dp = prev_dp, dp
 
-        return prev_dp[0]  # fn(0, p)
+        # f(0, p) is the answer
+        return prev_dp[0]
 
