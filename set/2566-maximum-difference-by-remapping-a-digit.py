@@ -1,0 +1,1 @@
+../all/2566-maximum-difference-by-remapping-a-digit.py
