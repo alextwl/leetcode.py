@@ -1,0 +1,1 @@
+../all/3405-count-the-number-of-arrays-with-k-matching-adjacent-elements.py
