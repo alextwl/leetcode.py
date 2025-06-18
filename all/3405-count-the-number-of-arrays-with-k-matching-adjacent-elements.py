@@ -8,7 +8,7 @@ https://leetcode.com/problems/count-the-number-of-arrays-with-k-matching-adjacen
 '''
 
 
-MOD = 1_000_000_007
+MOD = 1_000_000_007  # a big prime fits in signed 32-bit integer
 MAX = 100_000
 
 # fact[x] = x!
@@ -32,10 +32,24 @@ def qpow(x, n):
 fact[0] = 1
 for i in range(1, MAX):
     fact[i] = fact[i - 1] * i % MOD
-# Fermat's little theorem:
-# a**p = a (mod p)
-# a**(p-1) = 1 (mod p)
-# a**(p-2) = a**(-1) (mod p)
+'''
+the reason why we need to get an inverse factorial from (1**5)! by
+calculating ((1**5)! % MOD)**(MOD - 2):
+
+Fermat's little theorem:
+if a is an interger, p is a prime, then (a**p - a) is a multiple of p.
+    a**p ≡  a (mod p)
+if a is not divisible by p, then (a**(p-1) - 1) is a multiple of p.
+    a**(p-1) ≡  1 (mod p)
+
+and according to properties from Modular multiplicative inverse &
+Transitivity of Modular arithmetic:
+
+(a**(p-1) - 1) % p = 0
+a**(p-1) % p = 1
+(a**(p-1) % p) / a = 1 / a (mod p)
+a**(p-2) % p = 1 / a (mod p)
+'''
 inv_fact[MAX - 1] = qpow(fact[MAX - 1], MOD - 2)
 for i in range(MAX - 1, 0, -1):
     inv_fact[i - 1] = inv_fact[i] * i % MOD
