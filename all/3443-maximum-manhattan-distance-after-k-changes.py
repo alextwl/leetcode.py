@@ -22,3 +22,36 @@ class Solution:
                            get_distance(ctr['E'], ctr['W'], y))
         return max_dist
 
+
+'''
+optimized ver
+
+learnt from official editorial 2:
+https://leetcode.com/problems/maximum-manhattan-distance-after-k-changes/editorial/#approach-2-overall-solution
+
+modifying k times increases the Manhattan distance by k * 2.
+if total value of the coordinate is lesser than k,
+all decreasing charaters will be modified and
+the Manhattan distance is equal to the string length.
+'''
+
+
+class Solution:
+    def maxDistance(self, s: str, k: int) -> int:
+        x = y = 0
+        max_dist = 0
+        for i, c in enumerate(s):
+            if c == 'N':
+                x += 1
+            elif c == 'S':
+                x -= 1
+            elif c == 'E':
+                y += 1
+            else:
+                y -= 1
+            max_dist = max(max_dist,
+                           min(abs(x) + abs(y) + k * 2,
+                               i + 1)
+                           )
+        return max_dist
+
