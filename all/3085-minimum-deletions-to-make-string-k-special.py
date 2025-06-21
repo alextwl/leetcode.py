@@ -36,3 +36,34 @@ class Solution:
 
         return ans
 
+
+'''
+slightly optimized ver
+
+learnt from official editorial:
+https://leetcode.com/problems/minimum-deletions-to-make-string-k-special/editorial/#approach-hash-table--enumeration
+
+just try to remove any kind of chars without sorting.
+'''
+
+
+import collections
+
+
+class Solution:
+    def minimumDeletions(self, word: str, k: int) -> int:
+        ctr = collections.Counter(word)
+        freqs = ctr.values()
+
+        ans = len(word)
+        for x in freqs:
+            deleted = 0
+            for y in freqs:
+                if x > y:
+                    # delete chars lesser frequent than x
+                    deleted += y
+                elif y > (threshold := x + k):
+                    deleted += y - threshold
+            ans = min(ans, deleted)
+        return ans
+
