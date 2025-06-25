@@ -1,0 +1,1 @@
+../all/2040-kth-smallest-product-of-two-sorted-arrays.py
