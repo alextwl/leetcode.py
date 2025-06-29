@@ -1,5 +1,6 @@
 '''
 2023/05/06 daily challenge
+2025/06/29 daily challenge
 
 binary search approach (same to 0001 two sum.)
 
@@ -12,6 +13,7 @@ from both the original array and sorted array regardless of the order.
 
 and then do two pointer (to get min/max vals) & binary search to calculate the ans.
 '''
+
 
 class Solution:
     def numSubseq(self, nums: List[int], target: int) -> int:
@@ -38,6 +40,11 @@ class Solution:
                 valid subsequences:
                 [1], [1,2], [1,3], [1,2,3]
                 there are 4 subseqs == 2**(right-left)
+
+                in other words, there are 2**(right - left) subsequences,
+                because we make decisions on each value
+                in nums[left+1...right] by including or not including it
+                (2 possible decisions) into a subsequence.
                 '''
                 ans += pow(2, right-left, 1_000_000_007)
                 # we can try to increase the min for the next round.
