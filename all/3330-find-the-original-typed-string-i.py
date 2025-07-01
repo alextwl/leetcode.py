@@ -24,3 +24,20 @@ class Solution:
                 duplicates += running_len - 1
         return duplicates
 
+
+'''
+simpler one-pass ver
+'''
+
+
+import itertools
+
+
+class Solution:
+    def possibleStringCount(self, word: str) -> int:
+        duplicates = 1
+        for prev, curr in itertools.pairwise(word):
+            if prev == curr:
+                duplicates += 1
+        return duplicates
+
