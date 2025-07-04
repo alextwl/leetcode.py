@@ -21,3 +21,23 @@ class Solution:
                 ans = (ans + 1) % 26
         return chr(ord('a') + ans)
 
+
+'''
+super clever math approach
+
+learnt from official editorial 2:
+https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/editorial/#approach-2-mathematics
+'''
+
+
+class Solution:
+    def kthCharacter(self, k: int, operations: List[int]) -> str:
+        ans = 0
+        # reacking k-th char is equivalent to moving forward k-1 chars.
+        k -= 1
+        for i in range(k.bit_length() - 1, -1, -1):
+            if (k >> i) & 1:
+                # shift forward by 2**(t-1) chars, check (t-1)-th bit in (k-1) binary form, and apply (t-1)-th op
+                ans += operations[i]
+        return chr(ord('a') + (ans % 26))
+
