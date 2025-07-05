@@ -40,3 +40,29 @@ class Solution:
 
         return max(rank.values())
 
+
+'''
+set approach
+
+find beginnings of each consecutive subseqnence
+and estimate its length by iterating the entire subsequence.
+'''
+
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        vset = set(nums)
+
+        longest = 0
+        for x in vset:
+            if (x - 1) in vset:
+                continue
+            curr = x
+            sub_len = 1
+            while (curr + 1) in vset:
+                curr += 1
+                sub_len += 1
+            longest = max(longest, sub_len)
+
+        return longest
+
