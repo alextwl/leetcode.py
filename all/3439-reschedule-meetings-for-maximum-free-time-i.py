@@ -38,3 +38,35 @@ class Solution:
 
         return ans
 
+
+'''
+sliding window approach
+'''
+
+
+class Solution:
+    def maxFreeTime(self, eventTime: int, k: int, startTime: List[int], endTime: List[int]) -> int:
+        n = len(startTime)
+        if eventTime == n:
+            return 0
+
+        ans = 0
+        n1 = n - 1
+        k1 = k - 1
+        t = 0  # duration of meetings in the window
+        for i, (t0, t1) in enumerate(zip(startTime, endTime)):
+            t += t1 - t0
+            if i <= k1:
+                left = 0
+            else:
+                left = endTime[i - k]
+            if i == n1:
+                right = eventTime
+            else:
+                right = startTime[i + 1]
+            ans = max(ans, right - left - t)
+            # remove oldest meeting duration out of window
+            if i >= k - 1:
+                t -= endTime[i - k + 1] - startTime[i - k + 1]
+        return ans
+
