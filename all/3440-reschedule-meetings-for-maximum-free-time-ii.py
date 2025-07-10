@@ -53,3 +53,47 @@ class Solution:
 
         return ans
 
+
+'''
+optimized greedy method approach
+
+learnt from official editorial 2:
+https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-ii/editorial/#approach-2-greedy--optimization
+
+scan meetings from both side and track max free slot prior to the current meeting.
+
+time=O(n), space=O(1)
+'''
+
+
+class Solution:
+    def maxFreeTime(self, eventTime: int, startTime: List[int], endTime: List[int]) -> int:
+        n = len(startTime)
+        n1 = n - 1
+
+        ans = 0
+        t1 = 0  # the max duration of previous free slots
+        t_left = 0  # left bound of free slot prior to the current meeting
+
+        t2 = 0  # the max duration of previous free slots (for reverse scans)
+        t_right2 = eventTime  # right bound of free slot next to the current meeting (for reverse scans)
+        for i, (m_left, m_right) in enumerate(zip(startTime, endTime)):
+            t_right = eventTime if i == n1 else startTime[i + 1]
+            duration = m_right - m_left
+            if duration <= t1:
+                ans = max(ans, t_right - t_left)
+            else:
+                ans = max(ans, t_right - t_left - duration)
+            t1 = max(t1, m_left - t_left)
+            t_left = m_right
+
+            # scan reversely by reverse indices only
+            t_left2 = 0 if i == n1 else endTime[n - i - 2]
+            duration = endTime[n - i - 1] - startTime[n - i - 1]
+            if duration <= t2:
+                ans = max(ans, t_right2 - t_left2)
+            t2 = max(t2, t_right2 - endTime[n - i - 1])
+            t_right2 = startTime[n - i - 1]
+
+        return ans
+
