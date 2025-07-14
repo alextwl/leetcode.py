@@ -1,0 +1,1 @@
+../all/1290-convert-binary-number-in-a-linked-list-to-integer.py
