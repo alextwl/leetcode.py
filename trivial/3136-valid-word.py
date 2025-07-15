@@ -1,0 +1,1 @@
+../all/3136-valid-word.py
