@@ -1,0 +1,1 @@
+../all/1003-check-if-word-is-valid-after-substitutions.py
