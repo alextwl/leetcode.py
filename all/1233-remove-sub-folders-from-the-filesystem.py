@@ -1,5 +1,6 @@
 '''
 2024/10/25 daily challenge
+2025/07/19 daily challenge
 
 Trie + recursion approach
 '''
@@ -50,4 +51,22 @@ class Solution:
         traverse(root)
 
         return ans
+
+
+'''
+set approach
+'''
+
+
+class Solution:
+    def removeSubfolders(self, folders: List[str]) -> List[str]:
+        fs = set(folders)
+        for fname in folders:
+            levels = fname.split('/')
+            for i in range(2, len(levels)):
+                parent = '/'.join(levels[:i])
+                if parent in fs:
+                    fs.remove(fname)
+                    break
+        return list(fs)
 
