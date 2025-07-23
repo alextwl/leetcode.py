@@ -23,3 +23,30 @@ class Solution:
 
         return ans
 
+
+'''
+set + bitmasking approach
+'''
+
+
+class Solution:
+    def wordCount(self, startWords: List[str], targetWords: List[str]) -> int:
+        def bitmask(s):
+            v = 0
+            for c in s:
+                v |= 1 << (ord(c) - ord('a'))
+            return v
+        
+        src_set = set()
+        for w in startWords:
+            src_set.add(bitmask(w))
+
+        counts = 0
+        for w in targetWords:
+            orig = bitmask(w)
+            for c in w:
+                if orig ^ bitmask(c) in src_set:
+                    counts += 1
+                    break
+        return counts
+
