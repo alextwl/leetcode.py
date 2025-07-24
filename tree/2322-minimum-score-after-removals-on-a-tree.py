@@ -1,0 +1,1 @@
+../all/2322-minimum-score-after-removals-on-a-tree.py
