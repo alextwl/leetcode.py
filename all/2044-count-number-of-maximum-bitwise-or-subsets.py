@@ -1,5 +1,6 @@
 '''
 2024/10/18 daily challenge
+2025/07/28 daily challenge
 
 dynamic programming approach (nearly TLE)
 
@@ -77,23 +78,21 @@ class Solution:
 '''
 yet another dynamic programming approach (bottom up ver)
 
-runtime:4ms!
+runtime=3ms!
 '''
-
-
-import functools
 
 
 class Solution:
     def countMaxOrSubsets(self, nums: List[int]) -> int:
-        d = {0: 1}  # base case: 1 empty subset
+        dp = {0: 1}  # base case: 1 empty subset
+        max_val = 0
 
         # add each element of nums to existed subsets
         for v in nums:
-            prev_subset_counts = list(d.items()).copy()
-            for mask, cnt in prev_subset_counts:
-                new_mask = mask | v
-                d[new_mask] = d.get(new_mask, 0) + cnt
+            max_val |= v
+            for mask, count in dp.copy().items():
+                mask |= v
+                dp[mask] = dp.get(mask, 0) + count
 
-        return d[functools.reduce(int.__or__, nums)]
+        return dp[max_val]
 
