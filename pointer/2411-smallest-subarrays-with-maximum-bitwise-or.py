@@ -1,0 +1,1 @@
+../all/2411-smallest-subarrays-with-maximum-bitwise-or.py
