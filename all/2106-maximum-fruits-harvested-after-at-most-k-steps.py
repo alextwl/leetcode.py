@@ -2,6 +2,9 @@
 2025/08/03 daily challenge
 
 prefix sum + binary search approach
+
+learnt from official editorial:
+https://leetcode.com/problems/maximum-fruits-harvested-after-at-most-k-steps/editorial/#approach-1-binary-search
 '''
 
 
