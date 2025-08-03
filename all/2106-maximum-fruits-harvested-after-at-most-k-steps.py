@@ -41,3 +41,40 @@ class Solution:
 
         return max_fruits
 
+
+'''
+sliding window + binary search approach
+'''
+
+
+import bisect
+
+
+class Solution:
+    def maxTotalFruits(self, fruits: List[List[int]], startPos: int, k: int) -> int:
+        n = len(fruits)
+
+        # binary search the boundary of the leftest possible window
+        left = bisect.bisect_left(fruits, [startPos - k, float('-inf')])
+        right = bisect.bisect_right(fruits, [startPos, float('inf')])
+
+        window_sum = sum(fruits[i][1] for i in range(left, right))
+        max_fruits = window_sum
+
+        # try to expand right boundary of the window
+        for i in range(right, n):
+            curr_pos, curr_fruits = fruits[i]
+            window_sum += curr_fruits
+
+            if curr_pos - startPos > k:
+                # next position too far, cannot expand boundary
+                break
+
+            # shrink from left (steps including the part of turning around)
+            while min(abs(curr_pos - startPos), abs(startPos - fruits[left][0])) + \
+                    curr_pos - fruits[left][0] > k:
+                window_sum -= fruits[left][1]
+                left += 1
+            max_fruits = max(max_fruits, window_sum)
+        return max_fruits
+
