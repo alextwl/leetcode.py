@@ -1,0 +1,1 @@
+../all/3363-find-the-maximum-number-of-fruits-collected.py
