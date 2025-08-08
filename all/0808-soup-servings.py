@@ -65,17 +65,17 @@ import functools
 class Solution:
     def soupServings(self, n: int) -> float:
         # shortcut for large input, no need to calculate after that threshold
-        if n >= 5000:
+        if n > 4450:
             return 1.0
 
         @functools.cache
         def dp(a, b):
             # a, b are converted multiples of 25 ml
             if a <= 0 and b <= 0:
-                # both soups are used up
+                # both soups are used up (half the probability)
                 return 0.5
             if a <= 0:
-                # type A is empty
+                # type A is used up before B
                 return 1.0
             if b <= 0:
                 # type B is empty
