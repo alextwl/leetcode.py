@@ -1,5 +1,6 @@
 '''
 2023/07/29 daily challenge
+2025/08/08 daily challenge
 
 dynamic programming approach
 
@@ -51,4 +52,39 @@ class Solution:
 
         # start from full soups
         return dp[m][m]
+
+
+'''
+bottom-up dynamic programming approach (recursive)
+'''
+ 
+
+import functools
+
+
+class Solution:
+    def soupServings(self, n: int) -> float:
+        # shortcut for large input, no need to calculate after that threshold
+        if n >= 5000:
+            return 1.0
+
+        @functools.cache
+        def dp(a, b):
+            # a, b are converted multiples of 25 ml
+            if a <= 0 and b <= 0:
+                # both soups are used up
+                return 0.5
+            if a <= 0:
+                # type A is empty
+                return 1.0
+            if b <= 0:
+                # type B is empty
+                return 0.0
+            return (dp(a - 4, b) + \
+                    dp(a - 3, b - 1) + \
+                    dp(a - 2, b - 2) + \
+                    dp(a - 1, b - 3)) / 4.0
+        # multiples of 25 ml with ceiling
+        q = (n + 24) // 25
+        return dp(q, q)
 
