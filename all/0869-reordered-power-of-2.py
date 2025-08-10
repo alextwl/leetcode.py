@@ -1,4 +1,6 @@
 '''
+2025/08/10 daily challenge
+
 list all power of 2's below 10**9 in advance
 and compare amount of digits to find if input was possibly a power of 2.
 
@@ -65,3 +67,19 @@ class Solution2:
         s = list(str(n))
         
         return self.permute(s)
+
+
+'''
+string sorting approach
+'''
+
+
+class Solution:
+    def reorderedPowerOf2(self, n: int) -> bool:
+        sort_digit = lambda v: ''.join(sorted(str(v)))
+        sorted_n = sort_digit(n)
+        for i in range(31):
+            if sort_digit(1 << i) == sorted_n:
+                return True
+        return False
+
