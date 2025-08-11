@@ -1,0 +1,1 @@
+../all/2438-range-product-queries-of-powers.py
