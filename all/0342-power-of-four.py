@@ -1,9 +1,13 @@
 '''
 2022/08/22 daily challenge
+2023/10/23 daily challenge
+2025/08/15 daily challenge
 
 hint: consider any type of occurance of power of 4.
 (positive vs non-positive integers)
 '''
+
+
 class Solution:
     def isPowerOfFour(self, n: int) -> bool:
         if n < 0:
@@ -27,12 +31,21 @@ class Solution:
 
 
 '''
-2023/10/23 daily challenge
-
 oneliner for Python >= 3.10
 '''
+
 
 class Solution:
     def isPowerOfFour(self, n: int) -> bool:
         return n > 0 and n.bit_count() == 1 and n.bit_length() & 1
+
+
+'''
+bitmasking approach
+'''
+
+
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        return n > 0 and n & (n - 1) == 0 and n & 0x55555555 != 0
 
