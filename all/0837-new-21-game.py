@@ -1,5 +1,6 @@
 '''
 2023/05/25 daily challenge
+2025/08/17 daily challenge
 
 dynamic programming + sliding window approach
 '''
@@ -60,4 +61,31 @@ class Solution:
                 window -= dp[i-maxPts]
 
         return ans
+
+
+'''
+yet another dynamic programming + sliding window approach
+
+learnt from official solution:
+https://leetcode.com/problems/new-21-game/editorial/#solution
+'''
+
+
+class Solution:
+    def new21Game(self, n: int, k: int, maxPts: int) -> float:
+        dp = [0] * (n + 1)
+        dp[0] = 1
+
+        # the sum of probability between dp[i-maxPts:k]
+        curr_sum = 1 if k > 0 else 0
+
+        for i in range(1, n + 1):
+            dp[i] = curr_sum / maxPts
+            if i < k:
+                # insufficient points, continue drawing numbers
+                curr_sum += dp[i]
+            if 0 <= (diff := i - maxPts) < k:
+                curr_sum -= dp[diff]
+
+        return sum(dp[k:])
 
