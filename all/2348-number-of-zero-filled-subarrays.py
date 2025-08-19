@@ -1,6 +1,8 @@
 '''
 2023/03/21 daily challenge
+2025/08/19 daily challenge
 '''
+
 
 class Solution:
     def zeroFilledSubarray(self, nums: List[int]) -> int:
@@ -17,5 +19,23 @@ class Solution:
         # increment the last zero subarray if available
         ans += (repeat_zeroes * (repeat_zeroes + 1)) >> 1
 
+        return ans
+
+
+'''
+expand the equation approach
+'''
+
+
+class Solution:
+    def zeroFilledSubarray(self, nums: List[int]) -> int:
+        ans = 0
+        repeat = 0
+        for v in nums:
+            if v == 0:
+                repeat += 1
+                ans += repeat
+            else:
+                repeat = 0
         return ans
 
