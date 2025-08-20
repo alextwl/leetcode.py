@@ -1,5 +1,6 @@
 '''
 2024/10/27 daily challenge
+2025/08/20 daily challenge
 
 dynamic programming approach (top-down ver)
 
@@ -22,10 +23,11 @@ class Solution:
             if matrix[x][y] == 0:
                 return 0
 
+            # count additional squares with the current cell
             xy1 = count(x, y+1)
             x1y1 = count(x+1, y+1)
             x1y = count(x+1, y)
-            return 1 + min(xy1, x1y1, x1y)
+            return 1 + min(xy1, x1y1, x1y)  # itself + additionals
 
         ans = 0
         for i in range(m):
