@@ -1,0 +1,1 @@
+../all/1504-count-submatrices-with-all-ones.py
