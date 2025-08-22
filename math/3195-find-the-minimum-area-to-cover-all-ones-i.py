@@ -1,0 +1,1 @@
+../all/3195-find-the-minimum-area-to-cover-all-ones-i.py
