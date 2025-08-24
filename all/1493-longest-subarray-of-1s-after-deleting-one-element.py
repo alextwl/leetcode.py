@@ -1,8 +1,10 @@
 '''
 2023/07/05 daily challenge
+2025/08/24 daily challenge
 
 sliding window approach
 '''
+
 
 class Solution:
     def longestSubarray(self, nums: List[int]) -> int:
@@ -24,4 +26,29 @@ class Solution:
             return ones - 1  # we must delete 1 element even if there's no zero.
 
         return max(ans, ones)
+
+
+'''
+dynamic programming approach
+'''
+
+
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        longest = 0
+        dp0 = dp1 = 0  #  len([1,1,1,...]), one 0's, len([1,1,1,...])
+
+        for v in nums:
+            if v:
+                dp1 += 1
+            else:
+                longest = max(longest, dp0 + dp1)
+                dp0, dp1 = dp1, 0
+        # summarize last subarray
+        longest = max(longest, dp0 + dp1)
+
+        if longest == len(nums):
+            # must delete one element
+            return len(nums) - 1
+        return longest
 
