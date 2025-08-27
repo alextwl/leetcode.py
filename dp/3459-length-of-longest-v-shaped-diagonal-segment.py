@@ -1,0 +1,1 @@
+../all/3459-length-of-longest-v-shaped-diagonal-segment.py
