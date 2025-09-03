@@ -1,0 +1,1 @@
+../all/3027-find-the-number-of-ways-to-place-people-ii.py
