@@ -1,0 +1,1 @@
+../all/3495-minimum-operations-to-make-array-elements-zero.py
