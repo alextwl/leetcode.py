@@ -1,0 +1,1 @@
+../all/1733-minimum-number-of-people-to-teach.py
