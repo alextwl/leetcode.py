@@ -1,0 +1,1 @@
+../all/1616-split-two-strings-to-make-palindrome.py
