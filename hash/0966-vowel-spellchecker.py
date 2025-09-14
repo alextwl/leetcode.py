@@ -1,0 +1,1 @@
+../all/0966-vowel-spellchecker.py
