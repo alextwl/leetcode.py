@@ -1,0 +1,1 @@
+../all/2197-replace-non-coprime-numbers-in-array.py
