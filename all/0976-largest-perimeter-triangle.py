@@ -1,6 +1,10 @@
 '''
 2022/10/12 daily challenge
+2025/09/28 daily challenge
+
+sorting approach
 '''
+
 
 class Solution:
     def largestPerimeter(self, nums: List[int]) -> int:
@@ -21,3 +25,23 @@ class Solution:
         
         # a triangle of non-zero area is not found.
         return 0
+
+
+'''
+max heap approach
+'''
+
+
+class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        h = [-v for v in nums]
+        heapq.heapify(h)
+        w0 = heapq.heappop(h)
+        w1 = heapq.heappop(h)
+        while h:
+            w2 = heapq.heappop(h)
+            if w0 > w1 + w2:
+                return -(w0 + w1 + w2)
+            w0, w1 = w1, w2
+        return 0
+
