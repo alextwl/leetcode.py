@@ -1,0 +1,1 @@
+../all/1039-minimum-score-triangulation-of-polygon.py
