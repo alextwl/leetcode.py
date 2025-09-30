@@ -1,0 +1,1 @@
+../all/2221-find-triangular-sum-of-an-array.py
