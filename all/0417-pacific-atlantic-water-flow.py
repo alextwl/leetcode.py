@@ -1,5 +1,6 @@
 '''
 2022/08/31 daily challenge
+2025/10/05 daily challenge
 
 idea: search each cells starting from pacific boundary and atlantic boundary,
 and return the union of cells which can be visited from both 2 oceans.
@@ -39,3 +40,36 @@ class Solution:
             self.dfs(heights, m-1, c, flow2atlantic)  # search from south
         
         return list(flow2pacific & flow2atlantic)
+
+
+'''
+breadth first search approach
+
+bfs from shores of two oceans respectively.
+'''
+
+
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        m, n = len(heights), len(heights[0])
+        def bfs(coords):
+            visited = set(coords)
+            while coords:
+                x, y = coords.pop()
+                val = heights[x][y]
+                for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                    dx += x
+                    dy += y
+                    if 0 <= dx < m and 0 <= dy < n and \
+                            heights[dx][dy] >= val and \
+                            (dx, dy) not in visited:
+                        visited.add((dx, dy))
+                        coords.append((dx, dy))
+            return visited
+
+        pacific = bfs([(0, j) for j in range(n)] + [(i, 0) for i in range(1, m)])
+        m1, n1 = m - 1, n - 1
+        atlantic = bfs([(m1, j) for j in range(n)] + [(i, n1) for i in range(0, m1)])
+
+        return list(pacific & atlantic)
+
