@@ -1,5 +1,6 @@
 '''
 2023/04/02 daily challenge
+2025/10/08 daily challenge
 
 binary search approach
 
@@ -59,4 +60,25 @@ class Solution:
             ans[i] = m - left
 
         return ans
+
+
+'''
+prefix sum + bucket sort approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
+        prefix_sum = collections.defaultdict(int)
+        for v in potions:
+            req = (success + v - 1) // v
+            prefix_sum[req] += 1
+        prefix = 0
+        for k in range(min(prefix_sum.keys()), max(spells) + 1):
+            prefix += prefix_sum[k]
+            prefix_sum[k] = prefix
+        return [prefix_sum[sp] for sp in spells]
 
