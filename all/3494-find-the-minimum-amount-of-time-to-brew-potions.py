@@ -23,3 +23,21 @@ class Solution:
                 f[i] = f[i + 1] - skill[i + 1] * x
         return f[-1]
 
+
+'''
+prefix sum approach
+'''
+
+
+import itertools
+
+
+class Solution:
+    def minTime(self, skill: List[int], mana: List[int]) -> int:
+        t = sum(skill) * mana[-1]
+        prefix = list(itertools.accumulate(skill))
+        offset = [0] + prefix[:-1]
+        for v0, v1 in itertools.pairwise(mana):
+            t += max(a * v0 - b * v1 for a, b in zip(prefix, offset))
+        return t
+
