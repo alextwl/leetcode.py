@@ -18,3 +18,20 @@ class Solution:
                 last_ctr = ctr
         return ans
 
+
+'''
+oneliner ver (sorting approach)
+
+groupby functions groups consecutive elements which have the same key,
+and we use sorted function as key mapped from words, iterate only the
+first element returned from each group's iterator.
+'''
+
+
+import itertools
+
+
+class Solution:
+    def removeAnagrams(self, words: List[str]) -> List[str]:
+        return [next(grp_iter) for _, grp_iter in itertools.groupby(words, key=sorted)]
+
