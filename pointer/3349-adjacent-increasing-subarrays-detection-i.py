@@ -1,0 +1,1 @@
+../all/3349-adjacent-increasing-subarrays-detection-i.py
