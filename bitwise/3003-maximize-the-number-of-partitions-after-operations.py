@@ -1,0 +1,1 @@
+../all/3003-maximize-the-number-of-partitions-after-operations.py
