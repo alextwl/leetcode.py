@@ -1,5 +1,6 @@
 '''
 2023/12/06 daily challenge
+2025/10/25 daily challenge
 
 simulation approach
 
@@ -22,4 +23,19 @@ class Solution:
             total += money
 
         return total
+
+
+'''
+slightly simplified ver
+'''
+
+
+class Solution:
+    def totalMoney(self, n: int) -> int:
+        ans = 0
+        quo, rem = divmod(n, 7)
+        for week, sunday in zip(range(quo), range(7, quo+7)):
+            ans += (sunday * (sunday + 1) // 2) - (week * (week + 1) // 2)
+        ans += quo * rem + (rem * (rem + 1)) // 2
+        return ans
 
