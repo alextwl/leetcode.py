@@ -1,0 +1,1 @@
+../all/3354-make-array-elements-equal-to-zero.py
