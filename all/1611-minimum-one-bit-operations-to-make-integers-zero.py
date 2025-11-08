@@ -1,5 +1,6 @@
 '''
 2023/11/30 daily challenge
+2025/11/08 daily challenge
 
 bit manipulation
 
@@ -55,4 +56,28 @@ class Solution:
 
         # f(k) - A(n')
         return (2**(k+1)-1) - self.minimumOneBitOperations(n ^ curr)
+
+
+'''
+Gray code approach
+
+learnt from official editorial 3:
+https://leetcode.com/problems/minimum-one-bit-operations-to-make-integers-zero/editorial/#approach-3-gray-code
+
+the input is treated as a gray code (reflected binary code) and
+the problem actually asks for converting gray code to binary.
+
+equivalent to GrayToBinary32 function on wikipedia:
+https://en.wikipedia.org/wiki/Gray_code#Converting_to_and_from_Gray_code
+'''
+
+
+class Solution:
+    def minimumOneBitOperations(self, n: int) -> int:
+        n ^= n >> 16
+        n ^= n >> 8
+        n ^= n >> 4
+        n ^= n >> 2
+        n ^= n >> 1
+        return n
 
