@@ -1,0 +1,1 @@
+../all/3542-minimum-operations-to-convert-all-elements-to-zero.py
