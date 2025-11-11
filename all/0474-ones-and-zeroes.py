@@ -1,7 +1,7 @@
 '''
 2025/11/11 daily challenge
 
-dynamic programming approach
+bottom-up dynamic programming approach
 '''
 
 
@@ -12,6 +12,9 @@ class Solution:
         for s in strs:
             zeros = s.count('0')
             ones = len(s) - zeros
+            # reverse loop: avoid duplicate picks in the same iteration
+            # (i.e. pick strs[k] up twice in dp[i][j])
+            # see 0/1 knapsack problem
             for i in range(m, zeros - 1, -1):
                 for j in range(n, ones -1, -1):
                     dp[i][j] = max(dp[i-zeros][j-ones] + 1, dp[i][j])
