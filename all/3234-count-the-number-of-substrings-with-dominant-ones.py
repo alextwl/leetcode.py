@@ -22,17 +22,22 @@ class Solution:
         # count valid substrings in s[:i]
         for i, c in enumerate(s, start=1):
             if c == '0':
-                # if last char of s[:i] (that is, s[i - 1]) was zero, count it
+                # the first iteration of while-loop for s[pfx[j]:i] is
+                # s[i-1:i] if last char of s[:i] was zero,
+                # so we need to count it in advance.
                 zeros = 1
             else:
                 zeros = 0
 
             j = i
-            # extend the left bound from s[j:i]
+            # extend the left bound from s[pfx[j]:i]
             while j > 0 and zeros * zeros <= n:
+                # calculate the number of ones in s[pfx[j]:i]
+                # (i - pfx[j]) is the length of s[pfx[j]:i]
                 ones = (i - pfx[j]) - zeros
                 if zeros * zeros <= ones:
                     ans += min(j - pfx[j], ones - zeros * zeros + 1)
+                # count next zero in the left
                 j = pfx[j]
                 zeros += 1
 
