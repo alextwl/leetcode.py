@@ -1,5 +1,6 @@
 '''
 2023/11/14 daily challenge
+2025/11/21 daily challenge
 
 exhaustive method approach (count all letters)
 '''
@@ -19,4 +20,14 @@ class Solution:
             ans += len(center_letters)
 
         return ans
+
+
+'''
+oneliner ver
+'''
+
+
+class Solution:
+    def countPalindromicSubsequence(self, s: str) -> int:
+        return sum(len(set(s[s.index(c)+1:s.rindex(c)])) for c in set(s))
 
