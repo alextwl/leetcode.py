@@ -1,0 +1,1 @@
+../all/1015-smallest-integer-divisible-by-k.py
