@@ -29,6 +29,8 @@ class Solution:
             while q:
                 curr = q.popleft()
                 deg[curr] = 0
+                # add to neighbors if current node's value (or accumulated sum)
+                # is insufficient to form a component with sum k.
                 adds = values[curr] if values[curr] != k else 0
                 for adj in g[curr]:
                     if adds:
@@ -47,7 +49,8 @@ class Solution:
         total_sum = sum(nums)
         for tree_val in range(min(nums), total_sum):
             if total_sum % tree_val == 0 and search(tree_val):
-                print("test %d %d" % (total_sum, tree_val))
+                # the problem asks for max cuts,
+                # so it's the number of components - 1
                 return total_sum // tree_val - 1
         # the whole tree can be single component only. no cut can be made.
         return 0
