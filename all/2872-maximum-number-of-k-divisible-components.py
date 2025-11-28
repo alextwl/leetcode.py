@@ -1,5 +1,6 @@
 '''
 2024/12/21 daily challenge
+2025/11/28 daily challenge
 
 depth first search approach (recursive ver)
 
@@ -69,6 +70,58 @@ class Solution:
             # queue the next node if it becomes a leaf
             if next_node >= 0 and len(g[next_node]) == 1:
                 q.append(next_node)
+
+        return ans
+
+
+'''
+topological sort approach
+
+add remainder to all neighbors if current node value was indivisible.
+'''
+
+
+import collections
+
+
+class Solution:
+    def maxKDivisibleComponents(self, n: int, edges: List[List[int]], values: List[int], k: int) -> int:
+        if n < 2:
+            return 1
+
+        g = {i: set() for i in range(n)}
+        indegree = [0] * n
+        for a, b in edges:
+            g[a].add(b)
+            g[b].add(a)
+            indegree[a] += 1
+            indegree[b] += 1
+
+        ans = 0
+        q = collections.deque(i for i, v in enumerate(indegree) if v == 1)
+        while q:
+            curr = q.popleft()
+            indegree[curr] -= 1
+
+            # value to be added to neighbors
+            # if current node was indivisible by k
+            adds = 0
+            if (rem := values[curr] % k):
+                adds = rem
+            else:
+                # one more valid component found
+                ans += 1
+
+            for adj in g[curr]:
+                if indegree[adj] == 0:
+                    continue
+                indegree[adj] -= 1
+
+                if adds:
+                    values[adj] += adds
+
+                if indegree[adj] == 1:
+                    q.append(adj)
 
         return ans
 
