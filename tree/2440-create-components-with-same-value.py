@@ -1,0 +1,1 @@
+../all/2440-create-components-with-same-value.py
