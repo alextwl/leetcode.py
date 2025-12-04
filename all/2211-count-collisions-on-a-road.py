@@ -34,3 +34,19 @@ class Solution:
                 s = 1
         return ans
 
+
+'''
+two-liner ver
+
+learnt from official editorial 2:
+https://leetcode.com/problems/count-collisions-on-a-road/editorial/#approach-2-counting
+
+all vehicles other than leftmost Ls & rightmost Rs will collide exactly once.
+'''
+
+
+class Solution:
+    def countCollisions(self, directions: str) -> int:
+        arr = directions.lstrip('L').rstrip('R')
+        return len(arr) - arr.count('S')
+
