@@ -60,3 +60,61 @@ class Solution:
 
         return dp[-1]
 
+
+'''
+monotonic stack + sliding window + dynamic programming approach
+
+learnt from official editorial 2:
+https://leetcode.com/problems/count-partitions-with-max-min-difference-at-most-k/editorial/#approach-2-monotonic-queue-optimization
+
+it utilizes two monotonic deque for min/max value tracking in the sliding window.
+also see problem 239 for practicing.
+'''
+
+
+import collections
+
+
+class Solution:
+    def countPartitions(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        dp = [0] * (n + 1)
+        prefix = [0] * (n + 1)
+
+        dp[0] = 1
+        prefix[0] = 1
+
+        # monotonic stacks
+        # nums[q_min[0]] is min val in the window
+        q_min = collections.deque()
+        # nums[q_max[0]] is max val in the window
+        q_max = collections.deque()
+        j = 0
+        for i, v in enumerate(nums):
+            while q_min and nums[q_min[-1]] >= v:
+                # any value larger than nums[i] is no longer relevant
+                q_min.pop()
+            q_min.append(i)
+
+            while q_max and nums[q_max[-1]] <= v:
+                # any value smaller than nums[i] is no longer relevant
+                q_max.pop()
+            q_max.append(i)
+
+            # slide the window
+            while q_min and q_max and nums[q_max[0]] - nums[q_min[0]] > k:
+                # we are shrinking the window from the left side,
+                # but it doesn't always pop from these monotonic queues.
+                # only if the index of min or max value was out of window,
+                # it's popped.
+                if q_min[0] == j:
+                    q_min.popleft()
+                if q_max[0] == j:
+                    q_max.popleft()
+                j += 1
+
+            dp[i + 1] = (prefix[i] - (prefix[j - 1] if j > 0 else 0)) % 1_000_000_007
+            prefix[i + 1] = (prefix[i] + dp[i + 1]) % 1_000_000_007
+
+        return dp[-1]
+

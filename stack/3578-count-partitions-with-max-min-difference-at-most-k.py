@@ -1,0 +1,1 @@
+../all/3578-count-partitions-with-max-min-difference-at-most-k.py
