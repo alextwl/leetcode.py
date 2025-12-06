@@ -34,24 +34,36 @@ class Solution:
             # so dp[i + 1] is actually dp[j] + dp[j + 1] + ... + dp[i].
             #
             # in Example 1 we have nums = [9,4,1,3,7] and k = 4,
-            # when i = 2, j = 1, dp[3] = 2, we have 2 valid partitions:
-            #     [9], [4], [1]
+            # when i = 0, j = 0, dp[1] = 1, we have 1 valid partition:
+            #     [9]
+            # when i = 1, j = 1, dp[2] = 1, we have 1 valid partition:
+            #   derived from dp[1]:
+            #     [9], [4]
+            # when i = 2, j = 1, dp[3] = dp[1] + dp[2] = 2,
+            # we have 2 valid partitions:
+            #   derived from dp[1]:
             #     [9], [4, 1]
-            # when i = 3, j = 1, dp[4] = 4, we have 4 valid partitions:
+            #   derived from dp[2]:
+            #     [9], [4], [1]
+            # when i = 3, j = 1, dp[4] = dp[1] + dp[2] + dp[3] = 4,
+            # we have 4 valid partitions:
+            #   derived from dp[1]:
             #     [9], [4, 1, 3]
+            #   derived from dp[2]:
             #     [9], [4], [1, 3]
+            #   derived from dp[3]:
+            #     [9], [4, 1], [3]
             #     [9], [4], [1], [3]
-            #     [9], [4, 1, 3]
             # when i = 4, j = 3, dp[5] is the final answer,
-            # we have the following partitions with last segment appended
-            #     derived from dp[3]:
-            #     [9], [4], [1], [3, 7]
+            # we have the following partitions with last segment appended:
+            #   derived from dp[3]:
             #     [9], [4, 1], [3, 7]
-            #     derived from dp[4]:
+            #     [9], [4], [1], [3, 7]
+            #   derived from dp[4]:
             #     [9], [4, 1, 3], [7]
             #     [9], [4], [1, 3], [7]
+            #     [9], [4, 1], [3], [7]
             #     [9], [4], [1], [3], [7]
-            #     [9], [4, 1, 3], [7]
             # so dp[5] = dp[3] + dp[4] = 6.
             dp[i + 1] = (prefix[i] - (prefix[j - 1] if j > 0 else 0)) % 1_000_000_007
             # a prefix sum of dp is made for optimization.
