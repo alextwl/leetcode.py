@@ -18,3 +18,27 @@ class Solution:
                         ans += 1
         return ans
 
+
+'''
+counter approach
+
+use the count of middle element to calculate combinations of triplets.
+counter also guarantees pairwise distinct condition by keys.
+the actual values of triplets are not relevant.
+'''
+
+
+import collections
+
+
+class Solution:
+    def unequalTriplets(self, nums: List[int]) -> int:
+        ans = 0
+        left, right = 0, len(nums)  # possible counts of nums[i], nums[k]
+        for cnt in collections.Counter(nums).values():
+            right -= cnt
+            # count of nums[i] * count of nums[j] * count of nums[k]
+            ans += left * cnt * right
+            left += cnt
+        return ans
+
