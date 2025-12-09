@@ -1,0 +1,1 @@
+../all/3583-count-special-triplets.py
