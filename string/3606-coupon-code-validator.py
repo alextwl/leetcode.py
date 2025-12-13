@@ -1,0 +1,1 @@
+../all/3606-coupon-code-validator.py
