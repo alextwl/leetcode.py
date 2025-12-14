@@ -1,7 +1,8 @@
 '''
 2023/11/28 daily challenge
+2025/12/14 daily challenge
 
-combination approach
+combinatorics approach
 
 count plants as a separator and calculate the number of combinations.
 '''
@@ -49,5 +50,37 @@ class Solution:
             # reset the seat count, the last position must be a seat
             seat = 1
 
+        return ans
+
+
+'''
+pointer + while-loop ver for readibility
+'''
+
+
+class Solution:
+    def numberOfWays(self, corridor: str) -> int:
+        seats = corridor.count('S')
+        if seats == 0 or seats & 1:
+            return 0
+        
+        ans = 1  # base case
+        n = len(corridor)
+        i = 0
+        plants = 0
+        while i < n:
+            # install divider for previous section
+            ans = (ans * (plants + 1)) % 1_000_000_007
+            seats = 0
+            # count two seats and skip plants prior to the 2nd seat
+            while i < n and seats < 2:
+                if corridor[i] == 'S':
+                    seats += 1
+                i += 1
+            # count plants
+            plants = 0
+            while i < n and corridor[i] == 'P':
+                plants += 1
+                i += 1
         return ans
 
