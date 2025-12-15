@@ -1,0 +1,1 @@
+../all/2110-number-of-smooth-descent-periods-of-a-stock.py
