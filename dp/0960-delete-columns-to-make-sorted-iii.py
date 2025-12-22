@@ -1,0 +1,1 @@
+../all/0960-delete-columns-to-make-sorted-iii.py
