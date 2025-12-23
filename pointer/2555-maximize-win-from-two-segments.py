@@ -1,0 +1,1 @@
+../all/2555-maximize-win-from-two-segments.py
