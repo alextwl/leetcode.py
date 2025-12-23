@@ -1,5 +1,6 @@
 '''
 2024/12/08 daily challenge
+2025/12/23 daily challenge
 
 dynamic programming + binary search approach (top-down)
 
@@ -84,7 +85,7 @@ class Solution:
 
 
 '''
-greedy method approach
+greedy method approach (line sweep algorithm)
 
 learnt from official solution 3:
 https://leetcode.com/problems/two-best-non-overlapping-events/solution/
@@ -95,6 +96,8 @@ class Solution:
     def maxTwoEvents(self, events: List[List[int]]) -> int:
         tv = []  # (time, flag=1 if it's starttime else 0, value)
 
+        # line sweep: reduce a 2D problem (an event with start/end timestamps)
+        # into simpler 1D problem. (one timestamp for an element in the array)
         for starttime, endtime, value in events:
             tv.append((starttime, 1, value))
             # increase endtime by 1 to ensure it's sorted after all events overlapped by starttime.
