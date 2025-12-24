@@ -18,3 +18,19 @@ class Solution:
                 break
         return boxes
 
+
+'''
+sorting + binary search oneliner
+
+slower than intuitive ver
+'''
+
+
+import bisect
+import itertools
+
+
+class Solution:
+    def minimumBoxes(self, apple: List[int], capacity: List[int]) -> int:
+        return bisect.bisect_left(list(itertools.accumulate(sorted(capacity, reverse=True))), sum(apple)) + 1
+
