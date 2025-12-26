@@ -1,5 +1,6 @@
 '''
 2023/08/29 daily challenge
+2025/12/26 daily challenge
 
 prefix sum + sort approach
 '''
@@ -41,6 +42,8 @@ class Solution:
 
 '''
 onepass ver
+
+it's actually a two-pass because customers.count('Y') runs 1st pass.
 '''
 
 
@@ -74,4 +77,30 @@ class Solution:
                 earliest = i+1  # the earlier hour comes first.
 
         return earliest
+
+
+'''
+suffix sum + prefix sum approach
+'''
+
+
+class Solution:
+    def bestClosingTime(self, customers: str) -> int:
+        suffix_y = [0]
+        for c in reversed(customers):
+            suffix_y.append(suffix_y[-1] + (c == 'Y'))
+        suffix_y.reverse()
+
+        min_penalty = suffix_y[0]
+        ans = 0  # earlist hour to close
+        prefix_n = 0
+        for i, c in enumerate(customers):
+            # i == hour to close
+            penalty = suffix_y[i] + prefix_n
+            if penalty < min_penalty:
+                min_penalty = penalty
+                ans = i
+            if c == 'N':
+                prefix_n += 1
+        return ans if min_penalty <= prefix_n else len(customers)
 
