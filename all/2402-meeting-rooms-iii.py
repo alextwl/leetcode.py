@@ -1,6 +1,7 @@
 '''
 2024/02/18 daily challenge
 2025/07/11 daily challenge
+2025/12/27 daily challenge
 
 min heap approach
 
@@ -42,7 +43,8 @@ class Solution:
             if cnt > max_count:
                 max_count = cnt
                 ans = i
-
+        # oneliner:
+        # return cnt.index(max(cnt))
         return ans
 
 
