@@ -1,8 +1,10 @@
 '''
 2023/06/08 daily challenge
+2025/12/28 daily challenge
 
 time=O(m+n) ver
 '''
+
 
 class Solution:
     def countNegatives(self, grid: List[List[int]]) -> int:
@@ -26,4 +28,26 @@ class Solution:
             negs += (n-1) - bound
 
         return negs
+
+
+'''
+refined linear search ver
+'''
+
+
+class Solution:
+    def countNegatives(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        ans = 0
+        for i, row in enumerate(grid):
+            if row[0] < 0:
+                # shortcut for all-negative rows
+                ans += (m - i) * n
+                break
+            for j, cell in enumerate(row):
+                if cell < 0:
+                    # negative cell found
+                    ans += n - j
+                    break
+        return ans
 
