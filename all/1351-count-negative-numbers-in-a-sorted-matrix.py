@@ -39,15 +39,19 @@ class Solution:
     def countNegatives(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
         ans = 0
+        j = n - 1  # pointer for latest visited column
         for i, row in enumerate(grid):
             if row[0] < 0:
                 # shortcut for all-negative rows
                 ans += (m - i) * n
                 break
-            for j, cell in enumerate(row):
-                if cell < 0:
-                    # negative cell found
-                    ans += n - j
+            # note it's sorted in non-increasing order
+            # both row-wise & column-wise, we reuse the pointer of column
+            # to reduce the complexity to O(m+n).
+            for k in range(j, -1, -1):
+                if row[k] >= 0:
+                    j = k
+                    ans += n - 1 - j
                     break
         return ans
 
