@@ -1,0 +1,1 @@
+../all/0561-array-partition.py
