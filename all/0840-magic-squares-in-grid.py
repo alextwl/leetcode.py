@@ -74,7 +74,7 @@ thus we can find more properties of a magic square:
 (3) each non-corner cell of border must be an odd.
 
 and we can see the border is always in the sequence of
-"2943816729438167" clockwise or anticlockwise,
+"29438167" clockwise or anticlockwise,
 started from any position of the border.
 '''
 
@@ -88,6 +88,7 @@ class Solution:
                 return False
 
             # border sequence
+            # use double-copy sequence for the convenience of matching
             seq = "2943816729438167"
             rev_seq = "7618349276183492"
 
