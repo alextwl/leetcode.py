@@ -1,5 +1,6 @@
 '''
 2023/06/30 daily challenge
+2025/12/31 daily challenge
 
 binary search + breadth first search approach
 '''
@@ -56,6 +57,93 @@ class Solution:
             mid = left + (right - left + 1) // 2
             if isCrossable(mid):
                 # mid day is verified crossable, but not mid + 1
+                left = mid
+            else:
+                right = mid - 1
+
+        return left
+
+
+'''
+binary search + Union-find approach
+
+proceed cells array reversely with Disjoint set
+'''
+
+
+class Solution:
+    def latestDayToCross(self, row: int, col: int, cells: List[List[int]]) -> int:
+        tmpl_parent = None
+        # the last two DSUs are dummy sets for top land row & bottom land row.
+        parent = [i for i in range(row * col + 2)]
+        top_id = row * col
+        bottom_id = top_id + 1
+
+        def find(u):
+            if parent[u] != u:
+                parent[u] = find(parent[u])
+            return parent[u]
+
+        def union(u, v):
+            u, v = find(u), find(v)
+            if u > v:
+                parent[v] = u
+            elif v > u:
+                parent[u] = v
+
+        # build matrix of the latest day
+        grid = [[0] * col for _ in range(row)]
+        for i, j in cells:
+            grid[i-1][j-1] = 1
+        for i, r in enumerate(grid):
+            for j, val in enumerate(r):
+                if not val:
+                    idx = i * col + j
+                    for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                        dx += i
+                        dy += j
+                        if 0 <= dx < row and 0 <= dy < col and not grid[dx][dy]:
+                            union(idx, dx * col + dy)
+        # union top row
+        for j, val in enumerate(grid[0]):
+            if not val:
+                union(top_id, j)
+        # union bottom row
+        for j, val in enumerate(grid[-1], start=(row - 1) * col):
+            if not val:
+                union(bottom_id, j)
+        # make template for union-find structure
+        tmpl_parent = parent
+
+        def is_crossable(day):
+            nonlocal tmpl_parent, parent, top_id, bottom_id
+            nonlocal grid
+
+            parent = tmpl_parent.copy()
+            mat = [r.copy() for r in grid]
+            # recover from water to land reversely
+            for d in range(len(cells) - 1, day - 1, -1):
+                x, y = cells[d]
+                x, y = x - 1, y - 1
+                idx = x * col + y
+                mat[x][y] = 0
+                for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                    dx += x
+                    dy += y
+                    if 0 <= dx < row and 0 <= dy < col and not mat[dx][dy]:
+                        union(idx, dx * col + dy)
+                # remember to union dummy sets if it's in top or bottom row
+                if x == 0:
+                    union(top_id, idx)
+                if x == row - 1:
+                    union(bottom_id, idx)
+            return find(top_id) == find(bottom_id)
+
+        # binary search
+        left, right = 0, len(cells) - 1
+        while left < right:
+            mid = left + (right - left + 1) // 2
+            if is_crossable(mid):
                 left = mid
             else:
                 right = mid - 1
