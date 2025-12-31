@@ -65,7 +65,7 @@ class Solution:
 
 
 '''
-binary search + Union-find approach
+Union-find approach
 
 proceed cells array reversely with Disjoint set
 '''
@@ -73,7 +73,6 @@ proceed cells array reversely with Disjoint set
 
 class Solution:
     def latestDayToCross(self, row: int, col: int, cells: List[List[int]]) -> int:
-        tmpl_parent = None
         # the last two DSUs are dummy sets for top land row & bottom land row.
         parent = [i for i in range(row * col + 2)]
         top_id = row * col
@@ -112,41 +111,25 @@ class Solution:
         for j, val in enumerate(grid[-1], start=(row - 1) * col):
             if not val:
                 union(bottom_id, j)
-        # make template for union-find structure
-        tmpl_parent = parent
 
-        def is_crossable(day):
-            nonlocal tmpl_parent, parent, top_id, bottom_id
-            nonlocal grid
-
-            parent = tmpl_parent.copy()
-            mat = [r.copy() for r in grid]
-            # recover from water to land reversely
-            for d in range(len(cells) - 1, day - 1, -1):
-                x, y = cells[d]
-                x, y = x - 1, y - 1
-                idx = x * col + y
-                mat[x][y] = 0
-                for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-                    dx += x
-                    dy += y
-                    if 0 <= dx < row and 0 <= dy < col and not mat[dx][dy]:
-                        union(idx, dx * col + dy)
-                # remember to union dummy sets if it's in top or bottom row
-                if x == 0:
-                    union(top_id, idx)
-                if x == row - 1:
-                    union(bottom_id, idx)
-            return find(top_id) == find(bottom_id)
-
-        # binary search
-        left, right = 0, len(cells) - 1
-        while left < right:
-            mid = left + (right - left + 1) // 2
-            if is_crossable(mid):
-                left = mid
-            else:
-                right = mid - 1
-
-        return left
+        # recover from water to land reversely
+        for d in range(len(cells) - 1, -1, -1):
+            x, y = cells[d]
+            x, y = x - 1, y - 1
+            idx = x * col + y
+            grid[x][y] = 0
+            for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                dx += x
+                dy += y
+                if 0 <= dx < row and 0 <= dy < col and not grid[dx][dy]:
+                    union(idx, dx * col + dy)
+            # remember to union dummy sets if it's in top or bottom row
+            if x == 0:
+                union(top_id, idx)
+            if x == row - 1:
+                union(bottom_id, idx)
+            if find(top_id) == find(bottom_id):
+                return d
+        # undefined behavior
+        return -1
 
