@@ -1,0 +1,1 @@
+../all/2571-minimum-operations-to-reduce-an-integer-to-0.py
