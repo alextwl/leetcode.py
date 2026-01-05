@@ -2,6 +2,8 @@
 greedy method approach
 
 select smallest for 'I' and largest for 'D' greedily.
+
+(the editorial named it 'Ad-Hoc')
 '''
 
 
