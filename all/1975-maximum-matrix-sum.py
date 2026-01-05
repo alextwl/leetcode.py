@@ -1,5 +1,6 @@
 '''
 2024/11/24 daily challenge
+2026/01/05 daily challenge
 
 consider the amount of negative numbers in the matrix:
 
@@ -12,6 +13,10 @@ consider the amount of negative numbers in the matrix:
 (3) our goal is to maximize the sum,
     if we cannot prevent from having a negative,
     let the minimal absolute number be negative.
+
+(4) besides, if there's a zero value,
+    no matter how many negative numbers exist,
+    all of them can be eventually converted with adjacent zero.
 '''
 
 
