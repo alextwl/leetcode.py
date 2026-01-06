@@ -1,7 +1,8 @@
 '''
 2023/06/15 daily challenge
+2026/01/06 daily challenge
 
-breadth first search approach
+breadth first search (level order traversal) approach
 '''
 
 import collections
