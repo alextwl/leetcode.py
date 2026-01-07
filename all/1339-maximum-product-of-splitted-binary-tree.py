@@ -1,5 +1,6 @@
 '''
 2022/12/10 daily challenge
+2026/01/07 daily challenge
 
 depth first search approach
 
@@ -32,5 +33,6 @@ class Solution:
             y = rootSum - x
             ans = max(ans, x*y)
         
+        # the question asks for modulo only after the product maximized
         return ans % (10**9 + 7)
 
