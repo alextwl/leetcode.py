@@ -1,5 +1,6 @@
 '''
 2023/07/31 daily challenge
+2026/01/10 daily challenge
 
 dynamic programming approach
 
@@ -49,4 +50,40 @@ class Solution:
                                    a2[j-1] + dp[i][j-1])
 
         return dp[m][n]
+
+
+'''
+top-down dynamic programming approach (recursion ver)
+'''
+
+
+import functools
+
+
+class Solution:
+    def minimumDeleteSum(self, s1: str, s2: str) -> int:
+        # convert inputs to ASCII codes in advance
+        a1 = list(map(ord, s1))
+        a2 = list(map(ord, s2))
+
+        # dp(i, j) = min cost for s1[i:] & s2[j:]
+        @functools.cache
+        def dp(i, j):
+            if i == len(a1) and j == len(a2):
+                # base case: empty string == empty string, no removal
+                return 0
+            if i == len(a1):
+                # s1 is empty, remove s2[j] and inherit
+                return a2[j] + dp(i, j + 1)
+            if j == len(a2):
+                # s2 is empty, remove s1[i] and inherit
+                return a1[i] + dp(i + 1, j)
+
+            if a1[i] == a2[j]:
+                # s1[i] == s2[j], keep it.
+                return dp(i + 1, j + 1)
+            # delete s1[i] or s2[j]
+            return min(a1[i] + dp(i + 1, j), a2[j] + dp(i, j + 1))
+
+        return dp(0, 0)
 
