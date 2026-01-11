@@ -1,5 +1,6 @@
 '''
 2024/04/13 daily challenge
+2026/01/11 daily challenge
 
 prefix sum + stack approach
 '''
@@ -35,4 +36,51 @@ class Solution:
                 stack.append(sj)
 
         return max_area
+
+
+'''
+prefix sums + two pointers approach
+'''
+
+
+class Solution:
+    def getLargestArea(self, heights):
+        if not heights:
+            return 0
+
+        n = len(heights)
+        left = [-1] * n
+        right = [n] * n
+
+        # two-way scanning
+        # find left & right bounds of each rectangle
+        for i in range(1, n):
+            prev = i - 1
+            while prev >= 0 and heights[prev] >= heights[i]:
+                prev = left[prev]
+            left[i] = prev
+
+        for i in range(n - 2, -1, -1):
+            prev = i + 1
+            while prev < n and heights[prev] >= heights[i]:
+                prev = right[prev]
+            right[i] = prev
+
+        # find max area of rectangle in matrix[:last_scanned_row+1]
+        return max((r - l - 1) * h for l, r, h in zip(left, right, heights))
+
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        n = len(matrix[0])
+        heights = [0] * n
+
+        ans = 0
+        for row in matrix:
+            for i in range(n):
+                # vertical prefix sum for consecutive 1's in a column
+                if row[i] == '1':
+                    heights[i] = heights[i] + 1
+                else:
+                    heights[i] = 0
+            ans = max(ans, self.getLargestArea(heights))
+        return ans
 
