@@ -1,0 +1,1 @@
+../all/2943-maximize-area-of-square-hole-in-grid.py
