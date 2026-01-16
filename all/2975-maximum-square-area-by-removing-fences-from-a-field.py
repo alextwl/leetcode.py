@@ -33,3 +33,31 @@ class Solution:
             return -1
         return (root * root) % 1_000_000_007
 
+
+'''
+enumeration approach
+
+learnt from official editorial:
+https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/editorial/#approach-enumeration
+
+no need to get length between fences and build prefix sum.
+just get the difference of fences with nested loops and we can have
+all possible lengthes of gaps.
+'''
+
+
+class Solution:
+    def maximizeSquareArea(self, m: int, n: int, hFences: List[int], vFences: List[int]) -> int:
+        def get_gaps(fences, bound):
+            fences.insert(0, 1)
+            fences.append(bound)
+            return {fences[j] - fences[i] for i in range(len(fences)) for j in range(i + 1, len(fences))}
+
+        gset0 = get_gaps(sorted(hFences), m)
+        gset1 = get_gaps(sorted(vFences), n)
+
+        root = max(gset0 & gset1, default=0)
+        if not root:
+            return -1
+        return (root * root) % 1_000_000_007
+
