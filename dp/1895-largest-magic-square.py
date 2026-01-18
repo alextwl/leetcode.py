@@ -1,0 +1,1 @@
+../all/1895-largest-magic-square.py

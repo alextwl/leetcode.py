@@ -1,0 +1,54 @@
+'''
+2026/01/18 daily challenge
+
+prefix sum + exhaustive method approach
+
+build prefix sums for rows & columns,
+and calculate diagonal sums when enumerating each square.
+'''
+
+
+class Solution:
+    def largestMagicSquare(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        hsum = [[0] * (n + 1) for _ in range(m + 1)]
+        vsum = [[0] * (n + 1) for _ in range(m + 1)]
+
+        for i, row in enumerate(grid):
+            hs = 0
+            for j, v in enumerate(row):
+                # horizontal
+                hs += v
+                hsum[i+1][j+1] = hs
+                # vertical
+                vsum[i+1][j+1] = vsum[i][j+1] + v
+        
+        def verify(x, y, k):
+            target = hsum[x+1][y+k] - hsum[x+1][y]
+            # horizontal check
+            for i in range(1, k):
+                if hsum[x+1+i][y+k] - hsum[x+1+i][y] != target:
+                    return False
+            # vertical check
+            for i in range(k):
+                if vsum[x+k][y+1+i] - vsum[x][y+1+i] != target:
+                    return False
+            # slash diagonal check
+            diag_sum = sum(grid[x+i][y+i] for i in range(k))
+            if diag_sum != target:
+                return False
+            # backslash diagonal check
+            diag_sum = sum(grid[x+i][y+k-1-i] for i in range(k))
+            if diag_sum != target:
+                return False
+            return True
+
+        # start from verifying largest edge length
+        for k in range(min(m, n), 1, -1):
+            for x in range(m - k + 1):
+                for y in range(n - k + 1):
+                    if verify(x, y, k):
+                        return k
+
+        return 1
+
