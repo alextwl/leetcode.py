@@ -5,6 +5,9 @@ prefix sum + exhaustive method approach
 
 build prefix sums for rows & columns,
 and calculate diagonal sums when enumerating each square.
+
+similar to problem 840, but there's no shortcut to verify properties
+just by border sequence since elements in a square are not strictly limited.
 '''
 
 
