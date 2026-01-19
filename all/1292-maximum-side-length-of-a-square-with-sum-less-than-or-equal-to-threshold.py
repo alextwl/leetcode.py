@@ -31,3 +31,45 @@ class Solution:
 
         return 0
 
+
+'''
+simplified prefix sums + test side length by increasing order.
+'''
+
+
+class Solution:
+    def maxSideLength(self, mat: List[List[int]], threshold: int) -> int:
+        m, n = len(mat), len(mat[0])
+        # build prefix sums for area
+        psum = [[0] * (n + 1) for _ in range(m + 1)]
+
+        for i, row in enumerate(mat):
+            hs = 0  # current row's prefix sum
+            for j, val in enumerate(row):
+                hs += val
+                # prev row + curr row = (0,0)-to-(i,j)'s area
+                psum[i+1][j+1] = psum[i][j+1] + hs
+
+        if any(v <= threshold for row in mat for v in row):
+            ans = 1
+        else:
+            return 0
+
+        # test square sums
+        for r in range(2, min(m, n) + 1):
+            for i in range(r, m + 1):
+                for j in range(r, n + 1):
+                    # big square from (0,0) - top rectangle -
+                    # left rectangle + top-left rectangle which's removed twice.
+                    square_sum = psum[i][j] - psum[i - r][j] - \
+                                psum[i][j - r] + psum[i - r][j - r]
+                    if square_sum <= threshold:
+                        ans = r
+                        break
+                if ans == r:
+                    break
+            if ans != r:
+                break
+
+        return ans
+
