@@ -1,5 +1,9 @@
 '''
+2026/01/22 daily challenge
+
 brute-force method approach
+
+same to problem 3510.
 '''
 
 
