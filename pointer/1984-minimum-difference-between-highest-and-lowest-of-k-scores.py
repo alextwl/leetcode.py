@@ -1,0 +1,1 @@
+../all/1984-minimum-difference-between-highest-and-lowest-of-k-scores.py
