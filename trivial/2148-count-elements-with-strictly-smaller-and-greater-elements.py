@@ -1,0 +1,1 @@
+../all/2148-count-elements-with-strictly-smaller-and-greater-elements.py
