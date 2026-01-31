@@ -1,5 +1,6 @@
 '''
 2023/06/09 daily challenge
+2026/01/31 daily challenge
 
 binary search approach
 '''
@@ -34,4 +35,17 @@ class Solution:
             return letters[0]
 
         return letters[left]
+
+
+'''
+oneliner ver
+'''
+
+
+import bisect
+
+
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        return letters[bisect.bisect_right(letters, target) % len(letters)]
 
