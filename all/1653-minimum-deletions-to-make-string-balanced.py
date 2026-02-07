@@ -1,5 +1,6 @@
 '''
 2024/07/20 daily challenge
+2026/02/07 daily challenge
 
 count b & a in different directions and minimize the sum of deletions. (3-pass ver)
 '''
@@ -70,4 +71,30 @@ class Solution:
                 dp[i+1] = min(dp[i] + 1, b_cnt)  # min(remove a, keep a)
 
         return dp[-1]
+
+
+'''
+two prefix sums approach
+'''
+
+
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        cnt_a = cnt_b = 0
+        psum_a = [0]
+        psum_b = [0]
+
+        for c in s:
+            if c == 'a':
+                cnt_a += 1
+            else:
+                cnt_b += 1
+            psum_a.append(cnt_a)
+            psum_b.append(cnt_b)
+
+        total_a = psum_a[-1]
+        ans = len(s)
+        for a, b in zip(psum_a, psum_b):
+            ans = min(ans, b + (total_a - a))
+        return ans
 
