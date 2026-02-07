@@ -1,0 +1,1 @@
+../all/2124-check-if-all-as-appears-before-all-bs.py
