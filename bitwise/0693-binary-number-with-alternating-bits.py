@@ -1,0 +1,1 @@
+../all/0693-binary-number-with-alternating-bits.py
