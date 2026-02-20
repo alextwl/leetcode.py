@@ -3,7 +3,7 @@
 
 divide and conquer approach
 
-rearrange every valid prefix recursively,
+rearrange every special substring recursively,
 make every substring in "1...0" form,
 and sort substrings in lexicographically descending order.
 '''
