@@ -1,0 +1,1 @@
+../all/2937-make-three-strings-equal.py
