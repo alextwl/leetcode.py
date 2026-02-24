@@ -1,0 +1,1 @@
+../all/1022-sum-of-root-to-leaf-binary-numbers.py
