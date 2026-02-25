@@ -1,5 +1,6 @@
 '''
 2023/10/30 daily challenge
+2026/02/25 daily challenge
 
 sort by 2 keys
 '''
@@ -51,5 +52,16 @@ class Solution:
             return weight
         
         arr.sort(key=lambda v: (hamming_weight(v), v))
+        return arr
+
+
+'''
+2-key built-in sorting oneliner
+'''
+
+
+class Solution:
+    def sortByBits(self, arr: List[int]) -> List[int]:
+        arr.sort(key=lambda x: (x.bit_count(), x))
         return arr
 
