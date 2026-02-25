@@ -1,0 +1,1 @@
+../all/2427-number-of-common-factors.py
