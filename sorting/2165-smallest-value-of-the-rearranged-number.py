@@ -1,0 +1,1 @@
+../all/2165-smallest-value-of-the-rearranged-number.py
