@@ -1,5 +1,6 @@
 '''
 2024/05/29 daily challenge
+2026/02/26 daily challenge
 
 bitwise simulation approach
 '''
@@ -44,13 +45,20 @@ class Solution:
     def numSteps(self, s: str) -> int:
         steps = 0
         carry = 0
+        # we are actually removing rightmost bit in each iteration.
+        # leftmost setbit is always reserved, we can ignore it.
         for c in reversed(s[1:]):
             digit = int(c) + carry
             if digit & 1:
+                # odd bit, add 1 and divide by 2
                 steps += 2
                 carry = 1
             else:
+                # divide by 2 only
                 steps += 1
 
+        # if carry == 1 when reaching leftmost 1's bit,
+        # we add carry (no operation needed)
+        # and divide by 2 (1 step of operation) to remove it.
         return steps + carry
 
