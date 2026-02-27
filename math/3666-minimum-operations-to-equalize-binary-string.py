@@ -1,0 +1,1 @@
+../all/3666-minimum-operations-to-equalize-binary-string.py
