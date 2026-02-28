@@ -1,8 +1,10 @@
 '''
 2022/09/23 daily challenge
+2026/02/28 daily challenge
 
-intuitive ver
+simulation approach
 '''
+
 
 class Solution:
     def concatenatedBinary(self, n: int) -> int:
@@ -19,3 +21,42 @@ class Solution:
             ans = ((ans << (len(bin(x)) - 2)) + x) % modulo
         
         return ans
+
+
+'''
+recursion ver
+'''
+
+
+MOD = 1_000_000_007
+
+
+class Solution:
+    def concatenatedBinary(self, n: int) -> int:
+        if n == 1:
+            return 1
+        prev = self.concatenatedBinary(n - 1)
+        return ((prev << n.bit_length()) + n) % MOD
+
+
+'''
+lookup table method (LUT) approach
+'''
+
+
+MOD = 1_000_000_007
+TABLE = [0] * 100_001
+
+# pre-compute all answers
+curr = 0
+# max bit length of input (10**5) is 17.
+for sup in range(1, 18):
+    for v in range(1 << (sup - 1), min(1 << sup, 100_001)):
+        curr = ((curr << sup) | v) % MOD
+        TABLE[v] = curr
+
+
+class Solution:
+    def concatenatedBinary(self, n: int) -> int:
+        return TABLE[n]
+
