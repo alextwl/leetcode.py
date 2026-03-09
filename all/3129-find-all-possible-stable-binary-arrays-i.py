@@ -5,6 +5,10 @@ dynamic programming approach
 
 learnt from official editorial:
 https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/editorial/#approach-dynamic-programming
+
+note the 3rd constraint actually says:
+*NO* subarrays of arr with a size greater than limit contain only 0 or 1,
+so we need to prevent from building any consecutive 0s or 1s with size > limit.
 '''
 
 
