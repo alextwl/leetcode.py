@@ -2,6 +2,8 @@
 2024/08/22 daily challenge
 
 bitwise and & shift approach
+
+same to problem 1009.
 '''
 
 
