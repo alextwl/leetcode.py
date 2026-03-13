@@ -1,0 +1,1 @@
+../all/3296-minimum-number-of-seconds-to-make-mountain-height-zero.py
