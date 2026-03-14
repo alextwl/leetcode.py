@@ -1,5 +1,6 @@
 '''
 2025/02/19 daily challenge
+2026/03/14 daily challenge
 
 backtracking + exhaustive approach
 
@@ -89,4 +90,32 @@ class Solution:
                 k -= mid
 
         return ''.join(arr)
+
+
+'''
+stack approach
+'''
+
+
+class Solution:
+    def getHappyString(self, n: int, k: int) -> str:
+        stack = [""]  # init with empty string
+        i = 0
+
+        while stack:
+            curr_str = stack.pop()
+            if len(curr_str) == n:
+                i += 1
+                if i == k:
+                    return curr_str
+                continue
+
+            # append the last char in reversed order
+            # so the lexicographical larger string will be proceeded first
+            # in stack.
+            for c in "cba":
+                if not curr_str or curr_str[-1] != c:
+                    stack.append(curr_str + c)
+
+        return ""
 
