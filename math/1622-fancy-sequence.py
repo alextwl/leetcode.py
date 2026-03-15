@@ -1,0 +1,1 @@
+../all/1622-fancy-sequence.py
