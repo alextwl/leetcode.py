@@ -1,0 +1,1 @@
+../all/1878-get-biggest-three-rhombus-sums-in-a-grid.py
