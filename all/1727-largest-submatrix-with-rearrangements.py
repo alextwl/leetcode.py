@@ -1,5 +1,6 @@
 '''
 2023/11/26 daily challenge
+2026/03/17 daily challenge
 
 sorting + input modification approach
 
@@ -74,4 +75,36 @@ class Solution:
             prev_desc_row = curr_desc_row
 
         return max_area
+
+
+'''
+sort heights for each row ver
+'''
+
+
+class Solution:
+    def largestSubmatrix(self, matrix: List[List[int]]) -> int:
+        m, n = len(matrix), len(matrix[0])
+
+        ans = 0
+        # accumulated number of consecutive 1's for each column
+        prev_row = [0] * n
+        for row in matrix:
+            curr_row = row[:]
+            # build count of consecutive 1's for each column at the current row
+            for j, (prev, curr) in enumerate(zip(prev_row, row)):
+                if curr != 0:
+                    curr_row[j] += prev
+            # sort heights in descending order
+            desc_row = sorted(curr_row, reverse=True)
+            # maximize area of submatrix with current row as its bottom edge
+            for width, height in enumerate(desc_row, start=1):
+                if not height:
+                    # cannot form a submatrix, no need to search further.
+                    break
+                ans = max(ans, width * height)
+
+            prev_row = curr_row
+
+        return ans
 
