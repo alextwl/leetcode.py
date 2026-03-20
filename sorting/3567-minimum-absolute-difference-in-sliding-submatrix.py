@@ -1,0 +1,1 @@
+../all/3567-minimum-absolute-difference-in-sliding-submatrix.py
