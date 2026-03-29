@@ -1,0 +1,1 @@
+../all/1366-rank-teams-by-votes.py
