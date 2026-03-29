@@ -1,0 +1,1 @@
+../all/2839-check-if-strings-can-be-made-equal-with-operations-i.py
