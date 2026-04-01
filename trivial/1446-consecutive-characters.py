@@ -1,0 +1,1 @@
+../all/1446-consecutive-characters.py
