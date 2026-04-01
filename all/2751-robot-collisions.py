@@ -1,5 +1,6 @@
 '''
 2024/07/13 daily challenge
+2026/04/01 daily challenge
 
 sorting + stack approach
 
@@ -47,4 +48,39 @@ class Solution:
         survived.sort()
 
         return [hp for _, hp in survived]
+
+
+'''
+sort only the indices by position values + stack approach
+'''
+
+
+class Solution:
+    def survivedRobotsHealths(self, positions: List[int], healths: List[int], directions: str) -> List[int]:
+        n = len(positions)
+        # sort positions' indices by position values
+        indices = sorted(range(n), key=lambda x: positions[x])
+
+        stack = []  # robots moving in right direction
+        for i in indices:
+            if directions[i] == 'R':
+                stack.append(i)
+            else:
+                # robot moving to left found, check collisions
+                while stack and healths[i] > 0:
+                    if healths[stack[-1]] < healths[i]:
+                        # prev robot loses
+                        healths[stack.pop()] = 0
+                        healths[i] -= 1
+                    elif healths[stack[-1]] > healths[i]:
+                        # current robot loses
+                        healths[stack[-1]] -= 1
+                        healths[i] = 0
+                    else:
+                        # both robots eliminated
+                        healths[stack.pop()] = 0
+                        healths[i] = 0
+        # the problem asks for the health of remaining robots in the order
+        # they were given, so just return only positive values of healths[].
+        return [h for h in healths if h > 0]
 
