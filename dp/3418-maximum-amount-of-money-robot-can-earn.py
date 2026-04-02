@@ -1,0 +1,1 @@
+../all/3418-maximum-amount-of-money-robot-can-earn.py
