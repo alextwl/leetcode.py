@@ -1,0 +1,1 @@
+../all/3661-maximum-walls-destroyed-by-robots.py
