@@ -1,0 +1,1 @@
+../all/3653-xor-after-range-multiplication-queries-i.py
