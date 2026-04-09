@@ -1,7 +1,10 @@
 '''
 2026/04/09 daily challenge
 
-multiplicative difference array + optimized 1/v approach
+square root decomposition + multiplicative difference array + optimized 1/v approach
+
+learnt from official editorial:
+https://leetcode.com/problems/xor-after-range-multiplication-queries-ii/editorial/#approach-square-root-decomposition--difference-array
 
 same to problem 3653 with larger input
 '''
@@ -16,13 +19,22 @@ MOD = 1_000_000_007
 class Solution:
     def xorAfterQueries(self, nums: List[int], queries: List[List[int]]) -> int:
         n = len(nums)
+        root = int(n ** 0.5 + 1e-7)
 
         # convert queries to key=(k, remainder) -> (multiplicand start, end, v)
         qd = collections.defaultdict(lambda: collections.defaultdict(list))
         for l, r, k, v in queries:
-            start, rem = divmod(l, k)
-            end = (r - rem) // k
-            qd[k][rem].append((start, end, v))
+            if k <= root:
+                start, rem = divmod(l, k)
+                end = (r - rem) // k
+                qd[k][rem].append((start, end, v))
+            else:
+                # in this category,
+                # each query accesses at most (n / k) <= root elements,
+                # brute force is acceptable.
+                # time=O((n**0.5)q)
+                for idx in range(l, r + 1, k):
+                    nums[idx] = (nums[idx] * v) % MOD
 
         # multiplier array
         muls = [1] * n
