@@ -1,0 +1,1 @@
+../all/1320-minimum-distance-to-type-a-word-using-two-fingers.py
