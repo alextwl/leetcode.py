@@ -1,0 +1,1 @@
+../all/1722-minimize-hamming-distance-after-swap-operations.py
