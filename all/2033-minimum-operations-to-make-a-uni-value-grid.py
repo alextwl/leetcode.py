@@ -1,5 +1,6 @@
 '''
 2025/03/26 daily challenge
+2026/04/28 daily challenge
 
 math approach
 
@@ -43,6 +44,35 @@ class Solution:
             ops += abs(v - median) // x
 
         return ops
+
+
+'''
+simplified math approach
+
+the difference between sums of two parts of sorted elements
+is the total value we need to add to/subtract from.
+'''
+
+
+class Solution:
+    def minOperations(self, grid: List[List[int]], x: int) -> int:
+        arr = []
+        # check whether all elements have the same remainder or not
+        rem = grid[0][0] % x
+        for row in grid:
+            for val in row:
+                if val % x != rem:
+                    return -1
+                arr.append(val)
+
+        arr.sort()
+        mid = len(arr) // 2
+        if mid == 0:
+            # there's only one cell.
+            return 0
+        # don't include central value if the length of arr is odd.
+        # the center is already unified.
+        return (sum(arr[-mid:]) - sum(arr[:mid])) // x
 
 
 '''
