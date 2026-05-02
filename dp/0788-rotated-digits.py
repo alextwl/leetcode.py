@@ -1,0 +1,1 @@
+../all/0788-rotated-digits.py
