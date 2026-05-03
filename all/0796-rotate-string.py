@@ -1,5 +1,6 @@
 '''
 2024/11/03 daily challenge
+2026/05/03 daily challenge
 
 brute force approach
 '''
@@ -14,7 +15,11 @@ class Solution:
 
 
 '''
+oneliner ver
+
 finding goal in the doubled string approach
+
+note the problem does **NOT** guarantee s.length == goal.length
 '''
 
 
