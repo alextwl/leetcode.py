@@ -1,0 +1,1 @@
+../all/3629-minimum-jumps-to-reach-end-via-prime-teleportation.py
