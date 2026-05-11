@@ -18,3 +18,17 @@ class Solution:
                 ans.append(stack.pop())
         return ans
 
+
+'''
+string/integer conversion
+'''
+
+
+class Solution:
+    def separateDigits(self, nums: List[int]) -> List[int]:
+        ans = []
+        for s in map(str, nums):
+            for dig in map(int, s):
+                ans.append(dig)
+        return ans
+
