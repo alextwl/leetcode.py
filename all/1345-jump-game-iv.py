@@ -1,5 +1,6 @@
 '''
 2023/03/05 daily challenge
+2026/05/18 daily challenge
 
 breadth first search approach
 '''
@@ -57,4 +58,48 @@ class Solution:
 
         # undefined behavior
         return -1
+
+
+'''
+level order traversal approach
+'''
+
+
+class Solution:
+    def minJumps(self, arr: List[int]) -> int:
+        seen_val = set()
+        seen_idx = set()
+        n = len(arr)
+        target = n - 1
+
+        v2i = dict()
+        for i, v in enumerate(arr):
+            if v not in v2i:
+                v2i[v] = [i]
+            else:
+                v2i[v].append(i)
+
+        curr_list = [0]
+        next_list = []
+        jumps = 0
+        while curr_list:
+            for i in curr_list:
+                if i == target:
+                    return jumps
+                if i in seen_idx:
+                    continue
+                seen_idx.add(i)
+
+                if i - 1 >= 0:
+                    next_list.append(i - 1)
+                if i + 1 < n:
+                    next_list.append(i + 1)
+                if arr[i] not in seen_val:
+                    seen_val.add(arr[i])
+                    next_list.extend(v2i[arr[i]])
+
+            jumps += 1
+            curr_list, next_list = next_list, []
+
+        return -1  # undefined
 
