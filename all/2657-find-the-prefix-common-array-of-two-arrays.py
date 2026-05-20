@@ -1,5 +1,6 @@
 '''
 2025/01/14 daily challenge
+2026/05/20 daily challenge
 
 set approach
 '''
@@ -18,13 +19,13 @@ class Solution:
 
 
 '''
-counter approach
+counter (frequency array) approach
 '''
 
 
 class Solution:
     def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
-        cnt = [0] * 51
+        cnt = [0] * (len(A) + 1)
         common_prefix = 0
         C = []
         for a, b in zip(A, B):
