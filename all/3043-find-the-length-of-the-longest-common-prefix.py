@@ -1,5 +1,6 @@
 '''
 2024/09/24 daily challenge
+2026/05/21 daily challenge
 
 set approach
 '''
@@ -18,6 +19,31 @@ class Solution:
         s1, s2 = arr2set(arr1), arr2set(arr2)
 
         return max(map(len, s1 & s2))
+
+
+'''
+yet another set approach
+'''
+
+
+class Solution:
+    def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
+        pfx = set()
+
+        for w in map(str, arr1):
+            for i in range(1, len(w) + 1):
+                pfx.add(w[:i])
+
+        max_len = 0
+        for w in map(str, arr2):
+            # we search longer prefix only
+            for i in range(max_len + 1, len(w) + 1):
+                if w[:i] in pfx:
+                    max_len = i
+                else:
+                    break
+
+        return max_len
 
 
 '''
