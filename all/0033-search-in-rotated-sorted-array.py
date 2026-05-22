@@ -1,5 +1,7 @@
 '''
 leetcode 75 lv2 day 8
+2023/08/08 daily challenge
+2026/05/22 daily challenge
 
 binary search + pivot approach
 '''
@@ -33,10 +35,9 @@ class Solution:
 
 
 '''
-2023/08/08 daily challenge
-
 2x binary search ver
 '''
+
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -79,4 +80,42 @@ class Solution:
 
         # not found
         return -1
+
+
+'''
+yet another two-pass binary search approach
+'''
+
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+
+        # determine the beginning of original array
+        last_val = nums[-1]
+        left, right = 0, n - 1
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] > last_val:
+                left = mid + 1
+            else:
+                right = mid
+
+        # original array starts from nums[orig_head]
+        orig_head = right
+
+        # adjust the range to search for target
+        if target <= last_val:
+            left, right = orig_head, n - 1
+        else:
+            left, right = 0, orig_head - 1
+
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+
+        return right if nums[right] == target else -1
 
