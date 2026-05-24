@@ -39,3 +39,35 @@ class Solution:
 
         return max(dp)
 
+
+'''
+monotonic stack approach
+'''
+
+
+class Solution:
+    def maxJumps(self, arr: List[int], d: int) -> int:
+        n = len(arr)
+        dp = [1] * n
+
+        # monotonic stack: non-increasing arr[stack[i]]
+        stack = []
+        for i in range(n + 1):
+            while stack and (i == n or arr[stack[-1]] < arr[i]):
+                # pop stack top and its consecutive duplicates
+                left_stack = [stack.pop()]
+                while stack and arr[stack[-1]] == arr[left_stack[0]]:
+                    left_stack.append(stack.pop())
+
+                # run dp[i] = max(dp[j]) + 1 within specific range
+                for j in left_stack:
+                    if i < n and i - j <= d:
+                        dp[i] = max(dp[i], dp[j] + 1)
+                    if stack and j - stack[-1] <= d:
+                        dp[stack[-1]] = max(dp[stack[-1]], dp[j] + 1)
+
+            if i < n:
+                stack.append(i)
+
+        return max(dp)
+
