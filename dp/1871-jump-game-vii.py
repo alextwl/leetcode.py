@@ -1,0 +1,1 @@
+../all/1871-jump-game-vii.py
