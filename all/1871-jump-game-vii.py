@@ -34,30 +34,35 @@ class Solution:
 
 
 '''
-breadth first search approach (TLE)
+graph traversal + visited set approach
 '''
-
-
-import collections
 
 
 class Solution:
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
+        # shortcuts for invalid cases
+        # we must verify these corner cases first, or it'd be TLE.
         if s[-1] == '1':
+            return False
+        if '1' * maxJump in s:
             return False
 
         n = len(s)
         target = n - 1
-        seen = {i for i, c in enumerate(s) if c == '1'}
-        seen.add(0)
-        q = collections.deque([0])
-        while q:
-            i = q.popleft()
+
+        if minJump == maxJump:
+            # test if target is reachable through fixed-length jumps
+            return target % minJump == 0 and '1' not in s[::minJump]
+
+        seen = {0}
+        stack = [0]
+        while stack:
+            i = stack.pop()
             for j in range(i + minJump, min(i + maxJump, target) + 1):
                 if j == target:
                     return True
-                if j not in seen:
-                    q.append(j)
+                if s[j] == '0' and j not in seen:
+                    stack.append(j)
                     seen.add(j)
         return False
 
