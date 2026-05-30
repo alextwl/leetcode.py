@@ -1,10 +1,12 @@
 '''
 2026/05/30 daily challenge
 
-segment tree approach (memory limit exceeded)
+segment tree approach
 
 learnt from official editorial 1:
 https://leetcode.com/problems/block-placement-queries/editorial/#approach-1-segment-tree
+
+runtime=4755ms, beats 38.21%
 '''
 
 
@@ -13,7 +15,10 @@ import bisect
 
 class Solution:
     def getResults(self, queries: List[List[int]]) -> List[bool]:
-        maxval = 50000
+        maxval = 0
+        for q in queries:
+            maxval = max(maxval, q[1])
+        maxval += 1
         seg = [0] * (maxval << 2)
         slist = [0, maxval]  # list, keep sorted manually
 
