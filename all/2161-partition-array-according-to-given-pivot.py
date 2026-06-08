@@ -1,5 +1,6 @@
 '''
 2025/03/03 daily challenge
+2026/06/08 daily challenge
 
 dynamic arrays approach
 '''
@@ -41,4 +42,26 @@ class Solution:
                 right -= 1
 
         return ans
+
+
+'''
+linear search + 3 partitions ver (yet another dynamic lists)
+
+surprisingly faster than other approaches.
+'''
+
+
+class Solution:
+    def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+        arr0, arr1, arr2 = [], [], []
+
+        for v in nums:
+            if v < pivot:
+                arr0.append(v)
+            elif v == pivot:
+                arr1.append(v)
+            else:
+                arr2.append(v)
+
+        return arr0 + arr1 + arr2
 
