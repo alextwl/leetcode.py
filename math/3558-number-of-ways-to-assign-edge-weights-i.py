@@ -1,0 +1,1 @@
+../all/3558-number-of-ways-to-assign-edge-weights-i.py
