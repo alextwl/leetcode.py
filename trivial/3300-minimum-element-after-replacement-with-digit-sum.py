@@ -1,0 +1,1 @@
+../all/3300-minimum-element-after-replacement-with-digit-sum.py

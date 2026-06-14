@@ -1,0 +1,1 @@
+../all/3142-check-if-grid-satisfies-conditions.py
