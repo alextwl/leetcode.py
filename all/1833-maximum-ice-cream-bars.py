@@ -1,8 +1,10 @@
 '''
 2023/01/06 daily challenge
+2026/06/21 daily challenge
 
 sorting + greddy approach
 '''
+
 
 class Solution:
     def maxIceCream(self, costs: List[int], coins: int) -> int:
@@ -17,10 +19,12 @@ class Solution:
 
 
 '''
-counting sort approach
+counter approach
 '''
 
+
 import collections
+
 
 class Solution:
     def maxIceCream(self, costs: List[int], coins: int) -> int:
@@ -38,4 +42,29 @@ class Solution:
             coins -= quo*i
 
         return ans
+
+
+'''
+counting sort approach
+'''
+
+
+class Solution:
+    def maxIceCream(self, costs: List[int], coins: int) -> int:
+        counts = [0] * (max(costs) + 1)
+        for price in costs:
+            counts[price] += 1
+
+        bought = 0
+        for price, bars in enumerate(counts):
+            if price > coins:
+                break
+            if not bars:
+                continue
+
+            can_buy = min(bars, coins // price)
+            bought += can_buy
+            coins -= can_buy * price
+
+        return bought
 
