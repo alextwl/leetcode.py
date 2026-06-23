@@ -34,6 +34,44 @@ class Solution:
 
 
 '''
+optimized dynamic programming + prefix sums approach
+
+half the computations by counting only present parity of array length conditionally.
+
+3210ms
+'''
+
+
+import itertools
+
+
+MOD = 1_000_000_007
+
+
+class Solution:
+    def zigZagArrays(self, n: int, l: int, r: int) -> int:
+        m = r - l + 1
+        dp = [1] * (m + 1)  # 1-indexed
+        dp[0] = 0  # dummy case
+
+        for i in range(2, n + 1):
+            if i & 1:
+                # odd length array
+                pfx = list(itertools.accumulate(dp))
+                pfx_m = pfx[-1]
+                # dp[v] = sum(pfx_m - x for u, x in enumerate(dp) if u > v) = pfx_m - pfx[v]
+                dp = [0] + [(pfx_m - x) % MOD for x in pfx[1:]]
+            else:
+                # even length array, for u < v
+                # dp[v] = sum(x for u, x in enumerate(dp) if u < v) = prefix_sum[v]
+                # note this prefix sum init with 0, pfx[0] = 0
+                dp = list(itertools.accumulate(dp, initial=0))[:-1]
+
+        # double valid seqs for symmetry
+        return (sum(dp) % MOD * 2) % MOD
+
+
+'''
 dynamic programming approach (time limit exceeded)
 
 time=O(nr), space=O(r)
