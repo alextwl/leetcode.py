@@ -1,0 +1,1 @@
+../all/3286-find-a-safe-walk-through-a-grid.py
