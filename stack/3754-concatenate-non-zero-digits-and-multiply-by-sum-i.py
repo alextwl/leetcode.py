@@ -1,0 +1,1 @@
+../all/3754-concatenate-non-zero-digits-and-multiply-by-sum-i.py
