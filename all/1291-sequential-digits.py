@@ -1,5 +1,6 @@
 '''
 2024/02/02 daily challenge
+2026/07/13 daily challenge
 '''
 
 
@@ -46,4 +47,30 @@ class Solution:
             lsd = 1
 
         return ans
+
+
+'''
+recursion + string manipulation approach
+
+fix rightmost digit and try all possible values by concatenating digits
+'''
+
+
+class Solution:
+    def sequentialDigits(self, low: int, high: int) -> List[int]:
+        s_dig = "0123456789"
+        s_low, s_high = str(low), str(high)
+        len_low, len_high = len(s_low), len(s_high)
+        ans = []
+        for start in range(1, 10):
+            stack = []
+            for i in range(start, 10):
+                stack.append(s_dig[i])
+                if len(stack) > len_high:
+                    break
+                if len(stack) >= len_low:
+                    val = int(''.join(stack))
+                    if low <= val <= high:
+                        ans.append(val)
+        return sorted(ans)
 
