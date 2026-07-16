@@ -1,0 +1,1 @@
+../all/3867-sum-of-gcd-of-formed-pairs.py
