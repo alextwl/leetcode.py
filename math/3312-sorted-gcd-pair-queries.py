@@ -1,0 +1,1 @@
+../all/3312-sorted-gcd-pair-queries.py
