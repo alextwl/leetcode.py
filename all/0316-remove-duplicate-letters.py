@@ -2,7 +2,10 @@
 2023/09/26 daily challenge
 
 two-pass + stack approach
+
+similar to problem 1081.
 '''
+
 
 class Solution:
     def removeDuplicateLetters(self, s: str) -> str:
