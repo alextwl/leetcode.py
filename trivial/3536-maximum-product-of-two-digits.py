@@ -1,0 +1,1 @@
+../all/3536-maximum-product-of-two-digits.py
