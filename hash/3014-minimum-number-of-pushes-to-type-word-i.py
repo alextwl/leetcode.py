@@ -1,0 +1,1 @@
+../all/3014-minimum-number-of-pushes-to-type-word-i.py
