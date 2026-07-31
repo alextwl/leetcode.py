@@ -1,7 +1,10 @@
 '''
 2024/08/06 daily challenge
+2026/07/31 daily challenge
 
 counter approach
+
+large input version of problem 3014.
 '''
 
 import collections
