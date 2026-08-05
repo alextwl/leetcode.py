@@ -1,0 +1,1 @@
+../all/3310-remove-methods-from-project.py
