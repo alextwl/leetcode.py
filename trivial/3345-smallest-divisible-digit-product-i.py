@@ -1,0 +1,1 @@
+../all/3345-smallest-divisible-digit-product-i.py
