@@ -1,5 +1,7 @@
 '''
 2023/05/26 daily challenge
+2024/08/20 daily challenge
+2026/08/09 daily challenge
 
 dynamic programming approach
 
@@ -53,8 +55,6 @@ class Solution:
 
 
 '''
-2024/08/20 daily challenge
-
 dynamic programming approach (recursive ver)
 '''
 
@@ -85,4 +85,31 @@ class Solution:
             return suffix_sums[pos] - opponents
         
         return max_stones(0, 1)  # start from pos=0, M=1
+
+
+'''
+dynamic programming approach (recursive ver + syntax sugar)
+'''
+
+
+import functools
+import itertools
+
+
+class Solution:
+    def stoneGameII(self, piles: List[int]) -> int:
+        n = len(piles)
+        suffixes = list(itertools.accumulate(piles[::-1]))[::-1]
+
+        @functools.cache
+        def dp(i, m):
+            if i + 2*m >= n:
+                return suffixes[i]
+
+            another_score = float('inf')
+            for x in range(1, 2*m + 1):
+                another_score = min(another_score, dp(i + x, max(x, m)))
+            return suffixes[i] - another_score
+
+        return dp(0, 1)
 
