@@ -1,0 +1,1 @@
+../all/2996-smallest-missing-integer-greater-than-sequential-prefix-sum.py
