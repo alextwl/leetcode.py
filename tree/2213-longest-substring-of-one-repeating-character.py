@@ -1,0 +1,1 @@
+../all/2213-longest-substring-of-one-repeating-character.py
