@@ -1,0 +1,1 @@
+../all/1563-stone-game-v.py
