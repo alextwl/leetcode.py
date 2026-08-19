@@ -1,0 +1,1 @@
+../all/1386-cinema-seat-allocation.py
