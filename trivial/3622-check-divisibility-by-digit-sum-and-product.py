@@ -1,0 +1,1 @@
+../all/3622-check-divisibility-by-digit-sum-and-product.py
