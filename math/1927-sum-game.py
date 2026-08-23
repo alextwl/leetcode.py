@@ -1,0 +1,1 @@
+../all/1927-sum-game.py
