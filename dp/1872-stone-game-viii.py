@@ -1,0 +1,1 @@
+../all/1872-stone-game-viii.py
