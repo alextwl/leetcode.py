@@ -1,0 +1,1 @@
+../all/2904-shortest-and-lexicographically-smallest-beautiful-string.py
