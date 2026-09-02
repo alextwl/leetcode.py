@@ -1,0 +1,1 @@
+../all/3875-construct-uniform-parity-array-i.py
