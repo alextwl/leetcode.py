@@ -22,3 +22,26 @@ class Solution:
 
         return dp[0][0]
 
+
+'''
+space=O(n) ver
+'''
+
+
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
+        n, m = len(s), len(t)
+        dp0 = [0] * (m + 1)
+        dp1 = [0] * (m + 1)
+        dp0[-1] = 1
+        dp1[-1] = 1
+
+        for i in range(n - 1, -1, -1):
+            for j in range(m - 1, -1, -1):
+                dp0[j] = dp1[j]  # dp[i][j] = dp[i+1][j]
+                if s[i] == t[j]:
+                    dp0[j] += dp1[j + 1]
+            dp0, dp1 = dp1, dp0
+
+        return dp1[0]
+
