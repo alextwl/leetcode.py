@@ -1,0 +1,1 @@
+../all/2472-maximum-number-of-non-overlapping-palindrome-substrings.py
