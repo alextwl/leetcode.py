@@ -27,3 +27,62 @@ class Solution:
 
         return dp[-1]
 
+
+'''
+greedy method approach
+
+always select shortest palindrome greedily
+'''
+
+
+class Solution:
+    def maxPalindromes(self, s: str, k: int) -> int:
+        n = len(s)
+
+        if k == 1:
+            return n
+
+        def is_pd(start):
+            # return the next index of s if a minimal substring
+            # starting from s[i] is a palindrome.
+            #
+            # for k-length substring
+            left_bound, right_bound = start, start + k - 1
+            if left_bound < 0 or right_bound >= n:
+                return -1
+            l, r = left_bound, right_bound
+            while l < r:
+                if s[l] != s[r]:
+                    break
+                l += 1
+                r -= 1
+            else:
+                return right_bound + 1
+            
+            # for (k+1)-length substring
+            left_bound, right_bound = start, start + k
+            if left_bound < 0 or right_bound >= n:
+                return -1
+            l, r = left_bound, right_bound
+            while l < r:
+                if s[l] != s[r]:
+                    break
+                l += 1
+                r -= 1
+            else:
+                return right_bound + 1
+            # not a palindrome
+            return -1
+
+        ans = 0
+        i = 0
+        while i < n:
+            next_idx = is_pd(i)
+            if next_idx == -1:
+                i += 1
+            else:
+                i = next_idx
+                ans += 1
+
+        return ans
+
