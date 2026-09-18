@@ -1,0 +1,1 @@
+../all/1520-maximum-number-of-non-overlapping-substrings.py
