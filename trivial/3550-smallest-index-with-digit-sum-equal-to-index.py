@@ -1,0 +1,1 @@
+../all/3550-smallest-index-with-digit-sum-equal-to-index.py
