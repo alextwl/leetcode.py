@@ -25,3 +25,22 @@ class Solution:
 
         return ''.join(ans)
 
+
+'''
+pythonic built-in string formation approach
+'''
+
+
+import collections
+
+
+class Solution:
+    def evaluate(self, s: str, knowledge: list[list[str]]) -> str:
+        d = collections.defaultdict(lambda: '?')
+        for k, v in knowledge:
+            d[k] = v
+
+        s = s.replace('(', '{').replace(')', '}')
+
+        return s.format_map(d)
+
