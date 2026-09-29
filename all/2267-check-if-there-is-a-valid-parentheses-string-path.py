@@ -33,3 +33,35 @@ class Solution:
 
         return dfs(0, 0, 0)
 
+
+'''
+dynamic programming + bitwise mask approach
+'''
+
+
+class Solution:
+    def hasValidPath(self, grid: list[list[str]]) -> bool:
+        m, n = len(grid), len(grid[0])
+        # since directions of the movements were restricted,
+        # the path length is fixed.
+        plen = m + n - 1
+
+        if grid[0][0] != '(' or grid[-1][-1] != ')':
+            # we need to start from opening bracket and end at closing bracket
+            return False
+        if plen & 1:
+            # we need even brackets
+            return False
+
+        dp = [[0] * n for _ in range(m)]
+        dp[0][0] = 0b10
+
+        for i, row in enumerate(grid):
+            for j, cell in enumerate(row):
+                if i:
+                    dp[i][j] |= (dp[i - 1][j] << 1) if cell == '(' else (dp[i - 1][j] >> 1)
+                if j:
+                    dp[i][j] |= (dp[i][j - 1] << 1) if cell == '(' else (dp[i][j - 1] >> 1)
+
+        return (dp[-1][-1] & 1) == 1
+
