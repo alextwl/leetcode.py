@@ -1,0 +1,1 @@
+../all/3727-maximum-alternating-sum-of-squares.py
