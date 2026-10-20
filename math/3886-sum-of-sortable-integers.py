@@ -1,0 +1,1 @@
+../all/3886-sum-of-sortable-integers.py
