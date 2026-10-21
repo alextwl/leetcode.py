@@ -1,0 +1,1 @@
+../all/3863-minimum-operations-to-sort-a-string.py
