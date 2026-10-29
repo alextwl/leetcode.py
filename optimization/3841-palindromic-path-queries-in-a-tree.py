@@ -1,0 +1,1 @@
+../all/3841-palindromic-path-queries-in-a-tree.py
